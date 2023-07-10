@@ -6,6 +6,7 @@ const AuthPage = () => {
     <div>
       <Auth />
     </div>
+    
   );
 };
 
