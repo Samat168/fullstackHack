@@ -16,10 +16,9 @@ const AuthContextProvider = ({ children }) => {
   async function handleRegister(formData) {
     setLoading(true);
     try {
-      await axios.post(`${API}/account/register/`, formData);
-      navigate("/register-success");
+      await axios.post(`${API}/accounts/register/`, formData);
     } catch (error) {
-      setError(Object.values(error.response.data).flat(2)[0]);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -28,11 +27,13 @@ const AuthContextProvider = ({ children }) => {
   async function handleLogin(formData, email) {
     setLoading(true);
     try {
-      const res = await axios.post(`${API}/account/login/`, formData);
+      const res = await axios.post(`${API}/accounts/login/`, formData);
       localStorage.setItem("tokens", JSON.stringify(res.data));
       localStorage.setItem("email", email);
       setCurrentUser(email);
       navigate("/");
+      console.log(res);
+      console.log(res);
     } catch (error) {
       console.log(error);
     } finally {
@@ -46,13 +47,14 @@ const AuthContextProvider = ({ children }) => {
     setCurrentUser("");
     navigate("/login");
   }
+  console.log(currentUser);
 
   async function checkAuth() {
     setLoading(true);
     try {
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
-      const res = await axios.post(`${API}/account/token/refresh/`, {
+      const res = await axios.post(`${API}/accounts/refresh/`, {
         refresh: tokens.refresh,
       });
       localStorage.setItem(
