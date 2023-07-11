@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContextProvider";
 
 const pages = [
   { name: "Главная", link: "/", id: 1 },
@@ -24,6 +25,13 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { currentUser, logout, checkAuth } = useAuth();
+
+  React.useEffect(() => {
+    if (localStorage.getItem("tokens")) {
+      checkAuth();
+    }
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
