@@ -8,7 +8,9 @@ import CartPage from "../pages/CartPage";
 import EditProductPage from "../pages/EditProductPage";
 import FavoritePage from "../pages/FavoritePage";
 import { Route, Routes } from "react-router-dom";
-import AuthPage from "../pages/AuthPage";
+
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -38,24 +40,29 @@ const MainRoutes = () => {
       id: 6,
     },
     {
-      link: "/auth",
-      element: <AuthPage />,
+      link: "/login",
+      element: <LoginPage />,
       id: 7,
+    },
+    {
+      link: "/register",
+      element: <RegisterPage />,
+      id: 8,
     },
     {
       link: "/cart",
       element: <CartPage />,
-      id: 8,
+      id: 9,
     },
     {
       link: "/edit/:id",
       element: <EditProductPage />,
-      id: 9,
+      id: 10,
     },
     {
       link: "/favorite",
       element: <FavoritePage />,
-      id: 9,
+      id: 11,
     },
   ];
   return (

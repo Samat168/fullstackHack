@@ -17,16 +17,25 @@ import Logo from "../../assets/SellSwap-removebg-preview.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { Input } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import { useAuth } from "../../context/AuthContextProvider";
+
 const pages = [
   { name: "Главная", link: "/", id: 1 },
   { name: "Продукты", link: "/products", id: 2 },
   { name: "Admin", link: "/admin", id: 3 },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+// const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { currentUser, logout, checkAuth } = useAuth();
+
+  React.useEffect(() => {
+    if (localStorage.getItem("tokens")) {
+      checkAuth();
+    }
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -119,7 +128,7 @@ function Navbar() {
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
-                    color: "white",
+                    color: "#9baec8",
                     display: "block",
                     margin: "0 20px",
                   }}
@@ -146,7 +155,11 @@ function Navbar() {
                 sx={{ color: "white" }}
               />
             </div>
-
+            <Box>
+              <Button>Войти</Button>
+              <Button>Зарегистрироваться</Button>
+            </Box>
+            {/* 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -168,12 +181,12 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+            </Menu> */}
           </Box>
         </Toolbar>
       </Container>

@@ -27,6 +27,12 @@ Button:hover {
   position: fixed;
   top: 0;
 }
+.footer {
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  bottom: 0;
+}
 .navbar,
 .footer {
   background: #282c37;
@@ -34,4 +40,8 @@ Button:hover {
   background: -webkit-linear-gradient(left, #282c37 0%, #1a3c6c 100%);
   background: linear-gradient(to right, #282c37 0%, #1a3c6c 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#282c37', endColorstr='#1a3c6c',GradientType=1 );
+}
+
+.icons:hover {
+  color: #2b67f5;
 }

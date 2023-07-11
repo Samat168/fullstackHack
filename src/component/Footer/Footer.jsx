@@ -4,6 +4,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import Logo from "../../assets/SellSwap-removebg-preview.png";
 
 const Footer = () => {
   return (
@@ -13,26 +14,61 @@ const Footer = () => {
         width: "100%",
         backgroundColor: "#282c37",
         padding: "50px 30px",
+        display: "flex",
       }}
     >
-      <div style={{ width: "65%" }}>
-        <h3>Мы в социальных сетях</h3>
-        <ul style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ width: "60%" }}>
+        <h3
+          style={{
+            color: "#9baec8",
+            marginBottom: "40px",
+            textAlign: "start",
+            borderBottom: "2px solid black",
+            paddingBottom: "10px",
+          }}
+        >
+          Мы в социальных сетях:
+        </h3>
+        <ul
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+          }}
+        >
           <li>
-            <InstagramIcon fontSize="large" sx={{ color: "white" }} />
+            <InstagramIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
           </li>
           <li>
-            <FacebookIcon fontSize="large" sx={{ color: "white" }} />
+            <FacebookIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
           </li>
           <li>
-            <YouTubeIcon fontSize="large" sx={{ color: "white" }} />
+            <YouTubeIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
           </li>
           <li>
-            <TwitterIcon fontSize="large" sx={{ color: "white" }} />
+            <TwitterIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
           </li>
         </ul>
       </div>
-      <div style={{ width: "35%" }}></div>
+      <div style={{ width: "40%", display: "flex", justifyContent: "center" }}>
+        <img src={Logo} alt="" />
+      </div>
     </div>
   );
 };
