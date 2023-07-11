@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+body {
+  background: #f3e4e4;
+  background: -moz-linear-gradient(100deg, #f3e4e4 0%, #eef2f3 100%);
+  background: -webkit-linear-gradient(100deg, #f3e4e4 0%, #eef2f3 100%);
+  background: linear-gradient(100deg, #f3e4e4 0%, #eef2f3 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3e4e4', endColorstr='#eef2f3',GradientType=1 );
+}
+
 a {
   text-decoration: none;
 }
@@ -11,4 +19,19 @@ a {
 ul,
 ol {
   list-style-type: none;
+}
+Button:hover {
+  color: #2b67f5;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+}
+.navbar,
+.footer {
+  background: #282c37;
+  background: -moz-linear-gradient(left, #282c37 0%, #1a3c6c 100%);
+  background: -webkit-linear-gradient(left, #282c37 0%, #1a3c6c 100%);
+  background: linear-gradient(to right, #282c37 0%, #1a3c6c 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#282c37', endColorstr='#1a3c6c',GradientType=1 );
 }

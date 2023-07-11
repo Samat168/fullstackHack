@@ -13,7 +13,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
-
+import Logo from "../../assets/SellSwap-removebg-preview.png";
+import SearchIcon from "@mui/icons-material/Search";
+import { Input } from "@mui/material";
+import { Search } from "@mui/icons-material";
 const pages = [
   { name: "Главная", link: "/", id: 1 },
   { name: "Продукты", link: "/products", id: 2 },
@@ -41,27 +44,10 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#293745;" }}>
+    <AppBar position="static" className="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+          <img style={{ width: "9%" }} src={Logo} alt="" />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -120,12 +106,23 @@ function Navbar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              justifyContent: "flexStart",
+            }}
+          >
             {pages.map((page) => (
               <Link key={page.id} to={page.link}>
                 <Button
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    margin: "0 20px",
+                  }}
                 >
                   {page.name}
                 </Button>
@@ -133,7 +130,23 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: "flex" }}>
+            <SearchIcon
+              sx={{
+                width: "25px",
+                height: "25px",
+                marginTop: "8px",
+                color: "#2b67f5",
+              }}
+            />
+            <div style={{ marginRight: "15px" }}>
+              <Input
+                placeholder="search"
+                type="search"
+                sx={{ color: "white" }}
+              />
+            </div>
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
