@@ -19,7 +19,7 @@ const Login = () => {
 
     formData.append("password", password);
 
-    handleLogin(formData);
+    handleLogin(formData, email);
   }
 
   return (

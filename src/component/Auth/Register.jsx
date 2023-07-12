@@ -33,7 +33,7 @@ const Register = () => {
   }
 
   return (
-    <Container>
+    <Container sx={{ display: "flex", flexDirection: "collumn" }}>
       {error ? <h2>{error}</h2> : null}
       <Input onChange={(e) => setName(e.target.value)} placeholder="name" />
       <Input
