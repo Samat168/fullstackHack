@@ -13,6 +13,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/SellSwap-removebg-preview.png";
+import SearchIcon from "@mui/icons-material/Search";
+import { Input } from "@mui/material";
+import { Search } from "@mui/icons-material";
 import { useAuth } from "../../context/AuthContextProvider";
 
 const pages = [
@@ -20,7 +24,7 @@ const pages = [
   { name: "Продукты", link: "/products", id: 2 },
   { name: "Admin", link: "/admin", id: 3 },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+// const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -49,27 +53,10 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#293745;" }}>
+    <AppBar position="static" className="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+          <img style={{ width: "9%" }} src={Logo} alt="" />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -128,12 +115,23 @@ function Navbar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              justifyContent: "flexStart",
+            }}
+          >
             {pages.map((page) => (
               <Link key={page.id} to={page.link}>
                 <Button
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{
+                    my: 2,
+                    color: "#9baec8",
+                    display: "block",
+                    margin: "0 20px",
+                  }}
                 >
                   {page.name}
                 </Button>
@@ -141,7 +139,27 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: "flex" }}>
+            <SearchIcon
+              sx={{
+                width: "25px",
+                height: "25px",
+                marginTop: "8px",
+                color: "#2b67f5",
+              }}
+            />
+            <div style={{ marginRight: "15px" }}>
+              <Input
+                placeholder="search"
+                type="search"
+                sx={{ color: "white" }}
+              />
+            </div>
+            <Box>
+              <Button>Войти</Button>
+              <Button>Зарегистрироваться</Button>
+            </Box>
+            {/* 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -163,12 +181,12 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+            </Menu> */}
           </Box>
         </Toolbar>
       </Container>
