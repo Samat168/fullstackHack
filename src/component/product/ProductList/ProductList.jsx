@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { useProducts } from "../../../context/ProductContextProvider";
 import ProductCard from "../ProductCard/ProductCard";
 import { Box, Grid, TextField, Typography } from "@mui/material";
+import { useProduct } from "../../../context/ProductContextProvider";
 
 const ProductList = () => {
-  const { getProducts, products } = useProducts();
+  const { getProducts, products } = useProduct();
   useEffect(() => {
     getProducts();
   }, []);
   return (
     <div>
-      <Typography
+      {/* <Typography
         variant="h1"
         fontSize={77}
         sx={{
@@ -25,9 +25,10 @@ const ProductList = () => {
       </Typography>
       <marquee>
         <h5 style={{ fontSize: "30px" }}>
-          Frontend Developer : Samat Nurkemel Arslan Python Developer:{" "}
+          Frontend Developer : Samat Nurkemel Arslan Python
+          Developer:loremdgdgggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
         </h5>
-      </marquee>
+      </marquee> */}
       <Grid
         className="GridList"
         item

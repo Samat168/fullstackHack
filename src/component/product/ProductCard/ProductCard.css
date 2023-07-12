@@ -5,18 +5,13 @@
 
 .product_card {
   width: 100%;
-  background: #217b81;
-  background: -moz-linear-gradient(left, #217b81 0%, #b9adad 100%);
-  background: -webkit-linear-gradient(left, #217b81 0%, #b9adad 100%);
-  background: linear-gradient(to right, #bfedf0 0%, #06a286 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#217b81', endColorstr='#b9adad',GradientType=1 );
-
-  border-radius: 10px;
+  border-radius: 30px;
 }
 
 .product_img {
   width: 100%;
-  border: 2px solid #337b80;
+  height: 329px;
+  border: 2px;
   border-radius: 9px;
 }
 

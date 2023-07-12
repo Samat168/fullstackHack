@@ -155,10 +155,20 @@ function Navbar() {
                 sx={{ color: "white" }}
               />
             </div>
-            <Box>
-              <Button>Войти</Button>
-              <Button>Зарегистрироваться</Button>
-            </Box>
+
+            {currentUser ? (
+              currentUser
+            ) : (
+              <Box>
+                <Link to="/login">
+                  <Button>Войти</Button>
+                </Link>
+                <Link to="/register">
+                  <Button>Зарегистрироваться</Button>
+                </Link>
+              </Box>
+            )}
+
             {/* 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

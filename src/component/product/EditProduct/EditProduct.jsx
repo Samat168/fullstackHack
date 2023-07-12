@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { useParams } from "react-router-dom";
-import { useProducts } from "../../../context/ProductContextProvider";
+import { useProduct } from "../../../context/ProductContextProvider";
 
 const EditProduct = () => {
   const [product, setProduct] = useState({
@@ -17,8 +17,7 @@ const EditProduct = () => {
     price: 0,
     category: "",
   });
-  const { saveEditedProduct, getProductDetails, productDetails } =
-    useProducts();
+  const { saveEditedProduct, getProductDetails, productDetails } = useProduct();
 
   const { id } = useParams();
 
