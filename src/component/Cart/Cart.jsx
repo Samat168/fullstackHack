@@ -53,20 +53,20 @@ export default function Cart() {
         <TableBody>
           {cart?.products.map((row) => (
             <TableRow
-              key={row.item.id}
+              key={row.product.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <img width={80} src={row.item.pic1} alt="" />
+                <img width={80} src={row.product.pic1} alt="" />
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
-                {row.item.title}
+                {row.product.title}
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
-                {row.item.category}
+                {row.product.category}
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
-                {row.item.price} $
+                {row.product.price} $
               </TableCell>
               {/* <TableCell align="right">
                 <input

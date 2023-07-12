@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Favorite } from "@mui/icons-material";
 import { Button, IconButton } from "@mui/material";
 import "./ProductCard.css";
+import { useCart } from "../../../context/CartContextProvider";
 const ProductCard = ({ item }) => {
-  const { deleteProduct } = useProducts();
+
+  const { addProductToCart, checkProductInCart } = useCart();
+  const { deleteProduct , getProductDetails, productDetails } = useProducts();
   const navigate = useNavigate();
   return (
     <div>
@@ -21,6 +24,13 @@ const ProductCard = ({ item }) => {
             <Favorite />
           </IconButton>
 
+          <Button
+            sx={{ marginBottom: "8px" }}
+            size="small"
+            onClick={() => addProductToCart(productDetails)}
+          >
+            add to cart
+          </Button>
           <Button
             sx={{ marginBottom: "8px" }}
             size="small"
