@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Button, CircularProgress, Container, Input } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Input,
+  TextField,
+} from "@mui/material";
 import { useAuth } from "../../context/AuthContextProvider";
 
 const Login = () => {
@@ -24,8 +31,11 @@ const Login = () => {
 
   return (
     <Container>
-      <Input onChange={(e) => setEmail(e.target.value)} placeholder="email" />
-      <Input
+      <TextField
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="email"
+      />
+      <TextField
         onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
       />

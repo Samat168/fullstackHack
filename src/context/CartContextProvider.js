@@ -1,7 +1,9 @@
 import { Switch } from "@mui/material";
 import React, { createContext, useContext, useReducer } from "react";
-import { ACTIONS } from "../helpers/consts";
-import { calcSubPrice, calcTotalPrice } from "../helpers/functions";
+import { ACTIONS, API } from "../helpers/consts";
+import { calcSubPrice, calcTotalPrice, getTokens } from "../helpers/functions";
+import axios from "axios";
+import { Api } from "@mui/icons-material";
 
 export const cartContex = createContext();
 export const useCart = () => useContext(cartContex);
@@ -48,8 +50,8 @@ const CartContexProvider = ({ children }) => {
       cart = { products: [], totalPrice: 0 };
     }
     let newProduct = {
-      item: product,
-      count: 1,
+      product: product,
+      quantity: 1,
       subPrice: +product.price,
     };
 
@@ -108,7 +110,26 @@ const CartContexProvider = ({ children }) => {
     dispatch({ type: ACTIONS.GET_CART, payload: cart });
   };
 
+  const handleSubmit = async (order) => {
+    // e.preventDefault();
+
+    try {
+      // Отправка заказа через API
+      const response = await axios.post(
+        `${API}/orders/`,
+        order,getTokens()
+      );
+      console.log("Заказ успешно отправлен!");
+      // Дополнительные действия после успешной отправки заказа
+    } catch (error) {
+      console.error("Ошибка при отправке заказа:", error);
+      // Дополнительные действия при ошибке отправки заказа
+    }
+  };
+
+
   const values = {
+    handleSubmit,
     cart: state.cart,
     getCart,
     addProductToCart,
