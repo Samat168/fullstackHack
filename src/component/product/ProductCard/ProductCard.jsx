@@ -13,7 +13,12 @@ const ProductCard = ({ item }) => {
   return (
     <div>
       <div className="product_card">
-        <img className="product_img" src={item.preview} alt="" />
+        <img
+          className="product_img"
+          src={item.preview}
+          alt=""
+          onClick={() => navigate(`/details/${item.id}`)}
+        />
         <div className="product_card_bottom">
           <IconButton sx={{ color: "grey" }}>
             <Favorite />
