@@ -51,12 +51,12 @@ const CartContexProvider = ({ children }) => {
     }
     let newProduct = {
       product: product,
-      quantity: 1,
+      // quantity: 1,
       // subPrice: +product.price,
     };
 
     let productToFind = cart.products.filter(
-      (elem) => elem.item.id === product.id
+      (elem) => elem.product.id === product.id
     );
 
     if (productToFind.length === 0) {
@@ -114,13 +114,10 @@ const CartContexProvider = ({ children }) => {
     // e.preventDefault();
 
     try {
-      // Отправка заказа через API
       const response = await axios.post(`${API}/orders/`, order, getTokens());
       console.log("Заказ успешно отправлен!");
-      // Дополнительные действия после успешной отправки заказа
     } catch (error) {
       console.error("Ошибка при отправке заказа:", error);
-      // Дополнительные действия при ошибке отправки заказа
     }
   };
 

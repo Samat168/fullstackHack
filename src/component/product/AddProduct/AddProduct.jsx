@@ -45,19 +45,22 @@ const AddProduct = () => {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="title"
         type="text"
+        sx={{ backgroundColor: "white" }}
       />
       <TextField
         onChange={(e) => setDescription(e.target.value)}
         placeholder="description"
         type="text"
+        sx={{ backgroundColor: "white" }}
       />
       <TextField
         onChange={(e) => setPrice(e.target.value)}
         placeholder="price"
         type="text"
+        sx={{ backgroundColor: "white" }}
       />
 
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ backgroundColor: "white" }}>
         <InputLabel id="demo-simple-select-label">Категории</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -72,9 +75,17 @@ const AddProduct = () => {
         </Select>
       </FormControl>
 
-      <TextField onChange={(e) => setPreview(e.target.files[0])} type="file" />
+      <TextField
+        onChange={(e) => setPreview(e.target.files[0])}
+        type="file"
+        sx={{ backgroundColor: "white" }}
+      />
 
-      <TextField onChange={(e) => setImages(e.target.files[4])} type="file" />
+      <TextField
+        onChange={(e) => setImages(e.target.files[4])}
+        type="file"
+        sx={{ backgroundColor: "white" }}
+      />
 
       <Button onClick={handleSave}>Create Product</Button>
     </div>

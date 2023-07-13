@@ -8,7 +8,8 @@ import { useProduct } from "../../../context/ProductContextProvider";
 import { useCart } from "../../../context/CartContextProvider";
 const ProductCard = ({ item }) => {
   const { addProductToCart, checkProductInCart } = useCart();
-  const { deleteProduct, getProductDetails, productDetails } = useProduct();
+  const { deleteProduct, getProductDetails, oneProduct, products } =
+    useProduct();
   const navigate = useNavigate();
   return (
     <div>
