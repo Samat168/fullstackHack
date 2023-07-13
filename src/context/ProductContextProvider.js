@@ -64,9 +64,11 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  console.log(INIT_STATE.categories);
+
   async function postCategories(category) {
     try {
-      await axios.post(`${API}/categories/`, category);
+      await axios.post(`${API}/categories/`, category, getTokens());
     } catch (error) {
       console.log(error);
     }
@@ -130,6 +132,7 @@ const ProductContextProvider = ({ children }) => {
     oneProduct: state.oneProduct,
     updateProduct,
     toggleLikes,
+    postCategories,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

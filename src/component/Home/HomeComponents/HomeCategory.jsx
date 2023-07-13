@@ -6,6 +6,7 @@ const HomeCategory = () => {
   useEffect(() => {
     getCategories();
   }, []);
+  console.log(categories);
   return (
     <div>
       <div style={{ width: "100%" }}></div>
