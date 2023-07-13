@@ -85,7 +85,8 @@ const ProductContextProvider = ({ children }) => {
   async function getOneProduct(id) {
     try {
       const res = await axios(`${API}/products/${id}/`, getTokens());
-      dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
+      console.log(res);
+      // dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
     } catch (error) {
       console.log(error);
     }

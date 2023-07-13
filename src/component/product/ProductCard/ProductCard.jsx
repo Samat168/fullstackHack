@@ -8,7 +8,8 @@ import { useProduct } from "../../../context/ProductContextProvider";
 import { useCart } from "../../../context/CartContextProvider";
 const ProductCard = ({ item }) => {
   const { addProductToCart, checkProductInCart } = useCart();
-  const { deleteProduct, getProductDetails, productDetails } = useProduct();
+  const { deleteProduct, getProductDetails, oneProduct, products } =
+    useProduct();
   const navigate = useNavigate();
   return (
     <div>
@@ -27,7 +28,7 @@ const ProductCard = ({ item }) => {
           <Button
             sx={{ marginBottom: "8px" }}
             size="small"
-            onClick={() => addProductToCart(productDetails)}
+            onClick={() => addProductToCart(products)}
           >
             add to cart
           </Button>
