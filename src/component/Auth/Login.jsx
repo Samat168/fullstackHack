@@ -30,14 +30,39 @@ const Login = () => {
   }
 
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        paddingTop: "10%",
+        width: "100%",
+        padding: "auto",
+        background:
+          "url(https://images.wallpaperscraft.ru/image/single/tekstura_fon_tekst_50473_1920x1080.jpg)",
+      }}
+    >
       <TextField
         onChange={(e) => setEmail(e.target.value)}
         placeholder="email"
+        sx={{
+          backgroundColor: "white",
+          borderRadius: "10px",
+          width: "50%",
+          padding: "auto",
+          marginLeft: "30%",
+        }}
       />
       <TextField
         onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
+        sx={{
+          marginTop: "5px",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          width: "50%",
+
+          marginLeft: "30%",
+        }}
       />
 
       {loading ? (
@@ -45,7 +70,17 @@ const Login = () => {
           <CircularProgress />
         </Box>
       ) : (
-        <Button onClick={handleSave}>Login</Button>
+        <Button
+          onClick={handleSave}
+          sx={{
+            backgroundColor: "white",
+            width: "10%",
+            margin: "auto",
+            marginTop: "10px",
+          }}
+        >
+          Login
+        </Button>
       )}
     </Container>
   );
