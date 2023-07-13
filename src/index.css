@@ -32,6 +32,7 @@ ol {
 Button:hover {
   color: #2b67f5;
 }
+/* ! Navbar and  Foooter */
 .navbar {
   position: fixed;
   top: 0;
@@ -77,3 +78,13 @@ input:focus {
 .contacts_li {
   margin: 0 20px;
 }
+/* ! Navbar and  Foooter */
+
+/* !Home page */
+
+.home_main_div {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+/* !Home page */
