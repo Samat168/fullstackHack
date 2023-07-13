@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/SellSwap-removebg-preview.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { Input } from "@mui/material";
-import { Search } from "@mui/icons-material";
+import { Opacity, Search } from "@mui/icons-material";
 import { useAuth } from "../../context/AuthContextProvider";
 
 const pages = [
@@ -24,7 +24,6 @@ const pages = [
   { name: "Продукты", link: "/products", id: 2 },
   { name: "Admin", link: "/admin", id: 3 },
 ];
-// const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -53,7 +52,17 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" className="navbar">
+    <AppBar
+      position="static"
+      className="navbar"
+      sx={{
+        background: "#2a2a2a",
+        width: "85%",
+        margin: "auto",
+        marginTop: "20px",
+        borderRadius: "15px",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img style={{ width: "9%" }} src={Logo} alt="" />
@@ -138,8 +147,17 @@ function Navbar() {
               </Link>
             ))}
           </Box>
+          <div
+            className="search_container"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "25%",
 
-          <Box sx={{ flexGrow: 0, display: "flex" }}>
+              padding: "5px 15px",
+              borderRadius: "20px",
+            }}
+          >
             <SearchIcon
               sx={{
                 width: "25px",
@@ -148,14 +166,22 @@ function Navbar() {
                 color: "#2b67f5",
               }}
             />
-            <div style={{ marginRight: "15px" }}>
-              <Input
+            <div style={{ width: "90%" }}>
+              <input
+                className="search_input"
+                type="text"
                 placeholder="search"
-                type="search"
-                sx={{ color: "white" }}
+                style={{
+                  width: "70%",
+
+                  color: "white",
+                  border: "none",
+                }}
               />
             </div>
+          </div>
 
+          <Box sx={{ flexGrow: 0, display: "flex" }}>
             {currentUser ? (
               currentUser
             ) : (
@@ -168,34 +194,33 @@ function Navbar() {
                 </Link>
               </Box>
             )}
-
-            {/* 
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+            {/*  
+            <Tooltip title="Open settings"> 
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> 
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> 
+              </IconButton> 
+            </Tooltip> 
+            <Menu 
+              sx={{ mt: "45px" }} 
+              id="menu-appbar" 
+              anchorEl={anchorElUser} 
+              anchorOrigin={{ 
+                vertical: "top", 
+                horizontal: "right", 
+              }} 
+              keepMounted 
+              transformOrigin={{ 
+                vertical: "top", 
+                horizontal: "right", 
+              }} 
+              open={Boolean(anchorElUser)} 
+              onClose={handleCloseUserMenu} 
+            > 
+                {settings.map((setting) => ( 
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}> 
+                    <Typography textAlign="center">{setting}</Typography> 
+                  </MenuItem> 
+                ))} 
             </Menu> */}
           </Box>
         </Toolbar>
