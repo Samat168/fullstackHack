@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Button, CircularProgress, Container, Input } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Input,
+  TextField,
+} from "@mui/material";
 import { useAuth } from "../../context/AuthContextProvider";
 
 const Register = () => {
@@ -35,17 +42,20 @@ const Register = () => {
   return (
     <Container sx={{ display: "flex", flexDirection: "collumn" }}>
       {error ? <h2>{error}</h2> : null}
-      <Input onChange={(e) => setName(e.target.value)} placeholder="name" />
-      <Input
+      <TextField onChange={(e) => setName(e.target.value)} placeholder="name" />
+      <TextField
         onChange={(e) => setLastName(e.target.value)}
         placeholder="last name"
       />
-      <Input onChange={(e) => setEmail(e.target.value)} placeholder="email" />
-      <Input
+      <TextField
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="email"
+      />
+      <TextField
         onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
       />
-      <Input
+      <TextField
         onChange={(e) => setPassword2(e.target.value)}
         placeholder="confirm password"
       />

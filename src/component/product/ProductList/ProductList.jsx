@@ -1,15 +1,34 @@
 import React, { useEffect } from "react";
-import { useProducts } from "../../../context/ProductContextProvider";
 import ProductCard from "../ProductCard/ProductCard";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, TextField, Typography } from "@mui/material";
+import { useProduct } from "../../../context/ProductContextProvider";
 
 const ProductList = () => {
-  const { getProducts, products } = useProducts();
+  const { getProducts, products } = useProduct();
   useEffect(() => {
     getProducts();
   }, []);
   return (
     <div>
+      {/* <Typography
+        variant="h1"
+        fontSize={77}
+        sx={{
+          fontFamily: "apercu, sans-serif",
+          textAlign: "center",
+          marginTop: "20px",
+          fill: "var(--color-primary)",
+          fontWeight: "300",
+        }}
+      >
+        SELL SWAP "ПОКУПАЙ И ПРОДАВАЙ"
+      </Typography>
+      <marquee>
+        <h5 style={{ fontSize: "30px" }}>
+          Frontend Developer : Samat Nurkemel Arslan Python
+          Developer:loremdgdgggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+        </h5>
+      </marquee> */}
       <Grid
         className="GridList"
         item
