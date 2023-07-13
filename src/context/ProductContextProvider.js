@@ -64,6 +64,14 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  async function postCategories(category) {
+    try {
+      await axios.post(`${API}/categories/`, category);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function createProduct(newProduct) {
     try {
       await axios.post(`${API}/products/`, newProduct, getTokens());
