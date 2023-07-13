@@ -52,7 +52,7 @@ const CartContexProvider = ({ children }) => {
     let newProduct = {
       product: product,
       quantity: 1,
-      subPrice: +product.price,
+      // subPrice: +product.price,
     };
 
     let productToFind = cart.products.filter(
@@ -115,10 +115,7 @@ const CartContexProvider = ({ children }) => {
 
     try {
       // Отправка заказа через API
-      const response = await axios.post(
-        `${API}/orders/`,
-        order,getTokens()
-      );
+      const response = await axios.post(`${API}/orders/`, order, getTokens());
       console.log("Заказ успешно отправлен!");
       // Дополнительные действия после успешной отправки заказа
     } catch (error) {
@@ -126,7 +123,6 @@ const CartContexProvider = ({ children }) => {
       // Дополнительные действия при ошибке отправки заказа
     }
   };
-
 
   const values = {
     handleSubmit,

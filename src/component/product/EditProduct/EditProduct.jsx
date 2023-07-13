@@ -101,7 +101,7 @@ const EditProduct = () => {
       <TextField onChange={(e) => setPreview(e.target.files[0])} type="file" />
 
       <p>IMAGE BEFORE : {oneProduct ? oneProduct.images : "image is empty"}</p>
-      <TextField onChange={(e) => setImages(e.target.files)} type="file" />
+      <TextField onChange={(e) => setImages(e.target.files[0])} type="file" />
 
       <Button onClick={handleSave}>Create Product</Button>
     </div>

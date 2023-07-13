@@ -27,13 +27,6 @@ const ProductCard = ({ item }) => {
           <Button
             sx={{ marginBottom: "8px" }}
             size="small"
-            onClick={() => addProductToCart(productDetails)}
-          >
-            add to cart
-          </Button>
-          <Button
-            sx={{ marginBottom: "8px" }}
-            size="small"
             onClick={() => deleteProduct(item.id)}
           >
             Delete
