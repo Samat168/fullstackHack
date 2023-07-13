@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useProduct } from "../../../context/ProductContextProvider";
+import { useAuth } from "../../../context/AuthContextProvider";
 const AddProduct = () => {
   const { categories, getCategories, createProduct } = useProduct();
 
@@ -29,7 +30,6 @@ const AddProduct = () => {
     newProduct.append("price", price);
     newProduct.append("description", description);
     newProduct.append("category", category);
-
     if (images) {
       newProduct.append("images", images);
     }

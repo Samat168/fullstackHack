@@ -100,6 +100,15 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  async function toggleLikes(id) {
+    try {
+      await axios(`${API}/products/${id}/toggle_like`, getTokens());
+      getOneProduct(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const values = {
     getProducts,
     products: state.products,
@@ -111,6 +120,7 @@ const ProductContextProvider = ({ children }) => {
     getOneProduct,
     oneProduct: state.oneProduct,
     updateProduct,
+    toggleLikes,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
