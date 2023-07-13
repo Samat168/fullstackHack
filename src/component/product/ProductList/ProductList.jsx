@@ -49,7 +49,7 @@ const ProductList = () => {
           sx={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "20px",
+            gap: "40px",
             marginTop: "7%",
             "@media (max-width: 716px)": {
               grid: "none",
