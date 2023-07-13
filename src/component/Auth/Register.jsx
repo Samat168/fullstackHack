@@ -40,7 +40,7 @@ const Register = () => {
   }
 
   return (
-    <Container>
+    <Container sx={{ display: "flex", flexDirection: "collumn" }}>
       {error ? <h2>{error}</h2> : null}
       <TextField onChange={(e) => setName(e.target.value)} placeholder="name" />
       <TextField

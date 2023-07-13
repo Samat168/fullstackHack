@@ -5,8 +5,10 @@ import { Button, IconButton, Select } from "@mui/material";
 import "./ProductCard.css";
 import EastIcon from "@mui/icons-material/East";
 import { useProduct } from "../../../context/ProductContextProvider";
+import { useCart } from "../../../context/CartContextProvider";
 const ProductCard = ({ item }) => {
-  const { deleteProduct } = useProduct();
+  const { addProductToCart, checkProductInCart } = useCart();
+  const { deleteProduct, getProductDetails, productDetails } = useProduct();
   const navigate = useNavigate();
   return (
     <div>
@@ -17,23 +19,29 @@ const ProductCard = ({ item }) => {
             <Favorite />
           </IconButton>
 
-          <Select>
-            <Button
-              sx={{ marginBottom: "8px" }}
-              size="small"
-              onClick={() => deleteProduct(item.id)}
-            >
-              Delete
-            </Button>
-            <Button
-              sx={{ marginBottom: "8px" }}
-              size="small"
-              onClick={() => navigate(`/edit/${item.id}`)}
-            >
-              Edit
-            </Button>
-          </Select>
-          <EastIcon onClick={() => navigate(`/details/${item.id}`)} />
+          <Button
+            sx={{ marginBottom: "8px" }}
+            size="small"
+            onClick={() => addProductToCart(productDetails)}
+          >
+            add to cart
+          </Button>
+          <Button
+            sx={{ marginBottom: "8px" }}
+            size="small"
+            onClick={() => deleteProduct(item.id)}
+          >
+            Delete
+          </Button>
+          <Button
+            sx={{ marginBottom: "8px" }}
+            size="small"
+            onClick={() => navigate(`/edit/${item.id}`)}
+          >
+            Edit
+          </Button>
+
+          <span className="product_price">${item.price}</span>
         </div>
       </div>
     </div>
