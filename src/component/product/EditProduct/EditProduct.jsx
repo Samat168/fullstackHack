@@ -20,6 +20,7 @@ const EditProduct = () => {
   } = useProduct();
 
   const { id } = useParams();
+  console.log(id)
 
   useEffect(() => {
     getOneProduct(id);
