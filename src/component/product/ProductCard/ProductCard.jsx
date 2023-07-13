@@ -1,18 +1,21 @@
 import React from "react";
-import { useProducts } from "../../../context/ProductContextProvider";
 import { useNavigate } from "react-router-dom";
 import { Favorite } from "@mui/icons-material";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Select } from "@mui/material";
 import "./ProductCard.css";
+import EastIcon from "@mui/icons-material/East";
+import { useProduct } from "../../../context/ProductContextProvider";
+import { useCart } from "../../../context/CartContextProvider";
 const ProductCard = ({ item }) => {
-  const { deleteProduct } = useProducts();
+  const { addProductToCart, checkProductInCart } = useCart();
+  const { deleteProduct, getProductDetails, productDetails } = useProduct();
   const navigate = useNavigate();
   return (
     <div>
       <div className="product_card">
         <img
           className="product_img"
-          src={item.pic1}
+          src={item.preview}
           alt=""
           onClick={() => navigate(`/details/${item.id}`)}
         />
@@ -21,6 +24,13 @@ const ProductCard = ({ item }) => {
             <Favorite />
           </IconButton>
 
+          <Button
+            sx={{ marginBottom: "8px" }}
+            size="small"
+            onClick={() => addProductToCart(productDetails)}
+          >
+            add to cart
+          </Button>
           <Button
             sx={{ marginBottom: "8px" }}
             size="small"

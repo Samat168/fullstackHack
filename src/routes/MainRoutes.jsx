@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import FormforPayPage from "../pages/FormforPayPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -63,6 +64,11 @@ const MainRoutes = () => {
       link: "/favorite",
       element: <FavoritePage />,
       id: 11,
+    },
+    {
+      link: "/formforpay",
+      element: <FormforPayPage />,
+      id: 12,
     },
   ];
   return (

@@ -1,212 +1,83 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { useProducts } from "../../../context/ProductContextProvider";
-
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import Button from "@mui/material/Button";
+import { useProduct } from "../../../context/ProductContextProvider";
+import { useAuth } from "../../../context/AuthContextProvider";
 const AddProduct = () => {
-  const [product, setProduct] = useState({
-    title: "",
-    desc: "",
-    pic1: "",
-    pic2: "",
-    pic3: "",
-    pic4: "",
-    price: 0,
-    category: "",
-  });
-  const { addProduct } = useProducts();
+  const { categories, getCategories, createProduct } = useProduct();
 
-  const handleInp = (e) => {
-    if (e.target.name === "price") {
-      let obj = {
-        ...product,
-        [e.target.name]: Number(e.target.value),
-      };
-      setProduct(obj);
-    } else {
-      let obj = {
-        ...product,
-        [e.target.name]: e.target.value,
-      };
-      setProduct(obj);
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [images, setImages] = useState("");
+  const [preview, setPreview] = useState("");
+
+  const handleSave = () => {
+    const newProduct = new FormData();
+    newProduct.append("title", title);
+    newProduct.append("price", price);
+    newProduct.append("description", description);
+    newProduct.append("category", category);
+    if (images) {
+      newProduct.append("images", images);
     }
+    if (preview) {
+      newProduct.append("preview", preview);
+    }
+    createProduct(newProduct);
   };
-
-  const handleAddProduct = () => {
-    addProduct(product);
-    setProduct({
-      title: "",
-      desc: "",
-      pic1: "",
-      pic2: "",
-      pic3: "",
-      pic4: "",
-      price: 0,
-      category: "",
-    });
-  };
-
   return (
-    <Box sx={{ paddingBottom: "3%" }}>
-      <Typography
-        sx={{
-          paddingTop: "2%",
-          color: "white",
-          WebkitTextStroke: "3px black",
-          fontWeight: "900",
-          fontSize: "44px",
-        }}
-        variant="h4"
-        align="center"
-      >
-        ADMIN PANEL
-      </Typography>
-      <Box
-        sx={{
-          width: "60vw",
-          margin: "10px auto",
-          padding: "5% 5%",
-        }}
-      >
-        <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-          <Typography>Название</Typography>
-          <Typography>Описание</Typography>
-        </Box>
-        <Box sx={{ display: "flex" }}>
-          <TextField
-            sx={{
-              background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-              borderRadius: "5px",
-              marginBottom: "20px",
-            }}
-            fullWidth
-            onChange={handleInp}
-            name="title"
-            label="title"
-            variant="outlined"
-            value={product.title}
-          />
-          <TextField
-            sx={{
-              background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-              borderRadius: "5px",
-              marginBottom: "20px",
-            }}
-            fullWidth
-            onChange={handleInp}
-            name="desc"
-            label="desc"
-            variant="outlined"
-            value={product.desc}
-          />
-        </Box>
+    <div className="w-50 mt-5 m-auto">
+      <h2>CREATE PRODUCT</h2>
+      <TextField
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="title"
+        type="text"
+      />
+      <TextField
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="description"
+        type="text"
+      />
+      <TextField
+        onChange={(e) => setPrice(e.target.value)}
+        placeholder="price"
+        type="text"
+      />
 
-        <Box sx={{ display: "flex" }}>
-          <TextField
-            sx={{
-              background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-              borderRadius: "5px",
-              marginBottom: "20px",
-            }}
-            fullWidth
-            onChange={handleInp}
-            name="pic1"
-            label="pic1"
-            variant="outlined"
-            value={product.pic1}
-          />
-          <TextField
-            sx={{
-              background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-              borderRadius: "5px",
-              marginBottom: "20px",
-            }}
-            fullWidth
-            onChange={handleInp}
-            name="pic2"
-            label="pic2"
-            variant="outlined"
-            value={product.pic2}
-          />
-          <TextField
-            sx={{
-              background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-              borderRadius: "5px",
-              marginBottom: "20px",
-            }}
-            fullWidth
-            onChange={handleInp}
-            name="pic3"
-            label="pic3"
-            variant="outlined"
-            value={product.pic3}
-          />
-          <TextField
-            sx={{
-              background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-              borderRadius: "5px",
-              marginBottom: "20px",
-            }}
-            fullWidth
-            onChange={handleInp}
-            name="pic4"
-            label="pic4"
-            variant="outlined"
-            value={product.pic4}
-          />
-        </Box>
-        <TextField
-          sx={{
-            background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="category"
-          label="category"
-          variant="outlined"
-          value={product.category}
-        />
-        <TextField
-          sx={{
-            background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="price"
-          label="price"
-          variant="outlined"
-          value={product.price}
-        />
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Категории</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          {categories.map((item) => (
+            <MenuItem value={item.slug} key={item.slug}>
+              {item.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
-        <Box sx={{ backgroundColor: "orange", borderRadius: "5px" }}>
-          <Button
-            sx={{
-              background: "linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%)",
-              borderRadius: "5px",
-              color: "black",
-              fontSize: "22px",
-              fontWeight: "900",
-              fontFamily: "segoe ui",
-              "&:hover": {
-                backgroundColor: "black",
-                color: "white",
-              },
-            }}
-            onClick={handleAddProduct}
-            fullWidth
-            variant="outlined"
-            size="large"
-            className="admin__button"
-          >
-            ADD PRODUCT
-          </Button>
-        </Box>
-      </Box>
-    </Box>
+      <TextField onChange={(e) => setPreview(e.target.files[0])} type="file" />
+
+      <TextField onChange={(e) => setImages(e.target.files[4])} type="file" />
+
+      <Button onClick={handleSave}>Create Product</Button>
+    </div>
   );
 };
 

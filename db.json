@@ -10,6 +10,61 @@
       "price": 12,
       "category": "sfs",
       "id": 1
+    },
+    {
+      "title": "Самат",
+      "desc": "ыаыып",
+      "pic1": "https://i.pinimg.com/564x/22/6d/f2/226df2d88df0b8571244a4a289698ace.jpg",
+      "pic2": "",
+      "pic3": "",
+      "pic4": "",
+      "price": 250,
+      "category": "Личные вещи",
+      "id": 2
+    },
+    {
+      "title": "adada",
+      "desc": "sfsfs",
+      "pic1": "https://i.pinimg.com/564x/2b/04/df/2b04df784724301d2c8a633237d9a67d.jpg",
+      "pic2": "",
+      "pic3": "",
+      "pic4": "",
+      "price": 24,
+      "category": "sfsfs",
+      "id": 3
+    },
+    {
+      "title": "adada",
+      "desc": "sfs",
+      "pic1": "https://i.pinimg.com/564x/82/40/a0/8240a0651584f00598a686a156b0a7f1.jpg",
+      "pic2": "",
+      "pic3": "",
+      "pic4": "",
+      "price": 55,
+      "category": "",
+      "id": 4
+    },
+    {
+      "title": "sffsfs",
+      "desc": "aafsfs",
+      "pic1": "https://i.pinimg.com/564x/b9/df/7e/b9df7e9820a3d5e600006e41ba9f5361.jpg",
+      "pic2": "",
+      "pic3": "",
+      "pic4": "",
+      "price": 500,
+      "category": "",
+      "id": 5
+    },
+    {
+      "title": "2tdhfhg",
+      "desc": "",
+      "pic1": "https://i.pinimg.com/564x/27/c9/7b/27c97b542abfe5dcf5595c747b48b80a.jpg",
+      "pic2": "",
+      "pic3": "",
+      "pic4": "",
+      "price": 10000000,
+      "category": "sgsd",
+      "id": 6
     }
   ]
 }
