@@ -1,192 +1,110 @@
 import React, { useEffect, useState } from "react";
 
-import { Box, Button, TextField, Typography } from "@mui/material";
-
-import { useParams } from "react-router-dom";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import Button from "@mui/material/Button";
 import { useProduct } from "../../../context/ProductContextProvider";
-
+import { useParams } from "react-router-dom";
 const EditProduct = () => {
-  const [product, setProduct] = useState({
-    title: "",
-    desc: "",
-    pic1: "",
-    pic2: "",
-    pic3: "",
-    pic4: "",
-
-    price: 0,
-    category: "",
-  });
-  const { saveEditedProduct, getProductDetails, productDetails } = useProduct();
+  const {
+    categories,
+    getCategories,
+    updateProduct,
+    oneProduct,
+    getOneProduct,
+  } = useProduct();
 
   const { id } = useParams();
 
   useEffect(() => {
-    getProductDetails(id);
+    getOneProduct(id);
+    getCategories();
   }, []);
 
   useEffect(() => {
-    if (productDetails) {
-      setProduct(productDetails);
+    if (oneProduct) {
+      setTitle(oneProduct.title);
+      setDescription(oneProduct.description);
+      setPrice(oneProduct.price);
+      if (oneProduct.category) {
+        setCategory(oneProduct.category.slug);
+      }
     }
-  }, [productDetails]);
+  }, [oneProduct]);
 
-  const handleInp = (e) => {
-    if (e.target.name === "price") {
-      let obj = {
-        ...product,
-        [e.target.name]: Number(e.target.value),
-      };
-      setProduct(obj);
-    } else {
-      let obj = {
-        ...product,
-        [e.target.name]: e.target.value,
-      };
-      setProduct(obj);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [images, setImages] = useState("");
+  const [preview, setPreview] = useState("");
+
+  const handleSave = () => {
+    const newProduct = new FormData();
+    newProduct.append("title", title);
+    newProduct.append("price", price);
+    newProduct.append("description", description);
+    newProduct.append("category", category);
+
+    if (images) {
+      newProduct.append("images", images);
     }
+    if (preview) {
+      newProduct.append("preview", preview);
+    }
+    updateProduct(id, newProduct);
   };
-
   return (
-    <Box sx={{ paddingBottom: "3%" }}>
-      <Typography
-        sx={{
-          paddingTop: "2%",
-          color: "white",
-          WebkitTextStroke: "3px black",
-          fontWeight: "900",
-          fontSize: "44px",
-        }}
-        variant="h4"
-        align="center"
-      >
-        EDIT PAGE
-      </Typography>
-      <Box
-        sx={{
-          width: "60vw",
-          margin: "10px auto",
-          padding: "5% 5%",
-        }}
-      >
-        <TextField
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="title"
-          label="title"
-          variant="outlined"
-          value={product.title}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="desc"
-          label="desc"
-          variant="outlined"
-          value={product.desc}
-        />
+    <div className="w-50 mt-5 m-auto">
+      <h2>CREATE PRODUCT</h2>
+      <TextField
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="title"
+        type="text"
+        value={title}
+      />
+      <TextField
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="description"
+        type="text"
+        value={description}
+      />
+      <TextField
+        onChange={(e) => setPrice(e.target.value)}
+        placeholder="price"
+        type="text"
+        value={price}
+      />
 
-        <TextField
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="pic1"
-          label="pic1"
-          variant="outlined"
-          value={product.pic1}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="pic2"
-          label="pic2"
-          variant="outlined"
-          value={product.pic2}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="pic3"
-          label="pic3"
-          variant="outlined"
-          value={product.pic3}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="pic4"
-          label="pic4"
-          variant="outlined"
-          value={product.pic4}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-          fullWidth
-          onChange={handleInp}
-          name="price"
-          label="price"
-          variant="outlined"
-          value={product.price}
-        />
+      <FormControl fullWidth>
+        <InputLabel>Категории</InputLabel>
+        <Select
+          id="demo-simple-select"
+          onChange={(e) => setCategory(e.target.value)}
+          value={category}
+        >
+          {categories.map((item) => (
+            <MenuItem value={item.slug} key={item.slug}>
+              {item.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <p>
+        Preview BEFORE : {oneProduct ? oneProduct.preview : "preview is empty"}
+      </p>
+      <TextField onChange={(e) => setPreview(e.target.files[0])} type="file" />
 
-        <Box sx={{ backgroundColor: "orange", borderRadius: "5px" }}>
-          <Button
-            sx={{
-              backgroundColor: "white",
-              borderRadius: "5px",
-              color: "black",
-              fontSize: "22px",
-              fontWeight: "900",
-              fontFamily: "segoe ui",
-              "&:hover": {
-                backgroundColor: "black",
-                color: "white",
-              },
-            }}
-            onClick={() => saveEditedProduct(product)}
-            fullWidth
-            variant="outlined"
-            size="large"
-            className="admin__button"
-          >
-            SAVE CHANGES
-          </Button>
-        </Box>
-      </Box>
-    </Box>
+      <p>IMAGE BEFORE : {oneProduct ? oneProduct.images : "image is empty"}</p>
+      <TextField onChange={(e) => setImages(e.target.files[0])} type="file" />
+
+      <Button onClick={handleSave}>Create Product</Button>
+    </div>
   );
 };
 

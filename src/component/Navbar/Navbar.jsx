@@ -56,11 +56,11 @@ function Navbar() {
       position="static"
       className="navbar"
       sx={{
-        background: "#2a2a2a",
+        backgroundColor: "transparent",
         width: "85%",
         margin: "auto",
         marginTop: "20px",
-        borderRadius: "15px",
+        boxShadow: "none",
       }}
     >
       <Container maxWidth="xl">
@@ -140,6 +140,7 @@ function Navbar() {
                     color: "#9baec8",
                     display: "block",
                     margin: "0 20px",
+                    color: "rgba(255,255,255,.5);",
                   }}
                 >
                   {page.name}
@@ -187,10 +188,10 @@ function Navbar() {
             ) : (
               <Box>
                 <Link to="/login">
-                  <Button>Войти</Button>
+                  <Button sx={{ color: "#ebedff" }}>Sign in</Button>
                 </Link>
                 <Link to="/register">
-                  <Button>Зарегистрироваться</Button>
+                  <Button sx={{ color: "#ebedff" }}>Sign up</Button>
                 </Link>
               </Box>
             )}
