@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Logo from "../../assets/SellSwap-removebg-preview.png";
 import {
   Box,
   Button,
@@ -6,15 +7,17 @@ import {
   Container,
   Input,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useAuth } from "../../context/AuthContextProvider";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { handleLogin, loading } = useAuth();
-
+  const navigate = useNavigate()
   function handleSave() {
     if (!email.trim() || !password.trim()) {
       alert("Заполните поля!");
@@ -30,59 +33,85 @@ const Login = () => {
   }
 
   return (
-    <Container
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        paddingTop: "10%",
+        height: '700px',
+        paddingTop: "7%",
         width: "100%",
         padding: "auto",
+      
         background:
           "url(https://images.wallpaperscraft.ru/image/single/tekstura_fon_tekst_50473_1920x1080.jpg)",
       }}
     >
+      {/* <img
+            src={Logo}
+            alt=""
+            style={{ width: "200px", marginInline: "auto",  }}
+          ></img> */}
+      <Typography component="h1" variant="h5" sx={{ color: "white", marginLeft:'38%', marginBottom:'2%', fontSize: '40px' }}>
+          Login
+          </Typography>
+
       <TextField
         onChange={(e) => setEmail(e.target.value)}
         placeholder="email"
         sx={{
           backgroundColor: "white",
           borderRadius: "10px",
-          width: "50%",
+          width: "320px",
           padding: "auto",
-          marginLeft: "30%",
+          marginInline: 'auto',
+          marginBottom: '10px'
         }}
       />
       <TextField
         onChange={(e) => setPassword(e.target.value)}
+        autoComplete="current-password"
         placeholder="password"
         sx={{
           marginTop: "5px",
           backgroundColor: "white",
           borderRadius: "10px",
-          width: "50%",
+          width: "320px",
 
-          marginLeft: "30%",
+          marginInline: 'auto',
         }}
       />
-
+      <div style={{width:'320px', marginInline: 'auto', display: 'flex', justifyContent: 'space-between'}}>
       {loading ? (
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex",margin: "auto",
+        marginTop: "10px", }}>
           <CircularProgress />
         </Box>
       ) : (
         <Button
           onClick={handleSave}
+          variant="contained"
           sx={{
-            backgroundColor: "white",
-            width: "10%",
+            // backgroundColor: "white",
+            width: "110px",
             margin: "auto",
             marginTop: "10px",
           }}
-        >
+          >
           Login
         </Button>
-      )}
-    </Container>
+
+          )}
+          <Button
+          onClick={() => navigate('/passresset')}
+          variant="Outline"
+          sx={{
+            // backgroundColor: "white",
+            width: "50%",
+            margin: "auto",
+            marginTop: "10px",
+          }}>forgot?</Button>
+            </div>
+      </Box>
   );
 };
 
