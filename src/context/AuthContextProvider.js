@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 import { async } from "q";
 import { Try } from "@mui/icons-material";
@@ -12,6 +12,7 @@ const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { uid } = useParams();
 
   const navigate = useNavigate();
 
@@ -42,8 +43,6 @@ const AuthContextProvider = ({ children }) => {
       setLoading(false);
     }
   }
-
-
 
   async function ressetPass(formData) {
     setLoading(true);

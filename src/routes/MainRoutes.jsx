@@ -14,6 +14,7 @@ import RegisterPage from "../pages/RegisterPage";
 import FormforPayPage from "../pages/FormforPayPage";
 import PasswordResetPage from "../pages/PasswordResetPage";
 import PassRessetConfirmPage from "../pages/PassRessetConfirmPage";
+import RegisterSuccessPage from "../pages/RegisterSuccessPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -80,7 +81,13 @@ const MainRoutes = () => {
     {
       link: "api/v1/accounts/password_reset/:tokens",
       element: <PassRessetConfirmPage />,
-      id: 13,
+      id: 14,
+    },
+    {
+      link: "api/v1/accounts/activate/:uid",
+
+      element: <RegisterSuccessPage />,
+      id: 14,
     },
   ];
   return (
