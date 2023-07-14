@@ -55,6 +55,16 @@ const AuthContextProvider = ({ children }) => {
       setLoading(false);
     }
   }
+  async function ressetPassConfirm(formData) {
+    setLoading(true);
+    try {
+      await axios.post(`${API}/accounts/password_reset/confirm/`, formData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   function logout() {
     localStorage.removeItem("tokens");
@@ -87,6 +97,7 @@ const AuthContextProvider = ({ children }) => {
   }
 
   const values = {
+    ressetPassConfirm,
     ressetPass,
     handleRegister,
     handleLogin,
