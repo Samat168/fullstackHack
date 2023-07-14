@@ -11,7 +11,8 @@ import Button from "@mui/material/Button";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { useAuth } from "../../../context/AuthContextProvider";
 const AddProduct = () => {
-  const { categories, getCategories, createProduct } = useProduct();
+  const { categories, getCategories, createProduct, postCategories } =
+    useProduct();
 
   useEffect(() => {
     getCategories();
@@ -23,6 +24,9 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [images, setImages] = useState("");
   const [preview, setPreview] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+  const [mainCategory, setMainCategory] = useState("");
+  const [slugCategory, setSlugCategory] = useState("");
 
   const handleSave = () => {
     const newProduct = new FormData();
@@ -38,6 +42,19 @@ const AddProduct = () => {
     }
     createProduct(newProduct);
   };
+
+  const handleCategory = () => {
+    if (!subCategory) {
+      alert("Заполните поля");
+      return;
+    }
+    const newObj = new FormData();
+    newObj.append("slug", slugCategory);
+    newObj.append("name", subCategory);
+    newObj.append("parent", mainCategory);
+    postCategories(newObj);
+  };
+
   return (
     <div className="w-50 mt-5 m-auto">
       <h2>CREATE PRODUCT</h2>
@@ -88,6 +105,27 @@ const AddProduct = () => {
       />
 
       <Button onClick={handleSave}>Create Product</Button>
+      <div>
+        <input
+          type="text"
+          onChange={(e) => setMainCategory(e.target.value)}
+          value={mainCategory}
+          placeholder="Основная категория"
+        />
+        <input
+          type="text"
+          onChange={(e) => setSubCategory(e.target.value)}
+          value={subCategory}
+          placeholder="Подкатегория"
+        />
+        <input
+          type="text"
+          placeholder="slug"
+          onChange={(e) => setSlugCategory(e.target.value)}
+          value={slugCategory}
+        />
+        <Button onClick={handleCategory}>Добавить категорию</Button>
+      </div>
     </div>
   );
 };

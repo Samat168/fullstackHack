@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../helpers/consts";
+import { async } from "q";
+import { Try } from "@mui/icons-material";
 
 export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
@@ -41,6 +43,29 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+
+
+  async function ressetPass(formData) {
+    setLoading(true);
+    try {
+      await axios.post(`${API}/accounts/password_reset/`, formData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  async function ressetPassConfirm(formData) {
+    setLoading(true);
+    try {
+      await axios.post(`${API}/accounts/password_reset/confirm/`, formData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   function logout() {
     localStorage.removeItem("tokens");
     localStorage.removeItem("email");
@@ -72,6 +97,8 @@ const AuthContextProvider = ({ children }) => {
   }
 
   const values = {
+    ressetPassConfirm,
+    ressetPass,
     handleRegister,
     handleLogin,
     currentUser,

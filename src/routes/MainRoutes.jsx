@@ -12,6 +12,8 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import FormforPayPage from "../pages/FormforPayPage";
+import PasswordResetPage from "../pages/PasswordResetPage";
+import PassRessetConfirmPage from "../pages/PassRessetConfirmPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -69,6 +71,16 @@ const MainRoutes = () => {
       link: "/formforpay",
       element: <FormforPayPage />,
       id: 12,
+    },
+    {
+      link: "/passresset",
+      element: <PasswordResetPage />,
+      id: 13,
+    },
+    {
+      link: "api/v1/accounts/password_reset/:tokens",
+      element: <PassRessetConfirmPage />,
+      id: 13,
     },
   ];
   return (
