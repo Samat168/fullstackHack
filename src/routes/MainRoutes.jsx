@@ -78,7 +78,7 @@ const MainRoutes = () => {
       id: 13,
     },
     {
-      link: "api/v1/accounts/password_reset/?token=:tokens",
+      link: "api/v1/accounts/password_reset/:tokens",
       element: <PassRessetConfirmPage />,
       id: 13,
     },
