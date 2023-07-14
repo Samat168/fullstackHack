@@ -1,34 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
-import { Box, Grid, TextField, Typography } from "@mui/material";
+import { Box, Grid, Pagination, TextField, Typography } from "@mui/material";
 import { useProduct } from "../../../context/ProductContextProvider";
+import { useSearchParams } from "react-router-dom";
 
 const ProductList = () => {
-  const { getProducts, products } = useProduct();
+  const { getProducts, products, pages } = useProduct();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSeacrhParams] = useSearchParams();
+
+  useEffect(() => {
+    setSeacrhParams({
+      page: currentPage,
+    });
+  }, [currentPage]);
+
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [searchParams]);
+  const handleChange = (e, p) => {
+    setCurrentPage(p);
+  };
   return (
     <div>
-      {/* <Typography
-        variant="h1"
-        fontSize={77}
-        sx={{
-          fontFamily: "apercu, sans-serif",
-          textAlign: "center",
-          marginTop: "20px",
-          fill: "var(--color-primary)",
-          fontWeight: "300",
-        }}
-      >
-        SELL SWAP "ПОКУПАЙ И ПРОДАВАЙ"
-      </Typography>
-      <marquee>
-        <h5 style={{ fontSize: "30px" }}>
-          Frontend Developer : Samat Nurkemel Arslan Python
-          Developer:loremdgdgggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
-        </h5>
-      </marquee> */}
       <Grid
         className="GridList"
         item
@@ -60,6 +54,12 @@ const ProductList = () => {
             <ProductCard key={item.id} item={item} />
           ))}
         </Box>
+        <Pagination
+          sx={{ backgroundColor: "white", color: "white" }}
+          count={pages}
+          page={currentPage}
+          onChange={handleChange}
+        />
       </Grid>
     </div>
   );

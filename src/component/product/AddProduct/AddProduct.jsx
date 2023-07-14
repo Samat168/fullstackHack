@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   FormControl,
   InputLabel,
@@ -10,6 +9,7 @@ import {
 import Button from "@mui/material/Button";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { useAuth } from "../../../context/AuthContextProvider";
+
 const AddProduct = () => {
   const { categories, getCategories, createProduct, postCategories } =
     useProduct();
@@ -22,7 +22,7 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [preview, setPreview] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [mainCategory, setMainCategory] = useState("");
@@ -34,12 +34,17 @@ const AddProduct = () => {
     newProduct.append("price", price);
     newProduct.append("description", description);
     newProduct.append("category", category);
-    if (images) {
-      newProduct.append("images", images);
+
+    if (images.length > 0) {
+      for (let i = 0; i < images.length; i++) {
+        newProduct.append("images", images[i]);
+      }
     }
+
     if (preview) {
       newProduct.append("preview", preview);
     }
+
     createProduct(newProduct);
   };
 
@@ -53,6 +58,11 @@ const AddProduct = () => {
     newObj.append("name", subCategory);
     newObj.append("parent", mainCategory);
     postCategories(newObj);
+  };
+
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    setImages(files);
   };
 
   return (
@@ -98,10 +108,11 @@ const AddProduct = () => {
         sx={{ backgroundColor: "white" }}
       />
 
-      <TextField
-        onChange={(e) => setImages(e.target.files[4])}
+      <input
         type="file"
-        sx={{ backgroundColor: "white" }}
+        multiple
+        onChange={handleImageChange}
+        style={{ backgroundColor: "white" }}
       />
 
       <Button onClick={handleSave}>Create Product</Button>

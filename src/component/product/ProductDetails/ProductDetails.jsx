@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import moment from "moment/moment";
+import moment from "moment/moment";
 import { useAuth } from "../../../context/AuthContextProvider";
 import { useProduct } from "../../../context/ProductContextProvider";
-import { Button } from "@mui/material";
+import { Button, Rating } from "@mui/material";
 
 const ProductDetails = () => {
   const {
@@ -13,35 +13,41 @@ const ProductDetails = () => {
     deleteReview,
     saveEditedReview,
     toggleLikes,
+    GetReview,
   } = useProduct();
   const { currentUser } = useAuth();
   const [text, setText] = useState("");
+  const [rating, setRating] = useState(0);
   const [commentToEdit, setCommentToEdit] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     getOneProduct(id);
+    GetReview();
   }, []);
 
   const handleAddReview = (e) => {
     e.preventDefault();
-    const newReview = { text, product: id };
+    const newReview = { rating, text, product: id };
     addReview(newReview);
     getOneProduct(id);
     setText("");
   };
-
-  const handleChange = (e) => {
-    setCommentToEdit({ ...commentToEdit, text: e.target.value });
+  const handleRatingChange = (event, value) => {
+    setRating(value);
   };
 
-  const handleSave = () => {
-    const editedReview = {
-      text: commentToEdit.text,
-      product: commentToEdit.product,
-    };
-    saveEditedReview(editedReview, commentToEdit.id);
-    setCommentToEdit(null);
-  };
+  // const handleChange = (e) => {
+  //   setCommentToEdit({ ...commentToEdit, text: e.target.value });
+  // };
+
+  // const handleSave = () => {
+  //   const editedReview = {
+  //     text: commentToEdit.text,
+  //     product: commentToEdit.product,
+  //   };
+  //   saveEditedReview(editedReview, commentToEdit.id);
+  //   setCommentToEdit(null);
+  // };
 
   return (
     <div style={{ margin: "auto", width: "50%" }}>
@@ -50,7 +56,7 @@ const ProductDetails = () => {
       <button onClick={() => toggleLikes(oneProduct?.id)}>
         {oneProduct?.liked_by_user ? "-" : "+"}
       </button>
-      <span style={{ color: "white" }}>Likes: {oneProduct?.likes}</span>
+      <span style={{ color: "white" }}>Likes: {oneProduct?.likes_count}</span>
       <p>{oneProduct?.category.name}</p>
       <p>{oneProduct?.price}</p>
       <p>{oneProduct?.description}</p>
@@ -62,37 +68,46 @@ const ProductDetails = () => {
           ? "Remove from favorites"
           : "Add to Favorites"}
       </Button>
-      {/* <div>
-        {oneProduct?.reviews.map((item) => (
+      <div>
+        {/* {oneProduct?.rating.map((item) => (
           <div key={item.id} className="border m-4">
-            <h5>{item.author}</h5>
-            {commentToEdit && commentToEdit.id == item.id ? (
-              <>
+            <h5>{item.author}</h5> */}
+        {/* {commentToEdit && commentToEdit.id == item.id ? ( */}
+        {/* <>
                 <input onChange={handleChange} value={commentToEdit.text} />
                 <button onClick={() => setCommentToEdit(null)}>cansel</button>
                 <button onClick={handleSave}>save review</button>
               </>
             ) : (
-              <p>
-                {item.text} {"    "}
-                <span style={{ fontSize: "10px", color: "lightgrey" }}>
-                  {moment(item.created_at).format("DD/MM/YYYY HH:mm:ss")}
-                </span>
-              </p>
-            )}
-
-            {item.author === currentUser ? (
+              */}{" "}
+        {/* <p> */}
+        {/* {item.avg} {"    "} */}
+        {/* <span style={{ fontSize: "10px", color: "lightgrey" }}>
+                {moment(item.created_at).format("DD/MM/YYYY HH:mm:ss")}
+              </span> */}
+        {/* </p>
+          </div>
+        ))}  */}
+        {/* {item.author === currentUser ? (
               <div>
                 <button onClick={() => setCommentToEdit(item)}>edit</button>
                 <button onClick={() => deleteReview(item.id, id)}>
                   delete
                 </button>
               </div>
-            ) : null}
-          </div>
-        ))}
+          //   ) : null} */}
       </div>
       <form onSubmit={handleAddReview} action="">
+        <label style={{ backgroundColor: "white" }}>
+          Rating:
+          <Rating
+            name="rating"
+            value={rating}
+            onChange={handleRatingChange}
+            precision={1}
+            required
+          />
+        </label>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -103,7 +118,7 @@ const ProductDetails = () => {
           rows="10"
         ></textarea>
         <button>add REVIEWS</button>
-      </form> */}
+      </form>
     </div>
   );
 };
