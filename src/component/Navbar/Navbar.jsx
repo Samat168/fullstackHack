@@ -81,11 +81,12 @@ function Navbar() {
 
   return (
     <AppBar
-      className={`navbar ${navbarHidden ? "hidden" : ""}`}
+      className="navbar"
       sx={{
         width: "100%",
         margin: "auto",
         boxShadow: "none",
+        position: "static",
       }}
     >
       <Container maxWidth="xl">
