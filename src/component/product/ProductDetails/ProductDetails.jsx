@@ -63,10 +63,10 @@ const ProductDetails = () => {
       <button onClick={() => toggleLikes(oneProduct?.id)}>
         {oneProduct?.liked_by_user ? "-" : "+"}
       </button>
-      <span style={{ color: "white" }}>Likes: {oneProduct?.likes_count}</span>
-      <p>{oneProduct?.category.name}</p>
-      <p>{oneProduct?.price}</p>
-      <p>{oneProduct?.description}</p>
+      <span style={{ color: "black" }}>Likes: {oneProduct?.likes_count}</span>
+      <p style={{ color: "black" }}>{oneProduct?.category.name}</p>
+      <p style={{ color: "black" }}>{oneProduct?.price}</p>
+      <p style={{ color: "black" }}>{oneProduct?.description}</p>
       <Button
         sx={{ color: "blue" }}
         variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
@@ -76,7 +76,7 @@ const ProductDetails = () => {
           : "Add to Favorites"}
       </Button>
       {review.some((item) => item.user === currentUser) ? (
-        <h3>Вы уже оставили отзыв</h3>
+        <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
       ) : (
         <form onSubmit={handleAddReview} action="">
           <label style={{ backgroundColor: "white" }}>
@@ -105,7 +105,7 @@ const ProductDetails = () => {
       <div>
         {review?.map((item) => (
           <div key={item.id}>
-            <h5>{item.user}</h5>
+            <h5 style={{ color: "black" }}>{item.user}</h5>
             <label style={{ backgroundColor: "white" }}>
               Rating:
               <Rating
@@ -115,7 +115,7 @@ const ProductDetails = () => {
                 required
               />
             </label>
-            <p>{item.text}</p>
+            <p style={{ color: "black" }}>{item.text}</p>
           </div>
         ))}
         {/* {oneProduct?.rating.map((item) => (
