@@ -5,7 +5,7 @@
   font-family: "Inter", sans-serif;
 }
 p {
-  color: #9baec8;
+  color: #fff;
 }
 h1,
 h2,
@@ -13,11 +13,12 @@ h3,
 h4,
 h5,
 h6 {
-  color: #969ca4;
+  color: #fff;
 }
 
 body {
-  background-color: #010105;
+  background-color: #fff;
+  margin-top: 80 px;
 }
 
 a {
@@ -31,14 +32,21 @@ ol {
   margin: 10px 0;
 }
 Button:hover {
-  color: #2b67f5;
+  color: gray;
 }
 /* ! Navbar and  Foooter */
 
 .navbar {
-  bottom: 0;
-  margin-top: 100px;
 }
+.navbar.hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+.navbar_icons {
+  cursor: pointer;
+  margin: 0 10px;
+}
+
 .footer {
   width: 100%;
   height: 450px;
@@ -47,7 +55,7 @@ Button:hover {
 }
 .navbar,
 .footer {
-  background-color: black;
+  background-color: #1551e5;
 }
 
 .icons:hover {
