@@ -16,7 +16,7 @@ const Footer = () => {
       className="footer"
       style={{
         width: "100%",
-        backgroundColor: "#2a2a2a",
+
         padding: "50px 30px",
         display: "flex",
       }}
@@ -24,7 +24,7 @@ const Footer = () => {
       <div style={{ width: "60%" }}>
         <h3
           style={{
-            color: "#9baec8",
+            color: "#fff",
             marginBottom: "40px",
             textAlign: "start",
             borderBottom: "2px solid gray ",
@@ -33,42 +33,7 @@ const Footer = () => {
         >
           О нас
         </h3>
-        <ul
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <li className="contacts_li">
-            <InstagramIcon
-              className="icons"
-              fontSize="large"
-              sx={{ color: "white" }}
-            />
-          </li>
-          <li className="contacts_li">
-            <FacebookIcon
-              className="icons"
-              fontSize="large"
-              sx={{ color: "white" }}
-            />
-          </li>
-          <li className="contacts_li">
-            <YouTubeIcon
-              className="icons"
-              fontSize="large"
-              sx={{ color: "white" }}
-            />
-          </li>
-          <li className="contacts_li">
-            <TwitterIcon
-              className="icons"
-              fontSize="large"
-              sx={{ color: "white" }}
-            />
-          </li>
-        </ul>
+
         <ul
           style={{
             display: "flex",
@@ -116,15 +81,52 @@ const Footer = () => {
       <div
         style={{
           display: "flex",
+          width: "40%",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "flex-start",
+
           alignItems: "center",
         }}
       >
-        <a href="">
-          <img style={{ width: "70%", marginLeft: "80px" }} src={Logo} alt="" />
-          <h2 style={{ textAlign: "center" }}>Свяжитесь с нами </h2>
-        </a>
+        <h3 style={{ textAlign: "start", color: "#fff" }}>Контакты</h3>
+        <ul
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            margin: "50px 0",
+          }}
+        >
+          <li className="contacts_li">
+            <InstagramIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
+          </li>
+          <li className="contacts_li">
+            <FacebookIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
+          </li>
+          <li className="contacts_li">
+            <YouTubeIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
+          </li>
+          <li className="contacts_li">
+            <TwitterIcon
+              className="icons"
+              fontSize="large"
+              sx={{ color: "white" }}
+            />
+          </li>
+        </ul>
+        <div>+996 700 00 00 00</div>
       </div>
     </div>
   );
