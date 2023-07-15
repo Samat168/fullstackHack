@@ -62,7 +62,7 @@ const AddProduct = () => {
 
   const handleImageChange = (event) => {
     const files = Array.from(event.target.files);
-    setImages(files);
+    setImages([...images, ...files]);
   };
 
   return (

@@ -20,7 +20,7 @@ const EditProduct = () => {
   } = useProduct();
 
   const { id } = useParams();
-  console.log(id)
+  console.log(id);
 
   useEffect(() => {
     getOneProduct(id);
@@ -42,7 +42,7 @@ const EditProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [preview, setPreview] = useState("");
 
   const handleSave = () => {
@@ -53,7 +53,9 @@ const EditProduct = () => {
     newProduct.append("category", category);
 
     if (images) {
-      newProduct.append("images", images);
+      for (let i = 0; i < images.length; i++) {
+        newProduct.append("images", images[i]);
+      }
     }
     if (preview) {
       newProduct.append("preview", preview);
@@ -101,8 +103,13 @@ const EditProduct = () => {
       </p>
       <TextField onChange={(e) => setPreview(e.target.files[0])} type="file" />
 
-      <p>IMAGE BEFORE : {oneProduct ? oneProduct.images : "image is empty"}</p>
-      <TextField onChange={(e) => setImages(e.target.files[0])} type="file" />
+      <p>
+        IMAGE BEFORE :{" "}
+        {oneProduct
+          ? oneProduct.images.map((item) => `${item.image}`)
+          : "image is empty"}
+      </p>
+      <input onChange={(e) => setImages(e.target.files[0])} type="file" />
 
       <Button onClick={handleSave}>Create Product</Button>
     </div>
