@@ -13,6 +13,7 @@ const INIT_STATE = {
   categories: [],
   oneProduct: null,
   favorites: [],
+  review: [],
   promo: [],
 };
 
@@ -22,7 +23,7 @@ function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         products: action.payload.results,
-        pages: Math.ceil(action.payload.count / 6),
+        pages: Math.ceil(action.payload.count / 12),
       };
     case "GET_CATEGORIES":
       return { ...state, categories: action.payload };
@@ -34,6 +35,9 @@ function reducer(state = INIT_STATE, action) {
       return { ...state, favorites: action.payload };
     case "GET_PROMO":
       return { ...state, promo: action.payload };
+
+    case "GET_REVIEW":
+      return { ...state, review: action.payload };
 
     default:
       return state;
@@ -98,8 +102,7 @@ const ProductContextProvider = ({ children }) => {
   async function getOneProduct(id) {
     try {
       const res = await axios(`${API}/products/${id}/`, getTokens());
-      console.log(res);
-      // dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
+      dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
     } catch (error) {
       console.log(error);
     }
@@ -139,6 +142,24 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  async function addReview(review) {
+    try {
+      await axios.post(`${API}/ratings/`, review, getTokens());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function GetReview(id) {
+    try {
+      let res = await axios(`${API}/products/${id}/reviews/`, getTokens());
+      dispatch({ type: "GET_REVIEW", payload: res.data });
+      getOneProduct(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const values = {
     getProducts,
     products: state.products,
@@ -152,6 +173,9 @@ const ProductContextProvider = ({ children }) => {
     updateProduct,
     toggleLikes,
     postCategories,
+    addReview,
+    GetReview,
+    review: state.review,
     postPromo,
     promo: state.promo,
   };
