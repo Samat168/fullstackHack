@@ -24,7 +24,7 @@ const ProductCard = ({ item }) => {
           <IconButton sx={{ color: "grey" }}>
             <Favorite />
           </IconButton>
-
+          <p style={{ color: "white" }}>{item.title}</p>
           <Button
             sx={{
               marginBottom: "8px",
