@@ -9,6 +9,9 @@ const Home = () => {
       <HomeSlider />
       <ProductSlider />
       <HomeCategory />
+      <ProductSlider />
+      <ProductSlider />
+      <ProductSlider />
     </div>
   );
 };
