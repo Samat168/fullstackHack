@@ -5,7 +5,7 @@
   font-family: "Inter", sans-serif;
 }
 p {
-  color: #9baec8;
+  color: #fff;
 }
 h1,
 h2,
@@ -13,11 +13,12 @@ h3,
 h4,
 h5,
 h6 {
-  color: #969ca4;
+  color: #fff;
 }
 
 body {
-  background-color: #010105;
+  background-color: #fff;
+  margin-top: 80 px;
 }
 
 a {
@@ -31,23 +32,30 @@ ol {
   margin: 10px 0;
 }
 Button:hover {
-  color: #2b67f5;
+  color: gray;
 }
 /* ! Navbar and  Foooter */
 
 .navbar {
-  position: fixed;
-  top: 0;
 }
+.navbar.hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+.navbar_icons {
+  cursor: pointer;
+  margin: 0 10px;
+}
+
 .footer {
   width: 100%;
   height: 450px;
-
+  margin-top: 100px;
   bottom: 0;
 }
 .navbar,
 .footer {
-  background-color: black;
+  background-color: #1551e5;
 }
 
 .icons:hover {
@@ -127,3 +135,167 @@ input:focus {
 }
 /* slider end */
 /* !Home page */
+
+/* !Admin page */
+/* add product */
+#product {
+  animation-name: shutter-out-left;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+
+  animation: shutter-out-left 0.3s linear 0s 1 normal none;
+}
+
+.button_container {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.add_button_div {
+  margin: 10px;
+}
+.add_product {
+  animation-name: shutter-in-left;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+
+  animation: shutter-in-left 0.3s linear 0s 1 normal none;
+}
+
+.add_product_open {
+  width: 25%;
+  height: 25px;
+}
+.add_product_close {
+  width: 25%;
+  height: 25px;
+}
+.add_product_input {
+  background-color: #7f9298;
+  width: 25%;
+}
+.add_product_category {
+  width: 25%;
+}
+.add_product_button {
+  background-color: #2fce6f;
+  width: 250px;
+  height: 57px;
+  border-radius: 15px;
+  margin: 5px 10px;
+  transition: transform 0.2s ease;
+}
+
+.add_product_button:hover {
+  background-color: #9de263;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 10px 30px -10px #3dc6fa;
+  box-shadow: 0px 10px 30px -10px #3dc6fa;
+  transform: scale(1.05);
+}
+.add_product_button:active {
+  background-color: #ff7473;
+  -webkit-box-shadow: 0px 10px 30px -10px #a0a0a0;
+  box-shadow: 0px 10px 30px -10px #a0a0a0;
+  transform: puffIn;
+  transform: scale(1);
+}
+/* add product end */
+/* add category */
+.add_category_modal {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 80%;
+  align-items: center;
+}
+.add_category_open {
+  width: 25%;
+  height: 25px;
+}
+.add_category_close {
+  width: 25%;
+  height: 25px;
+}
+.add_category {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  animation-name: shutter-in-left;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+
+  animation: shutter-in-left 0.3s linear 0s 1 normal none;
+}
+.add_category_button {
+  background-color: #2fce6f;
+  width: 250px;
+  height: 57px;
+  border-radius: 15px;
+  margin: 10px 0;
+  transition: transform 0.2s ease;
+}
+.add_category_button:hover {
+  background-color: #9de263;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 10px 30px -10px #3dc6fa;
+  box-shadow: 0px 10px 30px -10px #3dc6fa;
+  transform: scale(1.05);
+}
+.add_category_button:active {
+  background-color: #ff7473;
+  -webkit-box-shadow: 0px 10px 30px -10px #a0a0a0;
+  box-shadow: 0px 10px 30px -10px #a0a0a0;
+  transform: puffIn;
+  transform: scale(1);
+}
+.add_category_input {
+  color: black;
+  margin: 10px 0;
+  background-color: #7f9298;
+  width: 50%;
+  padding: 10px;
+}
+/* add category end */
+
+/* Animations */
+@keyframes shutter-in-left {
+  0% {
+    transform: rotateY(100deg);
+    transform-origin: left;
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0);
+    transform-origin: left;
+    opacity: 1;
+  }
+}
+@keyframes shutter-out-left {
+  0% {
+    transform: rotateY(0);
+    transform-origin: left;
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(-70deg);
+    transform-origin: left;
+    opacity: 0;
+  }
+}
+/* !Admin page */
