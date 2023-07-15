@@ -23,8 +23,8 @@ const EditProduct = () => {
   console.log(id);
 
   useEffect(() => {
-    getOneProduct(id);
     getCategories();
+    getOneProduct(id);
   }, []);
 
   useEffect(() => {
@@ -32,9 +32,7 @@ const EditProduct = () => {
       setTitle(oneProduct.title);
       setDescription(oneProduct.description);
       setPrice(oneProduct.price);
-      if (oneProduct.category) {
-        setCategory(oneProduct.category.slug);
-      }
+      setCategory(oneProduct.category);
     }
   }, [oneProduct]);
 
@@ -52,7 +50,7 @@ const EditProduct = () => {
     newProduct.append("description", description);
     newProduct.append("category", category);
 
-    if (images) {
+    if (images.length > 0) {
       for (let i = 0; i < images.length; i++) {
         newProduct.append("images", images[i]);
       }
@@ -62,8 +60,13 @@ const EditProduct = () => {
     }
     updateProduct(id, newProduct);
   };
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    setImages([...images, ...files]);
+  };
+
   return (
-    <div className="w-50 mt-5 m-auto">
+    <div style={{ margin: "auto" }}>
       <h2>CREATE PRODUCT</h2>
       <TextField
         onChange={(e) => setTitle(e.target.value)}
@@ -84,12 +87,14 @@ const EditProduct = () => {
         value={price}
       />
 
-      <FormControl fullWidth>
-        <InputLabel>Категории</InputLabel>
+      <FormControl>
+        <InputLabel id="demo-simple-select-label">Категории</InputLabel>
         <Select
+          labelId="demo-simple-select-label"
           id="demo-simple-select"
-          onChange={(e) => setCategory(e.target.value)}
+          defaultValue=""
           value={category}
+          onChange={(e) => setCategory(e.target.value)}
         >
           {categories.map((item) => (
             <MenuItem value={item.slug} key={item.slug}>
@@ -109,7 +114,12 @@ const EditProduct = () => {
           ? oneProduct.images.map((item) => `${item.image}`)
           : "image is empty"}
       </p>
-      <input onChange={(e) => setImages(e.target.files[0])} type="file" />
+      <input
+        multiple
+        onChange={handleImageChange}
+        type="file"
+        style={{ padding: "16.5px 14px", border: "1px solid" }}
+      />
 
       <Button onClick={handleSave}>Create Product</Button>
     </div>
