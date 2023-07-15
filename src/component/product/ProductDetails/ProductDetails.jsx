@@ -56,8 +56,8 @@ const ProductDetails = () => {
   return (
     <div style={{ margin: "auto", width: "50%" }}>
       <img src={oneProduct?.preview} width={500} alt="" />
-      <img src={oneProduct?.images[0].image} width={500} alt="" />
-      <img src={oneProduct?.images[1].image} width={500} alt="" />
+      {/* <img src={oneProduct?.images[0].image} width={500} alt="" /> */}
+      {/* <img src={oneProduct?.images[1].image} width={500} alt="" /> */}
 
       <h3>{oneProduct?.title}</h3>
       <button onClick={() => toggleLikes(oneProduct?.id)}>
