@@ -192,17 +192,10 @@ input:focus {
   animation: shutter-in-left 0.3s linear 0s 1 normal none;
 }
 
-.add_product_open {
-  width: 25%;
-  height: 25px;
-}
-.add_product_close {
-  width: 25%;
-  height: 25px;
-}
 .add_product_input {
-  background-color: #7f9298;
-  width: 25%;
+  color: black;
+
+  width: 100%;
 }
 .add_product_category {
   width: 25%;
@@ -211,6 +204,7 @@ input:focus {
   background-color: #2fce6f;
   width: 250px;
   height: 57px;
+  border: none;
   border-radius: 15px;
   margin: 5px 10px;
   transition: transform 0.2s ease;
@@ -232,17 +226,27 @@ input:focus {
 }
 /* add product end */
 /* add category */
+.modal_button {
+  background-color: #1244c3;
+  border: none;
+  width: 100px;
+  height: 50px;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+.modal_button:hover {
+}
 .add_category_modal {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 80%;
   align-items: center;
 }
 .add_category_open {
   width: 25%;
   height: 25px;
+  color: #1244c3;
 }
 .add_category_close {
   width: 25%;
@@ -293,6 +297,23 @@ input:focus {
   padding: 10px;
 }
 /* add category end */
+/* add promo start */
+.add_promo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  animation-name: shutter-in-left;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+
+  animation: shutter-in-left 0.3s linear 0s 1 normal none;
+}
+/* add promo end */
 
 /* Animations */
 @keyframes shutter-in-left {

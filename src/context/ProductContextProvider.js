@@ -3,6 +3,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { API } from "../helpers/consts";
 import { useNavigate } from "react-router-dom";
 import { getTokens } from "../helpers/functions";
+import { async } from "q";
 
 export const productContext = createContext();
 export const useProduct = () => useContext(productContext);
@@ -135,8 +136,15 @@ const ProductContextProvider = ({ children }) => {
   }
   async function postPromo(obj) {
     try {
-      // await axios.post(`${API}/promo/`, obj, getTokens());
-      console.log(obj);
+      await axios.post(`${API}/promo/`, obj, getTokens());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function deletePromo(id) {
+    try {
+      await axios.delete(`${API}/promo/${id}/`, getTokens());
+      getPromo();
     } catch (error) {
       console.log(error);
     }
@@ -178,6 +186,8 @@ const ProductContextProvider = ({ children }) => {
     review: state.review,
     postPromo,
     promo: state.promo,
+    getPromo,
+    deletePromo,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

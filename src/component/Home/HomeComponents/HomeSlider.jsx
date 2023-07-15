@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -8,8 +8,14 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper/modules";
+import { useProduct } from "../../../context/ProductContextProvider";
 
 export default function HomeSlider() {
+  const { getPromo, promo } = useProduct();
+  useEffect(() => {
+    getPromo();
+  }, []);
+  console.log(promo);
   return (
     <>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
