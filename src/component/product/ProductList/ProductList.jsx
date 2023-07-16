@@ -3,9 +3,11 @@ import ProductCard from "../ProductCard/ProductCard";
 import { Box, Grid, Pagination, TextField, Typography } from "@mui/material";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { useSearchParams } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContextProvider";
 
 const ProductList = () => {
   const { getProducts, products, pages } = useProduct();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSeacrhParams] = useSearchParams();
 
@@ -21,6 +23,7 @@ const ProductList = () => {
   const handleChange = (e, p) => {
     setCurrentPage(p);
   };
+  
   return (
     <div>
       <Grid
