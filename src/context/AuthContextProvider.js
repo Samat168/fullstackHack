@@ -1,17 +1,37 @@
 import axios from "axios";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 import { async } from "q";
-import { Try } from "@mui/icons-material";
+import { Api, Try } from "@mui/icons-material";
 
 export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
 
+const INIT_STATE = {
+  favorites :[],
+};
+
+
+
+const reducer = (state = INIT_STATE, action) => {
+  switch (action.type) {
+    case "GET_USER_FAVORITES":
+      return { ...state, favorites: action.payload };
+
+
+    default:
+      return state;
+  }
+};
+
+
 const AuthContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, INIT_STATE);
   const [currentUser, setCurrentUser] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [userId, setUserID] = useState(0);
   const { uid } = useParams();
 
   const navigate = useNavigate();
@@ -95,7 +115,46 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  async function checkuserid(){
+    try {
+      const res = await axios(`${API}/accounts/`)
+      res.data.map((user) => {
+        
+        if(user.email === currentUser){
+          setUserID(user.id)
+          console.log(user.id)
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  
+
+
+ async function userFavorites(){
+  try {
+ 
+    const res = await axios(`${API}/accounts/${userId}/favorites/`)
+    dispatch({ type: "GET_USER_FAVORITES", payload: res.data });
+    console.log(state.favorites);
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+
+
+
   const values = {
+    checkuserid,
+    userId,
+    favorites: state.favorites,
+    userFavorites,
     ressetPassConfirm,
     ressetPass,
     handleRegister,

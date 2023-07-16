@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import moment from "moment/moment";
+// import moment from "moment/moment";
 import { useAuth } from "../../../context/AuthContextProvider";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { Button, Rating } from "@mui/material";
@@ -13,6 +13,7 @@ const ProductDetails = () => {
     deleteReview,
     saveEditedReview,
     toggleLikes,
+    togglefav,
     GetReview,
     review,
   } = useProduct();
@@ -70,6 +71,7 @@ const ProductDetails = () => {
       <Button
         sx={{ color: "blue" }}
         variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
+        onClick={() => togglefav(oneProduct?.id)}
       >
         {oneProduct?.favorite_by_user
           ? "Remove from favorites"
