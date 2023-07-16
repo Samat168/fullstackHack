@@ -29,7 +29,7 @@ const ProductList = () => {
         md={9}
         sx={{
           width: "75%",
-          margin: "auto",
+          marginLeft: "18%",
           "@media (max-width: 990px)": {
             width: "89%",
           },
@@ -42,8 +42,8 @@ const ProductList = () => {
           className="BoxList"
           sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "40px",
+            gridTemplateColumns: "repeat(4, minmax(0, 1fr)) ",
+            gap: "25px",
             marginTop: "7%",
             "@media (max-width: 716px)": {
               grid: "none",

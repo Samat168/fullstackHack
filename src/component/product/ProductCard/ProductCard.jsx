@@ -24,14 +24,12 @@ const ProductCard = ({ item }) => {
           <IconButton sx={{ color: "grey" }}>
             <Favorite />
           </IconButton>
-          <p style={{ color: "white" }}>{item.title}</p>
+          <p style={{ color: "#000" }}>{item.title}</p>
           <Button
             sx={{
               marginBottom: "8px",
-              color: "#fff",
+              color: "#000",
               border: "1px ",
-              background: "hsla(0,0%,100%,.04)",
-              borderRadius: "10px",
             }}
             size="small"
             onClick={() => deleteProduct(item.id)}
@@ -41,10 +39,8 @@ const ProductCard = ({ item }) => {
           <Button
             sx={{
               marginBottom: "8px",
-              color: "#fff",
+              color: "#000",
               border: "1px ",
-              background: "hsla(0,0%,100%,.04)",
-              borderRadius: "10px",
             }}
             size="small"
             onClick={() => navigate(`/edit/${item.id}`)}
