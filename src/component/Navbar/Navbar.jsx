@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Logo from "../../assets/SellSwap-removebg-preview.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { Input } from "@mui/material";
@@ -36,6 +36,8 @@ function Navbar() {
 
   const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
   const [navbarHidden, setNavbarHidden] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("q") || "");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +59,9 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos, navbarHidden]);
+  useEffect(() => {
+    setSearchParams({ q: search });
+  }, [search]);
 
   React.useEffect(() => {
     if (localStorage.getItem("tokens")) {
@@ -190,6 +195,7 @@ function Navbar() {
                   color: "white",
                   border: "none",
                 }}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>
