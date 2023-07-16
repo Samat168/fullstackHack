@@ -4,12 +4,11 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContextProvider";
 
 const AddPromo = ({ animat }) => {
-  const { postPromo, promo } = useProduct();
-  const { currentUser } = useAuth();
+  const { postPromo } = useProduct();
 
   const [img, setImg] = useState("");
   const [desc, setDesc] = useState("");
-  const [date, setDate] = useState("");
+
   const handlePromo = () => {
     const newObj = new FormData();
     if (img) {
@@ -30,11 +29,7 @@ const AddPromo = ({ animat }) => {
         onChange={(e) => setDesc(e.target.value)}
         placeholder="Описание"
       />
-      <input
-        type="date"
-        onChange={(e) => setDate(e.target.value)}
-        placeholder="Дата обращения"
-      />
+
       <button onClick={handlePromo}>Опубликовать</button>
     </div>
   );

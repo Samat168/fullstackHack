@@ -72,8 +72,6 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-  console.log(INIT_STATE.categories);
-
   async function postCategories(category) {
     try {
       await axios.post(`${API}/categories/`, category, getTokens());
@@ -144,6 +142,7 @@ const ProductContextProvider = ({ children }) => {
   async function postPromo(obj) {
     try {
       await axios.post(`${API}/promo/`, obj, getTokens());
+      console.log(state.promo);
     } catch (error) {
       console.log(error);
     }

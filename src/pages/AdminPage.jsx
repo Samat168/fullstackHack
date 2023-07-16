@@ -11,6 +11,7 @@ const AdminPage = () => {
   const [addProduct, setAddProduct] = useState(false);
   const [addCategory, setAddCategory] = useState(false);
   const [addPromo, setAddPromo] = useState(false);
+  const [deletePromo, setDeletePromo] = useState(false);
   const [animat, setAnimat] = useState();
   const [catanim, setCatanim] = useState();
   const [promanim, setPromanim] = useState();
@@ -22,6 +23,7 @@ const AdminPage = () => {
   }
   function closePromo() {
     setAddPromo(false);
+    setDeletePromo(false);
   }
   useEffect(() => {
     getPromo();
@@ -104,11 +106,11 @@ const AdminPage = () => {
         </div>
 
         <div className="add_button_div">
-          {!addPromo ? (
+          {!deletePromo ? (
             <button
               className="modal_button"
               onClick={() => {
-                setAddPromo(true);
+                setDeletePromo(true);
                 setPromanim(false);
               }}
             >
@@ -131,8 +133,7 @@ const AdminPage = () => {
         {addProduct ? <AddProduct animat={animat} /> : null}
         {addCategory ? <AddCategory animat={catanim} /> : null}
         {addPromo ? <AddPromo animat={promanim} /> : null}
-        <button onClick={() => deleteCategories("avtomobile")}>Удалить</button>
-        <DeletePromo />
+        {deletePromo ? <DeletePromo animat={promanim} /> : null}
       </div>
     </div>
   );

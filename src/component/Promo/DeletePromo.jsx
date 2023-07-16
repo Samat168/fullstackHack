@@ -3,7 +3,7 @@ import { useProduct } from "../../context/ProductContextProvider";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const DeletePromo = () => {
+const DeletePromo = ({ animat }) => {
   const { promo, getPromo, deletePromo } = useProduct();
   const [tru, setTru] = useState(true);
   useEffect(() => {
@@ -11,7 +11,7 @@ const DeletePromo = () => {
   }, []);
 
   return (
-    <div>
+    <div className="add_promo" id={animat ? "product" : "p"}>
       <h3>Рекламы</h3>
       {promo.map((item) => (
         <div key={item.id}>
