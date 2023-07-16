@@ -33,7 +33,6 @@ export default function HomeSlider() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "20px",
               }}
             >
               <div>
