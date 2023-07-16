@@ -80,11 +80,15 @@ const AddProduct = ({ animat }) => {
           onChange={(e) => setCategory(e.target.value)}
           sx={{ width: "100%" }}
         >
-          {categories.map((item) => (
-            <MenuItem value={item.slug} key={item.slug}>
-              {item.name}
-            </MenuItem>
-          ))}
+          {categories.map((item) => {
+            if (item.parent != null) {
+              return (
+                <MenuItem value={item.slug} key={item.slug}>
+                  {item.name}
+                </MenuItem>
+              );
+            }
+          })}
         </Select>
       </FormControl>
 
