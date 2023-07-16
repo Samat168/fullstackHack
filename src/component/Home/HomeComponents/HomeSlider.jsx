@@ -18,7 +18,7 @@ export default function HomeSlider() {
   console.log(promo);
   return (
     <>
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+      <Swiper navigation={false} modules={[Navigation]} className="mySwiper">
         {promo.map((item) => (
           <SwiperSlide key={item.id} style={{ width: "100%" }}>
             <div
@@ -33,7 +33,6 @@ export default function HomeSlider() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "20px",
               }}
             >
               <div>
