@@ -44,26 +44,26 @@ const CartContexProvider = ({ children }) => {
     dispatch({ type: ACTIONS.GET_CART, payload: cart });
   };
 
-  const addProductToCart = (product) => {
+  const addProductToCart = (item) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     if (!cart) {
       cart = { products: [], totalPrice: 0 };
     }
     let newProduct = {
-      product: product,
-      // quantity: 1,
-      // subPrice: +product.price,
+      product: item,
+      quantity: 1,
+      subPrice: +item.price,
     };
 
     let productToFind = cart.products.filter(
-      (elem) => elem.product.id === product.id
+      (elem) => elem.product.id === item.id
     );
 
     if (productToFind.length === 0) {
       cart.products.push(newProduct);
     } else {
       cart.products = cart.products.filter(
-        (elem) => elem.item.id !== product.id
+        (elem) => elem.product.id !== item.id
       );
     }
 
@@ -77,7 +77,7 @@ const CartContexProvider = ({ children }) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
 
     if (cart) {
-      let newCart = cart.products.filter((elem) => elem.item.id === id);
+      let newCart = cart.products.filter((elem) => elem.product.id === id);
       return newCart.length > 0 ? true : false;
     }
   };
