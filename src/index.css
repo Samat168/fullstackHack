@@ -155,6 +155,44 @@ input:focus {
 }
 
 /* slider end */
+/* photos */
+.photos {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+}
+.photos_left_div {
+  width: 50%;
+  height: 600px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+.left_photo,
+img {
+  max-width: 100%;
+  height: auto;
+}
+.photos_right_div {
+  width: 50%;
+  overflow: hidden;
+}
+.photos_right_ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.photos_right_li {
+  width: 49%;
+  height: 300px;
+  margin: 0 2px 2px;
+  overflow: hidden;
+}
+.photos_right_li > img {
+  width: 100%;
+  height: auto;
+}
+/* photos end */
 /* !Home page */
 
 /* !Admin page */
