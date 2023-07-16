@@ -3,6 +3,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { API } from "../helpers/consts";
 import { useNavigate } from "react-router-dom";
 import { getTokens } from "../helpers/functions";
+import { async } from "q";
 
 export const productContext = createContext();
 export const useProduct = () => useContext(productContext);
@@ -13,6 +14,7 @@ const INIT_STATE = {
   categories: [],
   oneProduct: null,
   favorites: [],
+  review: [],
   promo: [],
 };
 
@@ -22,7 +24,7 @@ function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         products: action.payload.results,
-        pages: Math.ceil(action.payload.count / 6),
+        pages: Math.ceil(action.payload.count / 12),
       };
     case "GET_CATEGORIES":
       return { ...state, categories: action.payload };
@@ -34,6 +36,9 @@ function reducer(state = INIT_STATE, action) {
       return { ...state, favorites: action.payload };
     case "GET_PROMO":
       return { ...state, promo: action.payload };
+
+    case "GET_REVIEW":
+      return { ...state, review: action.payload };
 
     default:
       return state;
@@ -68,11 +73,16 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-  console.log(INIT_STATE.categories);
-
   async function postCategories(category) {
     try {
       await axios.post(`${API}/categories/`, category, getTokens());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function deleteCategories(slug) {
+    try {
+      await axios.delete(`${API}/categories/${slug}`, getTokens());
     } catch (error) {
       console.log(error);
     }
@@ -99,8 +109,7 @@ const ProductContextProvider = ({ children }) => {
   async function getOneProduct(id) {
     try {
       const res = await axios(`${API}/products/${id}/`, getTokens());
-      console.log(res);
-      // dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
+      dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
     } catch (error) {
       console.log(error);
     }
@@ -133,8 +142,34 @@ const ProductContextProvider = ({ children }) => {
   }
   async function postPromo(obj) {
     try {
-      // await axios.post(`${API}/promo/`, obj, getTokens());
-      console.log(obj);
+      await axios.post(`${API}/promo/`, obj, getTokens());
+      console.log(state.promo);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function deletePromo(id) {
+    try {
+      await axios.delete(`${API}/promo/${id}/`, getTokens());
+      getPromo();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function addReview(review) {
+    try {
+      await axios.post(`${API}/ratings/`, review, getTokens());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function GetReview(id) {
+    try {
+      let res = await axios(`${API}/products/${id}/reviews/`, getTokens());
+      dispatch({ type: "GET_REVIEW", payload: res.data });
+      getOneProduct(id);
     } catch (error) {
       console.log(error);
     }
@@ -163,8 +198,14 @@ const ProductContextProvider = ({ children }) => {
     updateProduct,
     toggleLikes,
     postCategories,
+    deleteCategories,
+    addReview,
+    GetReview,
+    review: state.review,
     postPromo,
     promo: state.promo,
+    getPromo,
+    deletePromo,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

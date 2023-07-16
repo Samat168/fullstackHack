@@ -7,7 +7,7 @@
   width: 100%;
   height: 470px;
   border-radius: 12px;
-  background: hsla(0, 0%, 100%, 0.06);
+  background: black;
   padding: 25px;
   padding-top: 40px;
 
@@ -35,4 +35,5 @@
   justify-content: space-between;
   width: 100%;
   margin: auto;
+  margin-top: 20px;
 }

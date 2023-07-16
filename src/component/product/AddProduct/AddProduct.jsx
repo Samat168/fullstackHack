@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   FormControl,
   InputLabel,
@@ -10,14 +9,20 @@ import {
 import Button from "@mui/material/Button";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { useAuth } from "../../../context/AuthContextProvider";
+
 const AddProduct = ({ animat }) => {
-  const { createProduct, categories } = useProduct();
+  const { categories, getCategories, createProduct, postCategories } =
+    useProduct();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [preview, setPreview] = useState("");
 
   const handleSave = () => {
@@ -26,13 +31,23 @@ const AddProduct = ({ animat }) => {
     newProduct.append("price", price);
     newProduct.append("description", description);
     newProduct.append("category", category);
-    if (images) {
-      newProduct.append("images", images);
+
+    if (images.length > 0) {
+      for (let i = 0; i < images.length; i++) {
+        newProduct.append("images", images[i]);
+      }
     }
+
     if (preview) {
       newProduct.append("preview", preview);
     }
+
     createProduct(newProduct);
+  };
+
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    setImages([...images, ...files]);
   };
 
   return (
@@ -63,7 +78,7 @@ const AddProduct = ({ animat }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           onChange={(e) => setCategory(e.target.value)}
-          sx={{ width: "25%" }}
+          sx={{ width: "100%" }}
         >
           {categories.map((item) => (
             <MenuItem value={item.slug} key={item.slug}>
@@ -79,9 +94,11 @@ const AddProduct = ({ animat }) => {
         className="add_product_input"
       />
 
-      <TextField
-        onChange={(e) => setImages(e.target.files[4])}
+      <input
         type="file"
+        multiple
+        onChange={handleImageChange}
+        style={{ backgroundColor: "white" }}
         className="add_product_input"
       />
 

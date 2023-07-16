@@ -24,16 +24,28 @@ const ProductCard = ({ item }) => {
           <IconButton onClick={() => togglefav(item.id)} sx={{ color: "grey" }}>
             <Favorite />
           </IconButton>
-
+          <p style={{ color: "white" }}>{item.title}</p>
           <Button
-            sx={{ marginBottom: "8px" }}
+            sx={{
+              marginBottom: "8px",
+              color: "#fff",
+              border: "1px ",
+              background: "hsla(0,0%,100%,.04)",
+              borderRadius: "10px",
+            }}
             size="small"
             onClick={() => deleteProduct(item.id)}
           >
             Delete
           </Button>
           <Button
-            sx={{ marginBottom: "8px" }}
+            sx={{
+              marginBottom: "8px",
+              color: "#fff",
+              border: "1px ",
+              background: "hsla(0,0%,100%,.04)",
+              borderRadius: "10px",
+            }}
             size="small"
             onClick={() => navigate(`/edit/${item.id}`)}
           >
