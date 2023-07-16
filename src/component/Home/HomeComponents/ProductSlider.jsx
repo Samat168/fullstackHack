@@ -13,18 +13,18 @@ import { Navigation } from "swiper/modules";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function ProductSlider() {
+export default function ProductSlider({ cat }) {
   const navigate = useNavigate();
-  const { products, getProducts, getCategories, categories } = useProduct();
+  const { products, getProducts } = useProduct();
 
   useEffect(() => {
     getProducts();
   }, []);
-  console.log(products);
+  console.log(cat);
 
   return (
-    <>
-      <h2>{}</h2>
+    <div style={{ width: "90%", margin: "auto" }}>
+      <h2 style={{ marginTop: "50px" }}>{cat.name}</h2>
       <Swiper
         slidesPerView={4}
         spaceBetween={20}
@@ -38,7 +38,7 @@ export default function ProductSlider() {
         {" "}
         <Box sx={{ padding: "0 15px" }}>
           {products.map((item) => {
-            if (item.parent === "odejda") {
+            if (item.parent === cat.slug) {
               return (
                 <SwiperSlide key={item.id} className="product_slider_item">
                   <Box
@@ -61,7 +61,7 @@ export default function ProductSlider() {
                       {item.title}
                     </h4>
                     <h5 style={{ textAlign: "start", margin: "5px" }}>
-                      {item.price}
+                      {item.price}$
                     </h5>
                     <button
                       onClick={() => navigate(`/details/${item.id}`)}
@@ -78,6 +78,6 @@ export default function ProductSlider() {
           })}
         </Box>
       </Swiper>
-    </>
+    </div>
   );
 }

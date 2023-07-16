@@ -115,6 +115,9 @@ input:focus {
   margin-bottom: 50px;
 }
 
+.swiper-wrapper {
+  width: 100%;
+}
 .swiper-slide {
   text-align: center;
   display: flex;
