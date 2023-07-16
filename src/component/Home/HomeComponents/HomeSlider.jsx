@@ -20,7 +20,7 @@ export default function HomeSlider() {
     <>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {promo.map((item) => (
-          <SwiperSlide>
+          <SwiperSlide key={item.id} style={{ width: "100%" }}>
             <div
               style={{
                 width: "100%",
@@ -28,13 +28,15 @@ export default function HomeSlider() {
                 height: "300px",
                 background: "#FF4800",
                 backgroundImage: `url(${item.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "20px",
               }}
             >
-              <div background>
+              <div>
                 <h2 style={{ color: "#fff" }}>{item.text}</h2>
                 <button style={{ width: "100%", height: "25px" }}>
                   Перейти

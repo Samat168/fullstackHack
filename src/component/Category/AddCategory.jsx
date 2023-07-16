@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useProduct } from "../../context/ProductContextProvider";
-import { Button } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
 const AddCategory = ({ animat }) => {
   const [subCategory, setSubCategory] = useState("");
@@ -28,13 +34,26 @@ const AddCategory = ({ animat }) => {
     <div>
       <h3>Add category</h3>
       <div className="add_category" id={animat ? "product" : "p"}>
-        <input
-          className="add_category_input"
-          type="text"
-          onChange={(e) => setMainCategory(e.target.value)}
-          value={mainCategory}
-          placeholder="Основная категория"
-        />
+        <FormControl fullWidth className="add_product_input">
+          <InputLabel id="demo-simple-select-label">Категории</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            onChange={(e) => setMainCategory(e.target.value)}
+            sx={{ width: "100%" }}
+          >
+            {categories.map((item) => {
+              if (item.parent === null) {
+                return (
+                  <MenuItem value={item.slug} key={item.slug}>
+                    {item.name}
+                  </MenuItem>
+                );
+              }
+            })}
+          </Select>
+        </FormControl>
+
         <input
           className="add_category_input"
           type="text"
