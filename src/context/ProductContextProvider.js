@@ -47,7 +47,8 @@ const ProductContextProvider = ({ children }) => {
       const res = await axios(
         `${API}/products/${window.location.search}`,
         getTokens()
-      );
+        );
+        console.log(res)
 
       dispatch({ type: "GET_PRODUCTS", payload: res.data });
     } catch (error) {
@@ -139,7 +140,17 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  async function togglefav(id) {
+    try {
+      await axios(`${API}/products/${id}/toggle_favorites/`, getTokens());
+      getOneProduct(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const values = {
+    togglefav,
     getProducts,
     products: state.products,
     pages: state.pages,

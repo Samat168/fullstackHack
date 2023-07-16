@@ -4,7 +4,7 @@ import { Box, Grid, TextField, Typography } from "@mui/material";
 import { useProduct } from "../../../context/ProductContextProvider";
 
 const ProductList = () => {
-  const { getProducts, products } = useProduct();
+  const { getProducts, products, } = useProduct();
   useEffect(() => {
     getProducts();
   }, []);

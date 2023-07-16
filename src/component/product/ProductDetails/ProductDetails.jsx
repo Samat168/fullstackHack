@@ -13,6 +13,7 @@ const ProductDetails = () => {
     deleteReview,
     saveEditedReview,
     toggleLikes,
+    togglefav,
   } = useProduct();
   const { currentUser } = useAuth();
   const [text, setText] = useState("");
@@ -57,6 +58,7 @@ const ProductDetails = () => {
       <Button
         sx={{ color: "blue" }}
         variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
+        onClick={() => togglefav(oneProduct?.id)}
       >
         {oneProduct?.favorite_by_user
           ? "Remove from favorites"
