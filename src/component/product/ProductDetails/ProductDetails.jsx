@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContextProvider";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { Button, Rating } from "@mui/material";
+import { useCart } from "../../../context/CartContextProvider";
 
 const ProductDetails = () => {
   const {
@@ -18,6 +19,7 @@ const ProductDetails = () => {
     review,
   } = useProduct();
   const { currentUser } = useAuth();
+  const { addProductToCart } = useCart();
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
   const [commentToEdit, setCommentToEdit] = useState(null);
@@ -76,6 +78,13 @@ const ProductDetails = () => {
         {oneProduct?.favorite_by_user
           ? "Remove from favorites"
           : "Add to Favorites"}
+      </Button>
+      <Button
+        sx={{ color: "blue" }}
+       
+        onClick={() => addProductToCart(oneProduct)}
+      >
+       add to cart
       </Button>
       {review.some((item) => item.user === currentUser) ? (
         <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
