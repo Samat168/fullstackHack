@@ -17,7 +17,7 @@ const ProductList = () => {
 
   useEffect(() => {
     getProducts();
-  }, [searchParams]);
+  }, []);
   const handleChange = (e, p) => {
     setCurrentPage(p);
   };
