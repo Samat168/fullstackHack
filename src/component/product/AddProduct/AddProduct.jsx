@@ -78,7 +78,7 @@ const AddProduct = ({ animat }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           onChange={(e) => setCategory(e.target.value)}
-          sx={{ width: "25%" }}
+          sx={{ width: "100%" }}
         >
           {categories.map((item) => (
             <MenuItem value={item.slug} key={item.slug}>
