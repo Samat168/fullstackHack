@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams , } from "react-router";
 import { useAuth } from "../../context/AuthContextProvider";
 import { Button, Input } from "@mui/material";
 
@@ -18,13 +18,29 @@ const PassRessetConfirm = () => {
     console.log(tokens);
   }, []);
   return (
-    <div>
+    <div style={{width:'320px', marginInline: 'auto', display: 'flex', justifyContent: 'space-between',} }>
+      <h3></h3>
       <Input
         onChange={(e) => setPassword(e.target.value)}
         placeholder="new Pass"
-        sx={{ backgroundColor: "white" }}
+        sx={{
+          marginTop: "5px",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          width: "320px",
+
+          marginInline: 'auto',
+        }}
       />
-      <Button onClick={ressetPasswordConfirms}>do</Button>
+     
+      <Button sx={{
+            // backgroundColor: "white",
+            width: "110px",
+            margin: "auto",
+            marginTop: "10px",
+          }}
+           onClick={ressetPasswordConfirms}>do</Button>
+      
     </div>
   );
 };
