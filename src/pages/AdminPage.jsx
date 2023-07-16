@@ -7,7 +7,7 @@ import DeletePromo from "../component/Promo/DeletePromo";
 import { useProduct } from "../context/ProductContextProvider";
 
 const AdminPage = () => {
-  const { getPromo } = useProduct();
+  const { getPromo, deleteCategories } = useProduct();
   const [addProduct, setAddProduct] = useState(false);
   const [addCategory, setAddCategory] = useState(false);
   const [addPromo, setAddPromo] = useState(false);
@@ -131,6 +131,7 @@ const AdminPage = () => {
         {addProduct ? <AddProduct animat={animat} /> : null}
         {addCategory ? <AddCategory animat={catanim} /> : null}
         {addPromo ? <AddPromo animat={promanim} /> : null}
+        <button onClick={() => deleteCategories("avtomobile")}>Удалить</button>
         <DeletePromo />
       </div>
     </div>

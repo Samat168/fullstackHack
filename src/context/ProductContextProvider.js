@@ -81,6 +81,13 @@ const ProductContextProvider = ({ children }) => {
       console.log(error);
     }
   }
+  async function deleteCategories(slug) {
+    try {
+      await axios.delete(`${API}/categories/${slug}`, getTokens());
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function createProduct(newProduct) {
     try {
@@ -181,6 +188,7 @@ const ProductContextProvider = ({ children }) => {
     updateProduct,
     toggleLikes,
     postCategories,
+    deleteCategories,
     addReview,
     GetReview,
     review: state.review,
