@@ -21,6 +21,7 @@ const ProductCard = ({ item }) => {
           onClick={() => navigate(`/details/${item.id}`)}
         />
         <div className="product_card_bottom">
+          <span className="product_price">{item.price} ₽</span>
           <IconButton sx={{ color: "grey" }}>
             <Favorite />
           </IconButton>
@@ -47,8 +48,6 @@ const ProductCard = ({ item }) => {
           >
             Edit
           </Button>
-
-          <span className="product_price">${item.price}</span>
         </div>
       </div>
     </div>

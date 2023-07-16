@@ -123,6 +123,21 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  const fetchByParams = async (query, value) => {
+    const search = new URLSearchParams(window.location.search);
+    if (value === "All") {
+      search.delete(query);
+    } else if (query === "_sort") {
+      search.set(query, "price");
+      search.set("_order", value);
+    } else {
+      search.set(query, value);
+    }
+
+    const url = `${window.location.pathname}?${search.toString()}`;
+    navigate(url);
+  };
+
   async function toggleLikes(id) {
     try {
       await axios(`${API}/products/${id}/toggle_like`, getTokens());
@@ -195,6 +210,7 @@ const ProductContextProvider = ({ children }) => {
     promo: state.promo,
     getPromo,
     deletePromo,
+    fetchByParams,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
