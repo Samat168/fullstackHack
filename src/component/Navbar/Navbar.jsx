@@ -12,12 +12,16 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Logo from "../../assets/SellSwap-removebg-preview.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { Input } from "@mui/material";
 import { Opacity, Search } from "@mui/icons-material";
 import { useAuth } from "../../context/AuthContextProvider";
+import { useState } from "react";
+import { useEffect } from "react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const pages = [
   { name: "Главная", link: "/", id: 1 },
@@ -29,6 +33,35 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { currentUser, logout, checkAuth } = useAuth();
+
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+  const [navbarHidden, setNavbarHidden] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("q") || "");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isScrollingUp = prevScrollPos > currentScrollPos;
+
+      setPrevScrollPos(currentScrollPos);
+
+      if (isScrollingUp && navbarHidden) {
+        setNavbarHidden(false);
+      } else if (!isScrollingUp && !navbarHidden) {
+        setNavbarHidden(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos, navbarHidden]);
+  useEffect(() => {
+    setSearchParams({ q: search });
+  }, [search]);
 
   React.useEffect(() => {
     if (localStorage.getItem("tokens")) {
@@ -53,19 +86,21 @@ function Navbar() {
 
   return (
     <AppBar
-      position="static"
       className="navbar"
       sx={{
-        backgroundColor: "transparent",
-        width: "85%",
+        width: "100%",
         margin: "auto",
-        marginTop: "20px",
         boxShadow: "none",
+        position: "static",
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img style={{ width: "9%" }} src={Logo} alt="" />
+          <img
+            style={{ width: "100px", height: "80px", margin: "5px 0" }}
+            src={Logo}
+            alt=""
+          />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -105,30 +140,13 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+
           <Box
             sx={{
               flexGrow: 1,
               display: "flex",
               justifyContent: "flexStart",
+              display: { xs: "none", md: "flex" },
             }}
           >
             {pages.map((page) => (
@@ -137,10 +155,9 @@ function Navbar() {
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
-                    color: "#9baec8",
+                    color: "white",
                     display: "block",
                     margin: "0 20px",
-                    color: "rgba(255,255,255,.5);",
                   }}
                 >
                   {page.name}
@@ -178,13 +195,18 @@ function Navbar() {
                   color: "white",
                   border: "none",
                 }}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             {currentUser ? (
-              currentUser
+              <div>
+                <p>{currentUser}</p>
+                <FavoriteBorderIcon className="navbar_icons" />
+                <ShoppingCartIcon className="navbar_icons" />
+              </div>
             ) : (
               <Box>
                 <Link to="/login">

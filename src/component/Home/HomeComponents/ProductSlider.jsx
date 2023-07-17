@@ -10,20 +10,24 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { Navigation } from "swiper/modules";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function ProductSlider() {
+export default function ProductSlider({ cat }) {
+  const navigate = useNavigate();
   const { products, getProducts } = useProduct();
+
   useEffect(() => {
     getProducts();
   }, []);
+  console.log(cat);
 
   return (
-    <>
-      <h2>{}</h2>
+    <div style={{ width: "90%", margin: "auto" }}>
+      <h2 style={{ marginTop: "50px" }}>{cat.name}</h2>
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
+        slidesPerView={4}
+        spaceBetween={20}
         pagination={{
           clickable: true,
         }}
@@ -32,25 +36,48 @@ export default function ProductSlider() {
         className="mySwiper"
       >
         {" "}
-        <Box sx={{ margin: "0 20px" }}>
-          {products.map((item) => (
-            <SwiperSlide key={item.id} className="product_slider_item">
-              <Box sx={{ width: "100%", height: "200px" }}>
-                <img
-                  style={{ maxWidth: "100%", borderRadius: "20px" }}
-                  src={item.preview}
-                  alt=""
-                />
-              </Box>
+        <Box sx={{ padding: "0 15px" }}>
+          {products.map((item) => {
+            if (item.parent === cat.slug) {
+              return (
+                <SwiperSlide key={item.id} className="product_slider_item">
+                  <Box
+                    sx={{ width: "100%", height: "400px", overflow: "hidden" }}
+                  >
+                    <img
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center",
+                      }}
+                      src={item.preview}
+                      alt=""
+                    />
+                  </Box>
 
-              <Box>
-                <h4>{item.title}</h4>
-                <h5>{item.price}</h5>
-              </Box>
-            </SwiperSlide>
-          ))}
+                  <Box sx={{ height: "100px" }}>
+                    <h4 style={{ textAlign: "start", margin: "5px " }}>
+                      {item.title}
+                    </h4>
+                    <h5 style={{ textAlign: "start", margin: "5px" }}>
+                      {item.price}$
+                    </h5>
+                    <button
+                      onClick={() => navigate(`/details/${item.id}`)}
+                      className="buy_button"
+                    >
+                      Перейти к продукту
+                    </button>
+                  </Box>
+                </SwiperSlide>
+              );
+            } else {
+              return null;
+            }
+          })}
         </Box>
       </Swiper>
-    </>
+    </div>
   );
 }

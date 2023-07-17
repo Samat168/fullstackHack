@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 // import moment from "moment/moment";
 import { useAuth } from "../../../context/AuthContextProvider";
 import { useProduct } from "../../../context/ProductContextProvider";
-import { Button } from "@mui/material";
+import { Button, Rating } from "@mui/material";
+import { useCart } from "../../../context/CartContextProvider";
 
 const ProductDetails = () => {
   const {
@@ -13,97 +14,165 @@ const ProductDetails = () => {
     deleteReview,
     saveEditedReview,
     toggleLikes,
+    togglefav,
+    GetReview,
+    review,
   } = useProduct();
   const { currentUser } = useAuth();
+  const { addProductToCart } = useCart();
   const [text, setText] = useState("");
+  const [rating, setRating] = useState(0);
   const [commentToEdit, setCommentToEdit] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     getOneProduct(id);
+    GetReview(id);
+    const recentlyViewed =
+      JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+    if (!recentlyViewed.includes(id)) {
+      recentlyViewed.unshift(id);
+      if (recentlyViewed.length > 4) {
+        recentlyViewed.pop();
+      }
+      localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+    }
   }, []);
 
-  const handleAddReview = (e) => {
+  const handleAddReview = async (e) => {
     e.preventDefault();
-    const newReview = { text, product: id };
-    addReview(newReview);
-    getOneProduct(id);
+    const newReview = { rating, text, product: id };
+    await addReview(newReview);
+    await GetReview(id);
+    await getOneProduct(id);
+    setRating(0);
     setText("");
   };
 
-  const handleChange = (e) => {
-    setCommentToEdit({ ...commentToEdit, text: e.target.value });
+  const handleRatingChange = (event, value) => {
+    setRating(value);
   };
 
-  const handleSave = () => {
-    const editedReview = {
-      text: commentToEdit.text,
-      product: commentToEdit.product,
-    };
-    saveEditedReview(editedReview, commentToEdit.id);
-    setCommentToEdit(null);
-  };
+  // const handleChange = (e) => {
+  //   setCommentToEdit({ ...commentToEdit, text: e.target.value });
+  // };
+
+  // const handleSave = () => {
+  //   const editedReview = {
+  //     text: commentToEdit.text,
+  //     product: commentToEdit.product,
+  //   };
+  //   saveEditedReview(editedReview, commentToEdit.id);
+  //   setCommentToEdit(null);
+  // };
 
   return (
     <div style={{ margin: "auto", width: "50%" }}>
-      <img src={oneProduct?.preview} width={500} alt="" />
-      <h3>{oneProduct?.title}</h3>
-      <button onClick={() => toggleLikes(oneProduct?.id)}>
-        {oneProduct?.liked_by_user ? "-" : "+"}
-      </button>
-      <span style={{ color: "white" }}>Likes: {oneProduct?.likes}</span>
-      <p>{oneProduct?.category.name}</p>
-      <p>{oneProduct?.price}</p>
-      <p>{oneProduct?.description}</p>
-      <Button
-        sx={{ color: "blue" }}
-        variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
-      >
-        {oneProduct?.favorite_by_user
-          ? "Remove from favorites"
-          : "Add to Favorites"}
-      </Button>
-      {/* <div>
-        {oneProduct?.reviews.map((item) => (
+      <div>
+        <img src={oneProduct?.preview} width={300} alt="" />
+        {oneProduct?.images.map((item) => (
+          <img src={item.image} alt="" width={100} />
+        ))}
+        {/* <img src={oneProduct?.images[0].image} width={500} alt="" /> */}
+        {/* <img src={oneProduct?.images[1].image} width={500} alt="" /> */}
+      </div>
+      <div>
+        <h3>{oneProduct?.title}</h3>
+        <button onClick={() => toggleLikes(oneProduct?.id)}>
+          {oneProduct?.liked_by_user ? "-" : "+"}
+        </button>
+        <span style={{ color: "black" }}>Likes: {oneProduct?.likes_count}</span>
+        <p style={{ color: "black" }}>{oneProduct?.category.name}</p>
+        <p style={{ color: "black" }}>{oneProduct?.price}</p>
+        <p style={{ color: "black" }}>{oneProduct?.description}</p>
+        <Button
+          sx={{ color: "blue" }}
+          variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
+          onClick={() => togglefav(oneProduct?.id)}
+        >
+          {oneProduct?.favorite_by_user
+            ? "Remove from favorites"
+            : "Add to Favorites"}
+        </Button>
+        <Button
+          sx={{ color: "blue" }}
+          onClick={() => addProductToCart(oneProduct)}
+        >
+          add to cart
+        </Button>
+      </div>
+      <div>
+        {review.some((item) => item.user === currentUser) ? (
+          <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
+        ) : (
+          <form onSubmit={handleAddReview} action="">
+            <label style={{ backgroundColor: "white" }}>
+              Rating:
+              <Rating
+                name="rating"
+                value={rating}
+                onChange={handleRatingChange}
+                precision={1}
+                required
+              />
+            </label>
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className="w-75"
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+            ></textarea>
+            <button>add REVIEWS</button>
+          </form>
+        )}
+
+        <div>
+          {review?.map((item) => (
+            <div key={item.id}>
+              <h5 style={{ color: "black" }}>{item.user}</h5>
+              <label style={{ backgroundColor: "white" }}>
+                Rating:
+                <Rating
+                  name="rating"
+                  value={item.rating}
+                  precision={item.rating}
+                  required
+                />
+              </label>
+              <p style={{ color: "black" }}>{item.text}</p>
+            </div>
+          ))}
+          {/* {oneProduct?.rating.map((item) => (
           <div key={item.id} className="border m-4">
-            <h5>{item.author}</h5>
-            {commentToEdit && commentToEdit.id == item.id ? (
-              <>
+            <h5>{item.author}</h5> */}
+          {/* {commentToEdit && commentToEdit.id == item.id ? ( */}
+          {/* <>
                 <input onChange={handleChange} value={commentToEdit.text} />
                 <button onClick={() => setCommentToEdit(null)}>cansel</button>
                 <button onClick={handleSave}>save review</button>
               </>
             ) : (
-              <p>
-                {item.text} {"    "}
-                <span style={{ fontSize: "10px", color: "lightgrey" }}>
-                  {moment(item.created_at).format("DD/MM/YYYY HH:mm:ss")}
-                </span>
-              </p>
-            )}
-
-            {item.author === currentUser ? (
+              */}{" "}
+          {/* <p> */}
+          {/* {item.avg} {"    "} */}
+          {/* <span style={{ fontSize: "10px", color: "lightgrey" }}>
+                {moment(item.created_at).format("DD/MM/YYYY HH:mm:ss")}
+              </span> */}
+          {/* </p>
+          </div>
+        ))}  */}
+          {/* {item.author === currentUser ? (
               <div>
                 <button onClick={() => setCommentToEdit(item)}>edit</button>
                 <button onClick={() => deleteReview(item.id, id)}>
                   delete
                 </button>
               </div>
-            ) : null}
-          </div>
-        ))}
+          //   ) : null} */}
+        </div>
       </div>
-      <form onSubmit={handleAddReview} action="">
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="w-75"
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-        ></textarea>
-        <button>add REVIEWS</button>
-      </form> */}
     </div>
   );
 };

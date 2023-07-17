@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   FormControl,
   InputLabel,
@@ -10,7 +9,8 @@ import {
 import Button from "@mui/material/Button";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { useAuth } from "../../../context/AuthContextProvider";
-const AddProduct = () => {
+
+const AddProduct = ({ animat }) => {
   const { categories, getCategories, createProduct, postCategories } =
     useProduct();
 
@@ -22,11 +22,8 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [preview, setPreview] = useState("");
-  const [subCategory, setSubCategory] = useState("");
-  const [mainCategory, setMainCategory] = useState("");
-  const [slugCategory, setSlugCategory] = useState("");
 
   const handleSave = () => {
     const newProduct = new FormData();
@@ -34,98 +31,84 @@ const AddProduct = () => {
     newProduct.append("price", price);
     newProduct.append("description", description);
     newProduct.append("category", category);
-    if (images) {
-      newProduct.append("images", images);
+
+    if (images.length > 0) {
+      for (let i = 0; i < images.length; i++) {
+        newProduct.append("images", images[i]);
+      }
     }
+
     if (preview) {
       newProduct.append("preview", preview);
     }
+
     createProduct(newProduct);
   };
 
-  const handleCategory = () => {
-    if (!subCategory) {
-      alert("Заполните поля");
-      return;
-    }
-    const newObj = new FormData();
-    newObj.append("slug", slugCategory);
-    newObj.append("name", subCategory);
-    newObj.append("parent", mainCategory);
-    postCategories(newObj);
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    setImages([...images, ...files]);
   };
 
   return (
-    <div className="w-50 mt-5 m-auto">
+    <div className="add_product" id={animat ? "product" : "p"}>
       <h2>CREATE PRODUCT</h2>
       <TextField
         onChange={(e) => setTitle(e.target.value)}
         placeholder="title"
         type="text"
-        sx={{ backgroundColor: "white" }}
+        className="add_product_input"
       />
       <TextField
         onChange={(e) => setDescription(e.target.value)}
         placeholder="description"
         type="text"
-        sx={{ backgroundColor: "white" }}
+        className="add_product_input"
       />
       <TextField
         onChange={(e) => setPrice(e.target.value)}
         placeholder="price"
         type="text"
-        sx={{ backgroundColor: "white" }}
+        className="add_product_input"
       />
 
-      <FormControl fullWidth sx={{ backgroundColor: "white" }}>
+      <FormControl fullWidth className="add_product_input">
         <InputLabel id="demo-simple-select-label">Категории</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           onChange={(e) => setCategory(e.target.value)}
+          sx={{ width: "100%" }}
         >
-          {categories.map((item) => (
-            <MenuItem value={item.slug} key={item.slug}>
-              {item.name}
-            </MenuItem>
-          ))}
+          {categories.map((item) => {
+            if (item.parent != null) {
+              return (
+                <MenuItem value={item.slug} key={item.slug}>
+                  {item.name}
+                </MenuItem>
+              );
+            }
+          })}
         </Select>
       </FormControl>
 
       <TextField
         onChange={(e) => setPreview(e.target.files[0])}
         type="file"
-        sx={{ backgroundColor: "white" }}
+        className="add_product_input"
       />
 
-      <TextField
-        onChange={(e) => setImages(e.target.files[4])}
+      <input
         type="file"
-        sx={{ backgroundColor: "white" }}
+        multiple
+        onChange={handleImageChange}
+        style={{ backgroundColor: "white" }}
+        className="add_product_input"
       />
 
-      <Button onClick={handleSave}>Create Product</Button>
-      <div>
-        <input
-          type="text"
-          onChange={(e) => setMainCategory(e.target.value)}
-          value={mainCategory}
-          placeholder="Основная категория"
-        />
-        <input
-          type="text"
-          onChange={(e) => setSubCategory(e.target.value)}
-          value={subCategory}
-          placeholder="Подкатегория"
-        />
-        <input
-          type="text"
-          placeholder="slug"
-          onChange={(e) => setSlugCategory(e.target.value)}
-          value={slugCategory}
-        />
-        <Button onClick={handleCategory}>Добавить категорию</Button>
-      </div>
+      <button onClick={handleSave} className="add_product_button">
+        Create Product
+      </button>
     </div>
   );
 };

@@ -30,16 +30,18 @@ const FormforPay = () => {
   const [phone, setPhone] = useState("");
 
   const navigate = useNavigate();
-  const {  getCart, handleSubmit } = useCart();
-
+  const {  cart,getCart, handleSubmit } = useCart();
+console.log(cart.products.map((product) => console.log(product)));
   const handleSave = () => {
     
-    let cart = JSON.parse(localStorage.getItem("cart"))
+    
     const order = {
-      products : cart.products,
+      products :[{
+        product : cart.products.map((product) => product.id && product.title)
+      }],
       address: city,
       number : phone,
-      total_sum : cart?.totalPrice,
+      
     };
     handleSubmit(order);
   };
