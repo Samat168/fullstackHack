@@ -5,12 +5,11 @@ import { useAuth } from "../context/AuthContextProvider";
 
 const HomePage = () => {
   const { getPromo, getCategories, getProducts } = useProduct();
-  const {checkuserid } = useAuth();
+  const { checkuserid, userFavorites } = useAuth();
   useEffect(() => {
     getCategories();
     getPromo();
     getProducts();
-    checkuserid()
   }, []);
   return (
     <div>

@@ -7,43 +7,54 @@ import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { useProduct } from "../../context/ProductContextProvider";
 
-
 const Favorites = () => {
-  const { favorites, userFavorites, userId,checkuserid } = useAuth();
-  const {togglefav} = useProduct()
-  const navigate = useNavigate()
-  
-  
+  const { favorites, userFavorites, userId, checkuserid } = useAuth();
+  const { togglefav } = useProduct();
+  const navigate = useNavigate();
 
-
+  checkuserid();
   useEffect(() => {
+    // userFavorites();
+  }, []);
 
-    if(userId) {
-  
-      userFavorites();
-      console.log(favorites)
-    }
-  },[])
+  // useEffect(() => {
+  //   console.log(favorites);
+  // }, [checkuserid]);
 
   return (
-    <div style={{width: '80%', margin: 'auto',display: 'flex', flexWrap: 'wrap',justifyContent:'space-between'}} className="">
+    <div
+      style={{
+        width: "80%",
+        margin: "auto",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+      }}
+      className=""
+    >
       {favorites.map((item) => (
-       <div style={{width: '20%',marginRight:'10%' }} className="product_card">
-       <img
-         className="product_img"
-         src={item.photo}
-         alt=""
-         onClick={() => navigate(`/details/${item.id}`)}
-       />
-       <div className="product_card_bottom">
-         <IconButton onClick={() => togglefav(item.id)} sx={{ color: "grey" }}>
-           <Favorite />
-         </IconButton>
-         <p style={{ color: "white" }}>{item.title}</p>
+        <div
+          style={{ width: "20%", marginRight: "10%" }}
+          className="product_card"
+        >
+          <img
+            className="product_img"
+            src={item.photo}
+            alt=""
+            onClick={() => navigate(`/details/${item.id}`)}
+          />
+          <div className="product_card_bottom">
+            <IconButton
+              onClick={() => togglefav(item.id)}
+              sx={{ color: "grey" }}
+            >
+              <Favorite />
+            </IconButton>
+            <p style={{ color: "black" }}>{item.title}</p>
 
-         {/* <span className="product_price">${item.price}</span> */}
-       </div>
-     </div>
+            {/* <span className="product_price">${item.price}</span> */}
+          </div>
+        </div>
       ))}
     </div>
   );

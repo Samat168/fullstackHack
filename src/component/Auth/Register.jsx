@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useAuth } from "../../context/AuthContextProvider";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
+  const navigate = useNavigate();
   const { handleRegister, loading, error } = useAuth();
 
   function handleSave() {
@@ -43,45 +44,66 @@ const Register = () => {
   }
 
   return (
-    <Box sx={{
-      display: "flex",
-      flexDirection: "column",
-      height: '700px',
-      paddingTop: "5%",
-      width: "100%",
-      padding: "auto",
-    
-      background:
-        "url(https://images.wallpaperscraft.ru/image/single/tekstura_fon_tekst_50473_1920x1080.jpg)",
-    }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "700px",
+        paddingTop: "5%",
+        width: "100%",
+        padding: "auto",
+
+        background:
+          "url(https://images.wallpaperscraft.ru/image/single/tekstura_fon_tekst_50473_1920x1080.jpg)",
+      }}
+    >
       {error ? <h2>{error}</h2> : null}
 
-     
-      <Typography component="h1" variant="h5" sx={{ color: "white", marginInline:'auto', marginBottom:'2%', fontSize: '40px' }}>
-          Registration
-          </Typography>
-      <div style={{display: 'flex', width: '330px', marginInline: 'auto', justifyContent: 'space-between', marginBottom: '10px'}}>
-
-      <TextField onChange={(e) => setName(e.target.value)} placeholder="name" sx={{
-          marginTop: "5px",
-          backgroundColor: "white",
-          borderRadius: "10px",
-          width: "47%",
-
-          marginInline: 'auto',
-        }} />
-      <TextField
-        onChange={(e) => setLastName(e.target.value)}
-        placeholder="last name"
+      <Typography
+        component="h1"
+        variant="h5"
         sx={{
-          marginTop: "5px",
-          backgroundColor: "white",
-          borderRadius: "10px",
-          width: "47%",
-
-          marginInline: 'auto',
+          color: "white",
+          marginInline: "auto",
+          marginBottom: "2%",
+          fontSize: "40px",
         }}
-      />
+      >
+        Registration
+      </Typography>
+      <div
+        style={{
+          display: "flex",
+          width: "330px",
+          marginInline: "auto",
+          justifyContent: "space-between",
+          marginBottom: "10px",
+        }}
+      >
+        <TextField
+          onChange={(e) => setName(e.target.value)}
+          placeholder="name"
+          sx={{
+            marginTop: "5px",
+            backgroundColor: "white",
+            borderRadius: "10px",
+            width: "47%",
+
+            marginInline: "auto",
+          }}
+        />
+        <TextField
+          onChange={(e) => setLastName(e.target.value)}
+          placeholder="last name"
+          sx={{
+            marginTop: "5px",
+            backgroundColor: "white",
+            borderRadius: "10px",
+            width: "47%",
+
+            marginInline: "auto",
+          }}
+        />
       </div>
       <TextField
         onChange={(e) => setEmail(e.target.value)}
@@ -92,8 +114,8 @@ const Register = () => {
           borderRadius: "10px",
           width: "320px",
 
-          marginInline: 'auto',
-          marginBottom: '10px'
+          marginInline: "auto",
+          marginBottom: "10px",
         }}
       />
       <TextField
@@ -105,8 +127,8 @@ const Register = () => {
           borderRadius: "10px",
           width: "320px",
 
-          marginInline: 'auto',
-          marginBottom: '10px'
+          marginInline: "auto",
+          marginBottom: "10px",
         }}
       />
       <TextField
@@ -118,22 +140,27 @@ const Register = () => {
           borderRadius: "10px",
           width: "320px",
 
-          marginInline: 'auto',
-          marginBottom: '10px'
+          marginInline: "auto",
+          marginBottom: "10px",
         }}
       />
       {loading ? (
-        <Box sx={{ display: "flex", marginInline: 'auto' }}>
+        <Box sx={{ display: "flex", marginInline: "auto" }}>
           <CircularProgress />
         </Box>
       ) : (
-        <Button   onClick={handleSave} variant="contained" sx={{
-          // backgroundColor: "white",
-          width: "110px",
-          margin: "auto",
-          marginTop: "10px",
-        }}
-        >REGISTER</Button>
+        <Button
+          onClick={handleSave}
+          variant="contained"
+          sx={{
+            // backgroundColor: "white",
+            width: "110px",
+            margin: "auto",
+            marginTop: "10px",
+          }}
+        >
+          REGISTER
+        </Button>
       )}
     </Box>
   );
