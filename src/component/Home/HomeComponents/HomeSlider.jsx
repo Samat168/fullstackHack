@@ -61,14 +61,19 @@ export default function HomeSlider() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              borderRadius: "20px",
             }}
           >
             <div background>
-              <h2>Здесь могла бы быть ваша реклама</h2>
-              <button style={{ width: "100%", height: "25px" }}>
-                Заказать рекламу
-              </button>
+              <h2
+                style={{
+                  color: "#fff",
+                  fontWeight: "500",
+                  letterSpacing: "5px",
+                }}
+              >
+                Здесь могла бы быть ваша реклама
+              </h2>
+              <button className="home_slider_button">Заказать рекламу</button>
             </div>
           </div>
         </SwiperSlide>
