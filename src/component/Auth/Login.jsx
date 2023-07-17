@@ -16,7 +16,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { handleLogin, loading } = useAuth();
+  const { handleLogin, loading,checkuserid } = useAuth();
   const navigate = useNavigate()
   function handleSave() {
     if (!email.trim() || !password.trim()) {
@@ -30,6 +30,7 @@ const Login = () => {
     formData.append("password", password);
 
     handleLogin(formData, email);
+    checkuserid()
   }
 
   return (

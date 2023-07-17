@@ -6,15 +6,15 @@ import ProductPage from "../pages/ProductPage";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 import CartPage from "../pages/CartPage";
 import EditProductPage from "../pages/EditProductPage";
-import FavoritePage from "../pages/FavoritePage";
 import { Route, Routes } from "react-router-dom";
-
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import FormforPayPage from "../pages/FormforPayPage";
 import PasswordResetPage from "../pages/PasswordResetPage";
 import PassRessetConfirmPage from "../pages/PassRessetConfirmPage";
 import RegisterSuccessPage from "../pages/RegisterSuccessPage";
+import FavoritesPage from "../pages/FavoritesPage";
+
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -63,11 +63,7 @@ const MainRoutes = () => {
       element: <EditProductPage />,
       id: 10,
     },
-    {
-      link: "/favorite",
-      element: <FavoritePage />,
-      id: 11,
-    },
+   
     {
       link: "/formforpay",
       element: <FormforPayPage />,
@@ -87,6 +83,12 @@ const MainRoutes = () => {
       link: "api/v1/accounts/activate/:uid",
 
       element: <RegisterSuccessPage />,
+      id: 14,
+    },
+    {
+      link: "/favorites",
+
+      element: <FavoritesPage />,
       id: 14,
     },
   ];

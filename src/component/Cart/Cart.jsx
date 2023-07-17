@@ -57,7 +57,7 @@ export default function Cart() {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <img width={80} src={row.product.pic1} alt="" />
+                <img width={80} src={row.product.images[0].image} alt="" />
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
                 {row.product.title}

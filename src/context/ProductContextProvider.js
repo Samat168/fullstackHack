@@ -16,6 +16,7 @@ const INIT_STATE = {
   favorites: [],
   review: [],
   promo: [],
+  recentlyWatched: [],
 };
 
 function reducer(state = INIT_STATE, action) {
@@ -40,6 +41,9 @@ function reducer(state = INIT_STATE, action) {
     case "GET_REVIEW":
       return { ...state, review: action.payload };
 
+    case "ADD_TO_RECENTLY_WATCHED":
+      return { ...state, recentlyWatched: action.payload };
+
     default:
       return state;
   }
@@ -53,6 +57,7 @@ const ProductContextProvider = ({ children }) => {
         `${API}/products/${window.location.search}`,
         getTokens()
       );
+      console.log(res);
 
       dispatch({ type: "GET_PRODUCTS", payload: res.data });
     } catch (error) {
@@ -109,6 +114,18 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios(`${API}/products/${id}/`, getTokens());
       dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
+
+      const updatedRecentlyWatched = [...state.recentlyWatched];
+      if (!updatedRecentlyWatched.includes(res.data)) {
+        updatedRecentlyWatched.unshift(res.data);
+        if (updatedRecentlyWatched.length > 3) {
+          updatedRecentlyWatched.pop();
+        }
+      }
+      dispatch({
+        type: "ADD_TO_RECENTLY_WATCHED",
+        payload: updatedRecentlyWatched,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -122,6 +139,21 @@ const ProductContextProvider = ({ children }) => {
       console.log(error);
     }
   }
+
+  const fetchByParams = async (query, value) => {
+    const search = new URLSearchParams(window.location.search);
+    if (value === "All") {
+      search.delete(query);
+    } else if (query === "_sort") {
+      search.set(query, "price");
+      search.set("_order", value);
+    } else {
+      search.set(query, value);
+    }
+
+    const url = `${window.location.pathname}?${search.toString()}`;
+    navigate(url);
+  };
 
   async function toggleLikes(id) {
     try {
@@ -174,7 +206,17 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  async function togglefav(id) {
+    try {
+      await axios(`${API}/products/${id}/toggle_favorites/`, getTokens());
+      getOneProduct(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const values = {
+    togglefav,
     getProducts,
     products: state.products,
     pages: state.pages,
@@ -195,6 +237,8 @@ const ProductContextProvider = ({ children }) => {
     promo: state.promo,
     getPromo,
     deletePromo,
+    fetchByParams,
+    recentlyWatched: state.recentlyWatched,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
