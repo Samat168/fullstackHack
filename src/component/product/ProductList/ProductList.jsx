@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import {
   Box,
+  Card,
+  CardContent,
+  CardMedia,
   Grid,
   MenuItem,
   Pagination,
@@ -9,14 +12,20 @@ import {
   Typography,
 } from "@mui/material";
 import { useProduct } from "../../../context/ProductContextProvider";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Chat from "./Chat";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
 const ProductList = () => {
-  const { getProducts, products, pages, categories, getCategories } =
-    useProduct();
+  const {
+    getProducts,
+    products,
+    pages,
+    categories,
+    getCategories,
+    recentlyWatched,
+  } = useProduct();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSeacrhParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -41,6 +50,7 @@ const ProductList = () => {
     const category = e.target.value;
     setSelectedCategory(category);
   };
+  const navigate = useNavigate();
   return (
     <div>
       <Swiper navigation={false} modules={[Navigation]}>
@@ -121,6 +131,41 @@ const ProductList = () => {
             </MenuItem>
           ))}
         </TextField>
+        <Box sx={{ position: "absolute", left: "20px", marginTop: "15%" }}>
+          <Typography>recently-watched</Typography>
+          {recentlyWatched
+            .filter((product, index, self) => {
+              return index === self.findIndex((p) => p.id === product.id);
+            })
+            .map((product) => (
+              <Card
+                sx={{
+                  maxWidth: 200,
+                  border: "1px solid #ccc",
+                  marginTop: 5,
+                  textAlign: "center",
+                }}
+                key={product.id}
+              >
+                <CardMedia
+                  sx={{ width: 197, height: 225 }}
+                  image={product.preview}
+                  title="green iguana"
+                  onClick={() => navigate(`/details/${product.id}`)}
+                />
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: "14px" }}
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                  >
+                    {product.title}
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))}
+        </Box>
         {/* <Chat /> */}
         <Box
           className="BoxList"

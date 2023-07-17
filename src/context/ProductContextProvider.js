@@ -16,6 +16,7 @@ const INIT_STATE = {
   favorites: [],
   review: [],
   promo: [],
+  recentlyWatched: [],
 };
 
 function reducer(state = INIT_STATE, action) {
@@ -40,6 +41,9 @@ function reducer(state = INIT_STATE, action) {
     case "GET_REVIEW":
       return { ...state, review: action.payload };
 
+    case "ADD_TO_RECENTLY_WATCHED":
+      return { ...state, recentlyWatched: action.payload };
+
     default:
       return state;
   }
@@ -52,8 +56,8 @@ const ProductContextProvider = ({ children }) => {
       const res = await axios(
         `${API}/products/${window.location.search}`,
         getTokens()
-        );
-        console.log(res)
+      );
+      console.log(res);
 
       dispatch({ type: "GET_PRODUCTS", payload: res.data });
     } catch (error) {
@@ -110,6 +114,18 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios(`${API}/products/${id}/`, getTokens());
       dispatch({ type: "GET_ONE_PRODUCT", payload: res.data });
+
+      const updatedRecentlyWatched = [...state.recentlyWatched];
+      if (!updatedRecentlyWatched.includes(res.data)) {
+        updatedRecentlyWatched.unshift(res.data);
+        if (updatedRecentlyWatched.length > 3) {
+          updatedRecentlyWatched.pop();
+        }
+      }
+      dispatch({
+        type: "ADD_TO_RECENTLY_WATCHED",
+        payload: updatedRecentlyWatched,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -222,6 +238,7 @@ const ProductContextProvider = ({ children }) => {
     getPromo,
     deletePromo,
     fetchByParams,
+    recentlyWatched: state.recentlyWatched,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
