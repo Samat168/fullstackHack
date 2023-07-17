@@ -14,9 +14,18 @@ const PeopleFotos = () => {
     );
   };
   return (
-    <div style={{ width: "100%" }} onMouseOut={returnPhoto}>
-      <h2>СМОТРИ БОЛЬШЕ С ЭТИМ ТОВАРОМ</h2>
-      <h5>
+    <div style={{ width: "90%", margin: "auto" }} onMouseOut={returnPhoto}>
+      <h2
+        style={{
+          marginBottom: "10px",
+          fontSize: "30px",
+          letterSpacing: "5px",
+          fontWeight: "500",
+        }}
+      >
+        СМОТРИ БОЛЬШЕ С ЭТИМ ТОВАРОМ
+      </h2>
+      <h5 style={{ fontSize: "20px", fontWeight: "500", marginBottom: "20px" }}>
         Делись своими образами в соцсетях, отмечай SellSwap – и твой образ
         появится на сайте
       </h5>
