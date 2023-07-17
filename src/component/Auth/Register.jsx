@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../assets/SellSwap-removebg-preview.png";
+import back from '../../assets/reg.png'
 
 import {
   Box,
@@ -19,6 +20,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [avatar, setAvatar] = useState(null);
   const navigate = useNavigate();
   const { handleRegister, loading, error } = useAuth();
 
@@ -35,6 +37,7 @@ const Register = () => {
     }
 
     const formData = new FormData();
+    // formData.append("avatar", avatar);
     formData.append("email", email);
     formData.append("first_name", name);
     formData.append("last_name", lastName);
@@ -44,17 +47,18 @@ const Register = () => {
   }
 
   return (
-    <Box
+    <div style={{width: '100%' ,height: '800px',paddingTop:'140px', background: `url(${back})`}}>
+      <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "700px",
-        paddingTop: "5%",
-        width: "100%",
+        height: '470px',
+        width: "320px",
         padding: "auto",
-
-        background:
-          "url(https://images.wallpaperscraft.ru/image/single/tekstura_fon_tekst_50473_1920x1080.jpg)",
+        margin: 'auto',
+        boxShadow: '10px 10px 35px  #434040' ,
+        paddingTop: "40px",
+        borderRadius: '10px'
       }}
     >
       {error ? <h2>{error}</h2> : null}
@@ -64,17 +68,17 @@ const Register = () => {
         variant="h5"
         sx={{
           color: "white",
-          marginInline: "auto",
-          marginBottom: "2%",
+          marginLeft:'15px',
+          marginBottom: "15px",
           fontSize: "40px",
         }}
       >
-        Registration
+        registration
       </Typography>
       <div
         style={{
           display: "flex",
-          width: "330px",
+          width: "300px",
           marginInline: "auto",
           justifyContent: "space-between",
           marginBottom: "10px",
@@ -112,7 +116,7 @@ const Register = () => {
           marginTop: "5px",
           backgroundColor: "white",
           borderRadius: "10px",
-          width: "320px",
+          width: "300px",
 
           marginInline: "auto",
           marginBottom: "10px",
@@ -125,7 +129,7 @@ const Register = () => {
           marginTop: "5px",
           backgroundColor: "white",
           borderRadius: "10px",
-          width: "320px",
+          width: "300px",
 
           marginInline: "auto",
           marginBottom: "10px",
@@ -138,12 +142,26 @@ const Register = () => {
           marginTop: "5px",
           backgroundColor: "white",
           borderRadius: "10px",
-          width: "320px",
+          width: "300px",
 
           marginInline: "auto",
           marginBottom: "10px",
         }}
       />
+      {/* <TextField
+        type="file"
+        onChange={(e) => setAvatar(e.target.files[0])}
+        placeholder="avatar"
+        sx={{
+          marginTop: "5px",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          width: "300px",
+
+          marginInline: "auto",
+          marginBottom: "10px",
+        }}
+      /> */}
       {loading ? (
         <Box sx={{ display: "flex", marginInline: "auto" }}>
           <CircularProgress />
@@ -151,18 +169,23 @@ const Register = () => {
       ) : (
         <Button
           onClick={handleSave}
-          variant="contained"
+          variant="outlined"
           sx={{
             // backgroundColor: "white",
             width: "110px",
             margin: "auto",
             marginTop: "10px",
+            color:'white'
+            ,
+            border: "1px solid white"
           }}
         >
           REGISTER
         </Button>
       )}
     </Box>
+    </div>
+    
   );
 };
 

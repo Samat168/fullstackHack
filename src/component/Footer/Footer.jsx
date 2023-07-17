@@ -132,7 +132,7 @@ const Footer = () => {
           <div>+996 700 00 00 00</div>
         </div>
       </div>
-      <div className="footer_sec">hello</div>
+     
     </>
   );
 };
