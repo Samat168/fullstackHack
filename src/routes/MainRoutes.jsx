@@ -14,6 +14,7 @@ import PasswordResetPage from "../pages/PasswordResetPage";
 import PassRessetConfirmPage from "../pages/PassRessetConfirmPage";
 import RegisterSuccessPage from "../pages/RegisterSuccessPage";
 import FavoritesPage from "../pages/FavoritesPage";
+import ProfilePage from "../pages/ProfilePage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -89,6 +90,12 @@ const MainRoutes = () => {
 
       element: <FavoritesPage />,
       id: 15,
+    },
+    {
+      link: "/profile",
+
+      element: <ProfilePage />,
+      id: 16,
     },
   ];
   return (
