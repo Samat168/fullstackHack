@@ -6,6 +6,7 @@ import HomeUl from "./HomeComponents/HomeUl";
 import { useProduct } from "../../context/ProductContextProvider";
 import { useState } from "react";
 import { useEffect } from "react";
+import HomeCategory from "./HomeComponents/HomeCategory";
 
 const Home = () => {
   const { categories } = useProduct();
@@ -30,8 +31,9 @@ const Home = () => {
     <div className="home_main_div">
       <HomeSlider />
       <ProductSlider cat={odejda} />
-      <PeopleFotos />
+      <HomeCategory />
       <ProductSlider cat={obuv} />
+      <PeopleFotos />
       <HomeUl />
     </div>
   );

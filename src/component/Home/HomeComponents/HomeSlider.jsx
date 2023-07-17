@@ -18,9 +18,9 @@ export default function HomeSlider() {
   console.log(promo);
   return (
     <>
-      <Swiper navigation={false} modules={[Navigation]} className="mySwiper">
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {promo.map((item) => (
-          <SwiperSlide key={item.id} style={{ width: "100%" }}>
+          <SwiperSlide key={item.id} style={{ width: "100%", margin: "0" }}>
             <div
               style={{
                 width: "100%",
@@ -28,7 +28,7 @@ export default function HomeSlider() {
                 height: "300px",
                 background: "#FF4800",
                 backgroundImage: `url(${item.image})`,
-                backgroundSize: "cover",
+                backgroundSize: "100% 100%",
                 backgroundPosition: "center",
                 display: "flex",
                 alignItems: "center",
@@ -36,10 +36,16 @@ export default function HomeSlider() {
               }}
             >
               <div>
-                <h2 style={{ color: "#fff" }}>{item.text}</h2>
-                <button style={{ width: "100%", height: "25px" }}>
-                  Перейти
-                </button>
+                <h2
+                  style={{
+                    color: "#fff",
+                    fontWeight: "500",
+                    letterSpacing: "5px",
+                  }}
+                >
+                  {item.text}
+                </h2>
+                <button className="home_slider_button">Перейти</button>
               </div>
             </div>
           </SwiperSlide>

@@ -2,8 +2,14 @@ import React from "react";
 
 const HomeUl = () => {
   return (
-    <div style={{ marginTop: "50px" }}>
-      <ul style={{ display: "flex", justifyContent: "space-between" }}>
+    <div className="home_ul_main">
+      <ul
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "100px",
+        }}
+      >
         <li className="home_ul_li">
           <img
             src="https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week13/27_03/benefit-delivery.svg"
@@ -23,7 +29,7 @@ const HomeUl = () => {
             src="https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week13/27_03/benefit-return.svg"
             alt=""
           />
-          <div>
+          <div className="home_li_div">
             <h4>Условия возврата</h4>
             <p>
               Быстрый возврат, если товар
@@ -37,7 +43,7 @@ const HomeUl = () => {
             src="https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week13/27_03/benefit-warranty.svg"
             alt=""
           />
-          <div>
+          <div className="home_li_div">
             <h4>Гарантийное обслуживание</h4>
             <p>
               Оплата наличными курьеру или
@@ -47,7 +53,7 @@ const HomeUl = () => {
           </div>
         </li>
       </ul>
-      <div style={{ marginTop: "50px", fontSize: "15px" }}>
+      <div style={{ marginTop: "50px", fontSize: "12px", color: "gray" }}>
         SellSwap — международная сеть магазинов качественного спортивного
         инвентаря для фитнеса, летних и зимних видов спорта, а также товаров для
         активного отдыха. В сети магазинов и на нашем сайте Вы найдете
