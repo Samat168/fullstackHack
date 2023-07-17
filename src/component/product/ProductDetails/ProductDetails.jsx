@@ -5,7 +5,7 @@ import { useAuth } from "../../../context/AuthContextProvider";
 import { useProduct } from "../../../context/ProductContextProvider";
 import { Button, Rating } from "@mui/material";
 import { useCart } from "../../../context/CartContextProvider";
-
+import "./ProductDetails.css";
 const ProductDetails = () => {
   const {
     oneProduct,
@@ -66,41 +66,143 @@ const ProductDetails = () => {
   // };
 
   return (
-    <div style={{ margin: "auto", width: "50%" }}>
-      <div>
-        <img src={oneProduct?.preview} width={300} alt="" />
-        {oneProduct?.images.map((item) => (
-          <img src={item.image} alt="" width={100} />
-        ))}
-        {/* <img src={oneProduct?.images[0].image} width={500} alt="" /> */}
-        {/* <img src={oneProduct?.images[1].image} width={500} alt="" /> */}
+    // <div style={{ margin: "auto" }}>
+    //   <div style={{ marginLeft: "10%", width: "87%", display: "flex" }}>
+    //     <div style={{ display: "flex", flexDirection: "column", width: "10%" }}>
+    //       {oneProduct?.images.map((item) => (
+    //         <img src={item.image} alt="" style={{ width: "100%" }} />
+    //       ))}
+    //     </div>
+    //     <img
+    //       src={oneProduct?.preview}
+    //       alt=""
+    //       style={{ marginLeft: "5%", width: "100%" }}
+    //     />
+    //     <div style={{ width: "32%" }}>
+    //       <h3>{oneProduct?.title}</h3>
+    //       <button onClick={() => toggleLikes(oneProduct?.id)}>
+    //         {oneProduct?.liked_by_user ? "-" : "+"}
+    //       </button>
+    //       <span style={{ color: "black" }}>
+    //         Likes: {oneProduct?.likes_count}
+    //       </span>
+    //       <p style={{ color: "black" }}>{oneProduct?.category.name}</p>
+    //       <p style={{ color: "black" }}>{oneProduct?.price}</p>
+
+    //       <Button
+    //         sx={{ color: "blue" }}
+    //         variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
+    //         onClick={() => togglefav(oneProduct?.id)}
+    //       >
+    //         {oneProduct?.favorite_by_user
+    //           ? "Remove from favorites"
+    //           : "Add to Favorites"}
+    //       </Button>
+    //       <Button
+    //         sx={{ color: "blue" }}
+    //         onClick={() => addProductToCart(oneProduct)}
+    //       >
+    //         add to cart
+    //       </Button>
+    //     </div>
+    //   </div>
+
+    //   <div style={{ marginLeft: "40px" }}>
+    //     <p style={{ color: "black", width: "50%" }}>
+    //       {oneProduct?.description}
+    //     </p>
+    //   </div>
+    //   <div style={{ margin: "auto", width: "50%", marginTop: "30px" }}>
+    //     {review.some((item) => item.user === currentUser) ? (
+    //       <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
+    //     ) : (
+    //       <form onSubmit={handleAddReview} action="">
+    //         <label style={{ backgroundColor: "white" }}>
+    //           Rating:
+    //           <Rating
+    //             name="rating"
+    //             value={rating}
+    //             onChange={handleRatingChange}
+    //             precision={1}
+    //             required
+    //           />
+    //         </label>
+    //         <textarea
+    //           value={text}
+    //           onChange={(e) => setText(e.target.value)}
+    //           className="w-75"
+    //           name=""
+    //           id=""
+    //           cols="30"
+    //           rows="10"
+    //         ></textarea>
+    //         <button>add REVIEWS</button>
+    //       </form>
+    //     )}
+
+    //     <div>
+    //       {review?.map((item) => (
+    //         <div key={item.id}>
+    //           <h5 style={{ color: "black" }}>{item.user}</h5>
+    //           <label style={{ backgroundColor: "white" }}>
+    //             Rating:
+    //             <Rating
+    //               name="rating"
+    //               value={item.rating}
+    //               precision={item.rating}
+    //               required
+    //             />
+    //           </label>
+    //           <p style={{ color: "black" }}>{item.text}</p>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </div>
+
+    <div className="conter">
+      <div className="container_details">
+        <div className="details_wrapper">
+          <div className="details_img">
+            {oneProduct?.images.map((item) => (
+              <img className="img_product" src={item.image} alt="" />
+            ))}
+          </div>
+          <div className="block_details_left">
+            <img src={oneProduct?.preview} alt="" className="preview_left" />
+          </div>
+
+          <div className="block_details_right">
+            <h3>{oneProduct?.title}</h3>
+            <p className="details_right_desc">{oneProduct?.price}</p>
+            <div>
+              <button onClick={() => toggleLikes(oneProduct?.id)}>
+                {oneProduct?.liked_by_user ? "-" : "+"}
+              </button>
+              <span style={{ color: "black" }}>
+                Likes: {oneProduct?.likes_count}
+              </span>
+
+              <Button
+                sx={{ color: "blue" }}
+                variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
+                onClick={() => togglefav(oneProduct?.id)}
+              >
+                {oneProduct?.favorite_by_user
+                  ? "Remove from favorites"
+                  : "Add to Favorites"}
+              </Button>
+              <Button
+                sx={{ color: "blue" }}
+                onClick={() => addProductToCart(oneProduct)}
+              >
+                add to cart
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3>{oneProduct?.title}</h3>
-        <button onClick={() => toggleLikes(oneProduct?.id)}>
-          {oneProduct?.liked_by_user ? "-" : "+"}
-        </button>
-        <span style={{ color: "black" }}>Likes: {oneProduct?.likes_count}</span>
-        <p style={{ color: "black" }}>{oneProduct?.category.name}</p>
-        <p style={{ color: "black" }}>{oneProduct?.price}</p>
-        <p style={{ color: "black" }}>{oneProduct?.description}</p>
-        <Button
-          sx={{ color: "blue" }}
-          variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
-          onClick={() => togglefav(oneProduct?.id)}
-        >
-          {oneProduct?.favorite_by_user
-            ? "Remove from favorites"
-            : "Add to Favorites"}
-        </Button>
-        <Button
-          sx={{ color: "blue" }}
-          onClick={() => addProductToCart(oneProduct)}
-        >
-          add to cart
-        </Button>
-      </div>
-      <div>
+      <div style={{ margin: "auto", width: "50%", marginTop: "30px" }}>
         {review.some((item) => item.user === currentUser) ? (
           <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
         ) : (
@@ -144,33 +246,6 @@ const ProductDetails = () => {
               <p style={{ color: "black" }}>{item.text}</p>
             </div>
           ))}
-          {/* {oneProduct?.rating.map((item) => (
-          <div key={item.id} className="border m-4">
-            <h5>{item.author}</h5> */}
-          {/* {commentToEdit && commentToEdit.id == item.id ? ( */}
-          {/* <>
-                <input onChange={handleChange} value={commentToEdit.text} />
-                <button onClick={() => setCommentToEdit(null)}>cansel</button>
-                <button onClick={handleSave}>save review</button>
-              </>
-            ) : (
-              */}{" "}
-          {/* <p> */}
-          {/* {item.avg} {"    "} */}
-          {/* <span style={{ fontSize: "10px", color: "lightgrey" }}>
-                {moment(item.created_at).format("DD/MM/YYYY HH:mm:ss")}
-              </span> */}
-          {/* </p>
-          </div>
-        ))}  */}
-          {/* {item.author === currentUser ? (
-              <div>
-                <button onClick={() => setCommentToEdit(item)}>edit</button>
-                <button onClick={() => deleteReview(item.id, id)}>
-                  delete
-                </button>
-              </div>
-          //   ) : null} */}
         </div>
       </div>
     </div>
