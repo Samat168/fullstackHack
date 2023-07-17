@@ -1,0 +1,243 @@
+.container_details {
+  width: 65%;
+  margin-left: 9%;
+}
+
+.details_info {
+  margin-top: 23px;
+}
+
+.detail-info {
+  color: #56707f;
+  font-size: 12px;
+  font-family: "Motiva Sans", Sans-serif;
+  font-weight: normal;
+}
+
+.detail-title {
+  color: white;
+  font-size: 21px;
+  margin-top: 10px;
+}
+
+.details_wrapper {
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+}
+
+@media (max-width: 779px) {
+  .details_wrapper {
+    flex-wrap: wrap;
+  }
+}
+
+.block_details_left {
+  width: 100%;
+}
+.preview_left {
+  width: 74%;
+  margin-left: 12%;
+  height: 600px;
+}
+
+@media (max-width: 779px) {
+  .block_details_left {
+    width: 100%;
+  }
+}
+
+.details_img {
+  width: 12%;
+  display: flex;
+
+  flex-direction: column;
+}
+
+.img_product {
+  width: 100%;
+  height: 100px;
+  margin: 10px;
+}
+
+.details_video {
+  max-width: 100%;
+}
+
+.block_details_right {
+  width: 35%;
+
+  margin-left: 2%;
+}
+
+@media (max-width: 779px) {
+  .block_details_right {
+    width: 100%;
+    margin-top: 10%;
+  }
+}
+
+.img_product_right {
+  width: 100%;
+}
+
+.play-icon {
+  position: absolute;
+}
+
+.details_right_desc {
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  margin-top: 10px;
+  max-height: 111px;
+  overflow: hidden;
+  line-height: 18px;
+}
+
+.release-date {
+  margin-top: 10%;
+  color: #556772;
+  font-size: 12px;
+}
+
+.date-name {
+  color: white;
+}
+
+.product_details_cost {
+  position: relative;
+  margin-top: 10%;
+  width: 100%;
+  background: -webkit-linear-gradient(
+    150deg,
+    rgba(226, 244, 255, 0.3) 5%,
+    rgba(84, 107, 115, 0.3) 95%
+  );
+  background: linear-gradient(
+    -60deg,
+    rgba(226, 244, 255, 0.3) 5%,
+    rgba(84, 107, 115, 0.3) 95%
+  );
+  height: auto;
+  padding: 10px;
+
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product_details_buy {
+  font-size: 21px;
+  font-family: "Motiva Sans", Sans-serif;
+  color: white;
+}
+
+.game_cost {
+  position: absolute;
+  display: flex;
+  left: 66%;
+  top: 83%;
+  align-items: center;
+  width: 18%;
+  background-color: black;
+  height: 34px;
+}
+
+.product_buy {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 940px) {
+  .product_details_buy {
+    font-size: 17px;
+  }
+  .product_details_icon {
+    display: none;
+  }
+
+  .product_buy {
+    width: 44%;
+  }
+  .game_cost {
+    width: 33%;
+    top: 13%;
+  }
+}
+
+@media (max-width: 610px) {
+  .game_cost {
+    width: 40%;
+    left: 56%;
+  }
+}
+
+.people-review {
+  color: white;
+  margin-top: 10%;
+}
+
+.price {
+  font-family: "Motiva Sans", Sans-serif;
+  font-weight: normal;
+  background-color: #000000;
+
+  font-size: 15px;
+
+  align-items: center;
+  display: flex;
+  max-width: 50%;
+  justify-content: center;
+  flex: 1;
+}
+
+.add-to-cart {
+  font-family: "Motiva Sans", Sans-serif;
+  font-weight: normal;
+  background: #6fa720;
+  background: -webkit-linear-gradient(top, #6fa720 5%, #588a1b 95%);
+  background: linear-gradient(to bottom, #6fa720 5%, #588a1b 95%);
+  background: linear-gradient(to right, #75b022 5%, #588a1b 95%);
+  color: #d2efa9;
+  font-size: 15px;
+  border: 1px solid black;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  max-width: 50%;
+  justify-content: center;
+  cursor: pointer;
+  flex: 1;
+}
+
+.remove-to-cart {
+  font-family: "Motiva Sans", Sans-serif;
+  font-weight: normal;
+
+  background: linear-gradient(to right, #23145d 5%, #560b97 95%);
+  color: #cafbf3;
+  font-size: 15px;
+  border: 1px solid black;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  max-width: 50%;
+  justify-content: center;
+  cursor: pointer;
+  flex: 1 1;
+}
+
+@media (max-width: 473px) {
+  .price {
+    font-size: 10px;
+  }
+  .add-to-cart {
+    font-size: 10px;
+  }
+  .remove-to-cart {
+    font-size: 10px;
+  }
+}

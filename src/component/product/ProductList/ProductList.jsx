@@ -95,6 +95,7 @@ const ProductList = () => {
           width: "65%",
           marginLeft: "30%",
           marginTop: "4%",
+          height: "1400px",
           "@media (max-width: 990px)": {
             width: "89%",
           },
@@ -131,8 +132,10 @@ const ProductList = () => {
             </MenuItem>
           ))}
         </TextField>
-        <Box sx={{ position: "absolute", left: "20px", marginTop: "15%" }}>
-          <Typography>recently-watched</Typography>
+        <Box sx={{ position: "absolute", left: "20px", marginTop: "10%" }}>
+          <Typography sx={{ fontSize: "17px", color: "#000" }}>
+            Недавно просмотренные
+          </Typography>
           {recentlyWatched
             .filter((product, index, self) => {
               return index === self.findIndex((p) => p.id === product.id);
