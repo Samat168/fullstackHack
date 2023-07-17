@@ -15,7 +15,6 @@ import PassRessetConfirmPage from "../pages/PassRessetConfirmPage";
 import RegisterSuccessPage from "../pages/RegisterSuccessPage";
 import FavoritesPage from "../pages/FavoritesPage";
 
-
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
     {
@@ -63,7 +62,7 @@ const MainRoutes = () => {
       element: <EditProductPage />,
       id: 10,
     },
-   
+
     {
       link: "/formforpay",
       element: <FormforPayPage />,
@@ -89,7 +88,7 @@ const MainRoutes = () => {
       link: "/favorites",
 
       element: <FavoritesPage />,
-      id: 14,
+      id: 15,
     },
   ];
   return (
