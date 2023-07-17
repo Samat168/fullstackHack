@@ -103,7 +103,7 @@ const CartContexProvider = ({ children }) => {
 
   const deleteCartProduct = (id) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
-    cart.products = cart.products.filter((elem) => elem.item.id !== id);
+    cart.products = cart.products.filter((elem) => elem.product.id !== id);
     cart.totalPrice = calcTotalPrice(cart.products);
 
     localStorage.setItem("cart", JSON.stringify(cart));

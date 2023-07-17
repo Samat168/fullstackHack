@@ -92,7 +92,7 @@ export default function Cart() {
                     borderRadius: "10%",
                     padding: "5px",
                   }}
-                  onClick={() => deleteCartProduct(row.item.id)}
+                  onClick={() => deleteCartProduct(row.product.id)}
                   // sx={{
                   //   background:
                   //     "linear-gradient(90deg, rgba(62, 103, 150, 0.919) 11.38%, rgba(58, 120, 177, 0.8) 25.23%, rgb(15, 33, 110) 100%)",
