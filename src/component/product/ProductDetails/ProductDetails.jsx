@@ -28,6 +28,7 @@ const ProductDetails = () => {
   const [ratingAvg, setRatingAvg] = useState(
     oneProduct?.rating.rating__avg || 0
   );
+
   const { id } = useParams();
   useEffect(() => {
     getOneProduct(id);
@@ -68,17 +69,37 @@ const ProductDetails = () => {
     setRatingAvg(oneProduct?.rating.rating__avg || 0);
   }, [oneProduct?.rating.rating__avg]);
 
+  const [photoForMain, setFotoForMain] = useState(oneProduct?.preview);
+  const changePhoto = (img) => {
+    setFotoForMain(img);
+  };
+  const returnPhoto = () => {
+    setFotoForMain(oneProduct?.preview);
+  };
+
   return (
     <div className="conter">
       <div className="container_details">
         <div className="details_wrapper">
           <div className="details_img">
             {oneProduct?.images.map((item) => (
-              <img className="img_product" src={item.image} alt="" />
+              <img
+                key={item.id}
+                className="img_product"
+                src={item.image}
+                alt=""
+                onMouseOver={(e) => changePhoto(e.target.src)}
+                onMouseOut={returnPhoto}
+              />
             ))}
           </div>
           <div className="block_details_left">
-            <img src={oneProduct?.preview} alt="" className="preview_left" />
+            <img
+              alt=""
+              className="preview_left"
+              onMouseOut={returnPhoto}
+              src={photoForMain}
+            />
           </div>
 
           <div className="block_details_right">
@@ -102,12 +123,12 @@ const ProductDetails = () => {
                 }}
               />
               <span style={{ fontSize: "13px", marginLeft: "10px" }}>
-                {review.length} отзыва
+                {review.length} отзыв
               </span>
             </div>
             <p className="details_right_desc">{oneProduct?.price} ₽</p>
             <div>
-              <p style={{ color: "black" }}>
+              <p style={{ color: "black", marginTop: "20px" }}>
                 <ThumbUpOffAltIcon
                   onClick={() => toggleLikes(oneProduct?.id)}
                   sx={{ color: oneProduct?.liked_by_user ? "blue" : "black" }}
@@ -117,18 +138,9 @@ const ProductDetails = () => {
 
               <Button
                 sx={{ color: "blue" }}
-                variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
-                onClick={() => togglefav(oneProduct?.id)}
-              >
-                {oneProduct?.favorite_by_user
-                  ? "Remove from favorites"
-                  : "Add to Favorites"}
-              </Button>
-              <Button
-                sx={{ color: "blue" }}
                 onClick={() => addProductToCart(oneProduct)}
               >
-                add to cart
+                Добавить в коризину
               </Button>
             </div>
           </div>
@@ -252,7 +264,14 @@ const ProductDetails = () => {
               <span>5</span>
             </div>
           </div>
-          <div style={{ marginLeft: "14%" }}>
+          <div
+            style={{
+              marginLeft: "14%",
+              width: "39%",
+              border: "1px solid",
+              borderRadius: "36px",
+            }}
+          >
             {review.some((item) => item.user === currentUser) ? (
               <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
             ) : (
@@ -261,7 +280,13 @@ const ProductDetails = () => {
                 action=""
                 style={{ display: "flex", flexDirection: "column" }}
               >
-                <label style={{ backgroundColor: "white" }}>
+                <label
+                  style={{
+                    backgroundColor: "white",
+                    width: "31%",
+                    marginLeft: "91px",
+                  }}
+                >
                   <Rating
                     name="rating"
                     value={rating}
@@ -284,11 +309,9 @@ const ProductDetails = () => {
             )}
           </div>
         </div>
-        <div
-          style={{ display: "flex", justifyContent: "flex-end", width: "53%" }}
-        >
+        <div style={{ width: "53%", marginLeft: "45%" }}>
           {review?.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} style={{ marginTop: "20px" }}>
               <h5 style={{ color: "black" }}>{item.user}</h5>
               <label style={{ backgroundColor: "white" }}>
                 <Rating
