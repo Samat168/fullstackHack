@@ -12,6 +12,7 @@ import { async } from "q";
 import { Api, Try } from "@mui/icons-material";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import { getTokens } from "../helpers/functions";
 export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
 
@@ -61,8 +62,6 @@ const AuthContextProvider = ({ children }) => {
       localStorage.setItem("email", email);
       setCurrentUser(email);
       navigate("/");
-      console.log(res);
-      console.log(res);
     } catch (error) {
       console.log(error);
     } finally {
@@ -155,6 +154,18 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  async function changeUser(id, formData) {
+    // setLoading(true);
+    try {
+      await axios.patch(`${API}/accounts/${id}/`, formData, getTokens());
+      getUser();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // setLoading(false);
+    }
+  }
+
   firebase.initializeApp({
     apiKey: "AIzaSyCiidF07xZKf4NqjhrXf8ZRKvG3kxslPHs",
     authDomain: "chat-online-5705a.firebaseapp.com",
@@ -167,6 +178,7 @@ const AuthContextProvider = ({ children }) => {
   const firestore = firebase.firestore();
 
   const values = {
+    changeUser,
     getUser,
     checkuserid,
     userId,

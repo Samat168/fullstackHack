@@ -11,6 +11,7 @@ const ProductCard = ({ item }) => {
   const { deleteProduct, getProductDetails, oneProduct, products, togglefav } =
     useProduct();
   const navigate = useNavigate();
+
   return (
     <div>
       <div className="product_card">
