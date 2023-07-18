@@ -137,7 +137,7 @@ const ProductDetails = () => {
               </p>
 
               <Button
-                sx={{ color: "blue" }}
+                sx={{ color: "blue", marginTop: "50px" }}
                 onClick={() => addProductToCart(oneProduct)}
               >
                 Добавить в коризину
