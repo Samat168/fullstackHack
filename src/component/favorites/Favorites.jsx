@@ -12,10 +12,10 @@ const Favorites = () => {
   const { togglefav } = useProduct();
   const navigate = useNavigate();
 
-  checkuserid();
   useEffect(() => {
+    checkuserid();
     // userFavorites();
-  }, []);
+  }, [1000]);
 
   // useEffect(() => {
   //   console.log(favorites);
@@ -32,7 +32,7 @@ const Favorites = () => {
       }}
       className=""
     >
-      {favorites.map((item) => (
+      {favorites?.map((item) => (
         <div
           style={{ width: "20%", marginRight: "10%" }}
           className="product_card"
