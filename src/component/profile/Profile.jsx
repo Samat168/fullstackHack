@@ -91,6 +91,7 @@ const Profile = () => {
       >
         {favorites?.map((item) => (
           <div
+            key={item.id}
             style={{ width: "230px", marginRight: "10%" }}
             className="product_card"
           >

@@ -8,6 +8,7 @@ import { useCart } from "../../../context/CartContextProvider";
 import "./ProductDetails.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 const ProductDetails = () => {
   const {
     oneProduct,
@@ -68,100 +69,6 @@ const ProductDetails = () => {
   }, [oneProduct?.rating.rating__avg]);
 
   return (
-    // <div style={{ margin: "auto" }}>
-    //   <div style={{ marginLeft: "10%", width: "87%", display: "flex" }}>
-    //     <div style={{ display: "flex", flexDirection: "column", width: "10%" }}>
-    //       {oneProduct?.images.map((item) => (
-    //         <img src={item.image} alt="" style={{ width: "100%" }} />
-    //       ))}
-    //     </div>
-    //     <img
-    //       src={oneProduct?.preview}
-    //       alt=""
-    //       style={{ marginLeft: "5%", width: "100%" }}
-    //     />
-    //     <div style={{ width: "32%" }}>
-    //       <h3>{oneProduct?.title}</h3>
-    //       <button onClick={() => toggleLikes(oneProduct?.id)}>
-    //         {oneProduct?.liked_by_user ? "-" : "+"}
-    //       </button>
-    //       <span style={{ color: "black" }}>
-    //         Likes: {oneProduct?.likes_count}
-    //       </span>
-    //       <p style={{ color: "black" }}>{oneProduct?.category.name}</p>
-    //       <p style={{ color: "black" }}>{oneProduct?.price}</p>
-
-    //       <Button
-    //         sx={{ color: "blue" }}
-    //         variant={oneProduct?.favorite_by_user ? "success" : "secondary"}
-    //         onClick={() => togglefav(oneProduct?.id)}
-    //       >
-    //         {oneProduct?.favorite_by_user
-    //           ? "Remove from favorites"
-    //           : "Add to Favorites"}
-    //       </Button>
-    //       <Button
-    //         sx={{ color: "blue" }}
-    //         onClick={() => addProductToCart(oneProduct)}
-    //       >
-    //         add to cart
-    //       </Button>
-    //     </div>
-    //   </div>
-
-    //   <div style={{ marginLeft: "40px" }}>
-    //     <p style={{ color: "black", width: "50%" }}>
-    //       {oneProduct?.description}
-    //     </p>
-    //   </div>
-    //   <div style={{ margin: "auto", width: "50%", marginTop: "30px" }}>
-    //     {review.some((item) => item.user === currentUser) ? (
-    //       <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
-    //     ) : (
-    //       <form onSubmit={handleAddReview} action="">
-    //         <label style={{ backgroundColor: "white" }}>
-    //           Rating:
-    //           <Rating
-    //             name="rating"
-    //             value={rating}
-    //             onChange={handleRatingChange}
-    //             precision={1}
-    //             required
-    //           />
-    //         </label>
-    //         <textarea
-    //           value={text}
-    //           onChange={(e) => setText(e.target.value)}
-    //           className="w-75"
-    //           name=""
-    //           id=""
-    //           cols="30"
-    //           rows="10"
-    //         ></textarea>
-    //         <button>add REVIEWS</button>
-    //       </form>
-    //     )}
-
-    //     <div>
-    //       {review?.map((item) => (
-    //         <div key={item.id}>
-    //           <h5 style={{ color: "black" }}>{item.user}</h5>
-    //           <label style={{ backgroundColor: "white" }}>
-    //             Rating:
-    //             <Rating
-    //               name="rating"
-    //               value={item.rating}
-    //               precision={item.rating}
-    //               required
-    //             />
-    //           </label>
-    //           <p style={{ color: "black" }}>{item.text}</p>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className="conter">
       <div className="container_details">
         <div className="details_wrapper">
@@ -175,15 +82,38 @@ const ProductDetails = () => {
           </div>
 
           <div className="block_details_right">
-            <h3>{oneProduct?.title}</h3>
-            <p className="details_right_desc">{oneProduct?.price}</p>
-            <div>
-              <button onClick={() => toggleLikes(oneProduct?.id)}>
-                {oneProduct?.liked_by_user ? "-" : "+"}
-              </button>
-              <span style={{ color: "black" }}>
-                Likes: {oneProduct?.likes_count}
+            <h3 style={{ fontSize: "24px", lineHeight: "32px" }}>
+              {oneProduct?.title}
+            </h3>
+            <p style={{ fontSize: "13px", opacity: "0.5" }}>
+              Арт. 121637TRT-G2-44-46, 121637TRT-G2-48-50
+            </p>
+            <div style={{ marginTop: "10px", display: "flex" }}>
+              <Rating
+                name="rating"
+                value={ratingAvg ? ratingAvg : 0}
+                precision={0.5}
+                required
+                size="small"
+                sx={{
+                  marginRight: "5%",
+                  color: "blue",
+                  width: "20%",
+                }}
+              />
+              <span style={{ fontSize: "13px", marginLeft: "10px" }}>
+                {review.length} отзыва
               </span>
+            </div>
+            <p className="details_right_desc">{oneProduct?.price} ₽</p>
+            <div>
+              <p style={{ color: "black" }}>
+                <ThumbUpOffAltIcon
+                  onClick={() => toggleLikes(oneProduct?.id)}
+                  sx={{ color: oneProduct?.liked_by_user ? "blue" : "black" }}
+                />{" "}
+                {oneProduct?.likes_count}
+              </p>
 
               <Button
                 sx={{ color: "blue" }}
@@ -274,7 +204,7 @@ const ProductDetails = () => {
               value={ratingAvg ? ratingAvg : 0}
               precision={0.5}
               required
-              sx={{ marginRight: "5%" }}
+              sx={{ marginRight: "5%", color: "blue" }}
             />
           </div>
 
