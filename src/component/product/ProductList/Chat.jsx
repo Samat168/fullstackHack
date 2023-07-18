@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -18,6 +18,7 @@ const Chat = () => {
   const [messages, loading] = useCollectionData(
     firestore.collection("messages").orderBy("createdAt")
   );
+
   const sendMessage = async () => {
     firestore.collection("messages").add({
       uid: currentUser,
@@ -48,9 +49,9 @@ const Chat = () => {
             borderRadius: "6%",
           }}
         >
-          {messages.map((message) => (
+          {messages.map((message, index) => (
             <div
-              key={message?.uid}
+              key={index} // Используйте индекс в качестве ключа
               style={{
                 margin: 10,
                 border:
