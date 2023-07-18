@@ -24,7 +24,17 @@ export default function ProductSlider({ cat }) {
 
   return (
     <div style={{ width: "90%", margin: "auto" }}>
-      <h2 style={{ marginTop: "50px" }}>{cat.name}</h2>
+      <h2
+        style={{
+          marginTop: "100px",
+          fontWeight: "500",
+          letterSpacing: "5px",
+          fontSize: "30px",
+          textAlign: "center",
+        }}
+      >
+        {cat.name}
+      </h2>
       <Swiper
         slidesPerView={4}
         spaceBetween={20}

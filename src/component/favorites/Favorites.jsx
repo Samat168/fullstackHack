@@ -4,22 +4,17 @@ import ProductCard from "../product/ProductCard/ProductCard";
 import { useAuth } from "../../context/AuthContextProvider";
 import { Favorite } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 import { useProduct } from "../../context/ProductContextProvider";
 
 const Favorites = () => {
-  const { favorites, userFavorites, userId, checkuserid } = useAuth();
+  const { favorites, userFavorites, userId, checkuserid, users } = useAuth();
   const { togglefav } = useProduct();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    checkuserid();
-    // userFavorites();
-  }, [1000]);
+  useEffect(() => {}, []);
 
-  // useEffect(() => {
-  //   console.log(favorites);
-  // }, [checkuserid]);
+  console.log(users);
 
   return (
     <div
@@ -32,7 +27,8 @@ const Favorites = () => {
       }}
       className=""
     >
-      {favorites?.map((item) => (
+      <Avatar src={users.avatar} />
+      {favorites.map((item) => (
         <div
           style={{ width: "20%", marginRight: "10%" }}
           className="product_card"

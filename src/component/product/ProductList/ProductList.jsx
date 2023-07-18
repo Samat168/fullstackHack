@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import {
+  Avatar,
   Box,
   Card,
   CardContent,
@@ -16,6 +17,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Chat from "./Chat";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useAuth } from "../../../context/AuthContextProvider";
 
 const ProductList = () => {
   const {
@@ -26,10 +28,14 @@ const ProductList = () => {
     getCategories,
     recentlyWatched,
   } = useProduct();
+  const { getUser ,users } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSeacrhParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("");
 
+
+ 
+  console.log(users);
   useEffect(() => {
     setSeacrhParams({
       page: currentPage,
@@ -212,6 +218,7 @@ const ProductList = () => {
           page={currentPage}
           onChange={handleChange}
         />
+      
       </Grid>
     </div>
   );

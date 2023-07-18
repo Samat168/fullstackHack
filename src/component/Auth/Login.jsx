@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../assets/SellSwap-removebg-preview.png";
+import back from '../../assets/reg.png'
 import {
   Box,
   Button,
@@ -11,6 +12,7 @@ import {
 } from "@mui/material";
 import { useAuth } from "../../context/AuthContextProvider";
 import { useNavigate } from "react-router";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -34,17 +36,20 @@ const Login = () => {
   }
 
   return (
-    <Box
-      sx={{
+  <div style={{width: '100%' ,height: '700px',paddingTop:'140px', background: `url(${back})`}}>
+<div
+      style={{
         display: "flex",
         flexDirection: "column",
-        height: '700px',
-        paddingTop: "7%",
-        width: "100%",
+        height: '450px',
+        width: "320px",
         padding: "auto",
-      
-        background:
-          "url(https://images.wallpaperscraft.ru/image/single/tekstura_fon_tekst_50473_1920x1080.jpg)",
+        margin: 'auto',
+        boxShadow: '10px 10px 35px  #434040' ,
+        paddingTop: "70px",
+        borderRadius: '10px'
+       
+        
       }}
     >
       {/* <img
@@ -52,7 +57,7 @@ const Login = () => {
             alt=""
             style={{ width: "200px", marginInline: "auto",  }}
           ></img> */}
-      <Typography component="h1" variant="h5" sx={{ color: "white", marginLeft:'38%', marginBottom:'2%', fontSize: '40px' }}>
+      <Typography component="h1" variant="h5" sx={{ color: "white",paddingLeft: '1rem', marginBottom:'10%', fontSize: '40px',}}>
           Login
           </Typography>
 
@@ -62,7 +67,7 @@ const Login = () => {
         sx={{
           backgroundColor: "white",
           borderRadius: "10px",
-          width: "320px",
+          width: "300px",
           padding: "auto",
           marginInline: 'auto',
           marginBottom: '10px'
@@ -76,7 +81,7 @@ const Login = () => {
           marginTop: "5px",
           backgroundColor: "white",
           borderRadius: "10px",
-          width: "320px",
+          width: "300px",
 
           marginInline: 'auto',
         }}
@@ -90,12 +95,14 @@ const Login = () => {
       ) : (
         <Button
           onClick={handleSave}
-          variant="contained"
+          variant="outlined"
           sx={{
             // backgroundColor: "white",
             width: "110px",
             margin: "auto",
             marginTop: "10px",
+            color:'white' ,
+            border: "1px solid white"
           }}
           >
           Login
@@ -104,15 +111,19 @@ const Login = () => {
           )}
           <Button
           onClick={() => navigate('/passresset')}
-          variant="Outline"
+          variant="outlined"
           sx={{
             // backgroundColor: "white",
-            width: "50%",
+            width: "40%",
             margin: "auto",
             marginTop: "10px",
+            color:'white' ,
+            border: "1px solid white"
           }}>forgot?</Button>
             </div>
-      </Box>
+      </div>
+  </div>
+    
   );
 };
 
