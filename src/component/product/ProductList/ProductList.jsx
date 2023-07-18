@@ -28,13 +28,11 @@ const ProductList = () => {
     getCategories,
     recentlyWatched,
   } = useProduct();
-  const { getUser ,users } = useAuth();
+  const { getUser, users } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSeacrhParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("");
 
-
- 
   console.log(users);
   useEffect(() => {
     setSeacrhParams({
@@ -58,14 +56,14 @@ const ProductList = () => {
   };
   const navigate = useNavigate();
   return (
-    <div>
+    <div style={{ marginTop: "68px" }}>
       <Swiper navigation={false} modules={[Navigation]}>
         <SwiperSlide style={{ width: "100%" }}>
           <div
             style={{
               width: "100%",
               margin: "auto",
-              height: "300px",
+              height: "500px",
               background: "#FF4800",
               backgroundImage: `url(https://intersport.kg/media/WEBP/5d/a3fb54/media/slider_images/7.webp)`,
               backgroundSize: "cover",
@@ -81,7 +79,7 @@ const ProductList = () => {
             style={{
               width: "100%",
               margin: "auto",
-              height: "300px",
+              height: "500px",
               background: "#FF4800",
               backgroundImage: `url(https://intersport.kg/media/WEBP/42/96bb70/media/slider_images/10.webp)`,
               backgroundSize: "cover",
@@ -175,7 +173,7 @@ const ProductList = () => {
               </Card>
             ))}
         </Box>
-        {/* <Chat /> */}
+
         <Box
           className="BoxList"
           sx={{
@@ -218,8 +216,11 @@ const ProductList = () => {
           page={currentPage}
           onChange={handleChange}
         />
-      
+        <Typography sx={{ width: "59%", textAlign: "center" }}>
+          Чат коммьюнити
+        </Typography>
       </Grid>
+      <Chat />
     </div>
   );
 };
