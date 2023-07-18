@@ -30,7 +30,13 @@ const AdminPage = () => {
   }, []);
   return (
     <div
-      style={{ display: "flex", margin: "auto", height: "500px", width: "95%" }}
+      style={{
+        display: "flex",
+        margin: "auto",
+        height: "500px",
+        width: "95%",
+        marginTop: "100px",
+      }}
     >
       <div className="button_container">
         <div className="add_button_div">
