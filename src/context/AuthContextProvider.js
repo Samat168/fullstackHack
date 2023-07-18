@@ -107,10 +107,7 @@ const AuthContextProvider = ({ children }) => {
       const res = await axios.post(`${API}/accounts/refresh/`, {
         refresh: tokens.refresh,
       });
-      localStorage.setItem(
-        "tokens",
-        JSON.stringify({ access: res.data.access, refresh: tokens.refresh })
-      );
+      localStorage.setItem("tokens", JSON.stringify(res.data));
       const email = localStorage.getItem("email");
       setCurrentUser(email);
     } catch (error) {
@@ -122,9 +119,10 @@ const AuthContextProvider = ({ children }) => {
   }
 
   async function checkuserid() {
+    console.log(125678903);
     try {
       const res = await axios(`${API}/accounts/`);
-      res.data.map((user) => {
+      res.data.forEach((user) => {
         if (user.email === currentUser) {
           setUserID(user.id);
           userFavorites(user.id);
