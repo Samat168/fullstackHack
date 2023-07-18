@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import {
+  Avatar,
   Box,
   Card,
   CardContent,
@@ -16,6 +17,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Chat from "./Chat";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useAuth } from "../../../context/AuthContextProvider";
 
 const ProductList = () => {
   const {
@@ -26,10 +28,12 @@ const ProductList = () => {
     getCategories,
     recentlyWatched,
   } = useProduct();
+  const { getUser, users } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSeacrhParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  console.log(users);
   useEffect(() => {
     setSeacrhParams({
       page: currentPage,
@@ -52,14 +56,14 @@ const ProductList = () => {
   };
   const navigate = useNavigate();
   return (
-    <div>
+    <div style={{ marginTop: "68px" }}>
       <Swiper navigation={false} modules={[Navigation]}>
         <SwiperSlide style={{ width: "100%" }}>
           <div
             style={{
               width: "100%",
               margin: "auto",
-              height: "300px",
+              height: "500px",
               background: "#FF4800",
               backgroundImage: `url(https://intersport.kg/media/WEBP/5d/a3fb54/media/slider_images/7.webp)`,
               backgroundSize: "cover",
@@ -75,7 +79,7 @@ const ProductList = () => {
             style={{
               width: "100%",
               margin: "auto",
-              height: "300px",
+              height: "500px",
               background: "#FF4800",
               backgroundImage: `url(https://intersport.kg/media/WEBP/42/96bb70/media/slider_images/10.webp)`,
               backgroundSize: "cover",
@@ -169,7 +173,7 @@ const ProductList = () => {
               </Card>
             ))}
         </Box>
-        {/* <Chat /> */}
+
         <Box
           className="BoxList"
           sx={{
@@ -212,7 +216,11 @@ const ProductList = () => {
           page={currentPage}
           onChange={handleChange}
         />
+        <Typography sx={{ width: "59%", textAlign: "center" }}>
+          Чат коммьюнити
+        </Typography>
       </Grid>
+      <Chat />
     </div>
   );
 };

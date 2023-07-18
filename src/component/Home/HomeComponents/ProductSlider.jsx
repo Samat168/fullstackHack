@@ -13,7 +13,7 @@ import { Navigation } from "swiper/modules";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function ProductSlider({ cat }) {
+export default function ProductSlider({ cat, slidesPerView }) {
   const navigate = useNavigate();
   const { products, getProducts } = useProduct();
 
@@ -36,7 +36,7 @@ export default function ProductSlider({ cat }) {
         {cat.name}
       </h2>
       <Swiper
-        slidesPerView={4}
+        slidesPerView={slidesPerView}
         spaceBetween={20}
         pagination={{
           clickable: true,
@@ -46,19 +46,22 @@ export default function ProductSlider({ cat }) {
         className="mySwiper"
       >
         {" "}
-        <Box sx={{ padding: "0 15px" }}>
+        <Box sx={{}}>
           {products.map((item) => {
             if (item.parent === cat.slug) {
               return (
                 <SwiperSlide key={item.id} className="product_slider_item">
                   <Box
-                    sx={{ width: "100%", height: "400px", overflow: "hidden" }}
+                    sx={{
+                      width: "auto",
+                      height: "auto",
+                    }}
                   >
                     <img
                       style={{
                         width: "100%",
                         height: "100%",
-                        objectFit: "cover",
+                        objectFit: "contain",
                         objectPosition: "center",
                       }}
                       src={item.preview}

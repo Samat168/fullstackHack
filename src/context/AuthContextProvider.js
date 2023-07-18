@@ -10,18 +10,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 import { async } from "q";
 import { Api, Try } from "@mui/icons-material";
-
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
 
 const INIT_STATE = {
   favorites: [],
+  users: [],
 };
 
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case "GET_USER_FAVORITES":
       return { ...state, favorites: action.payload };
+    case "GET_USER":
+      return { ...state, users: action.payload };
 
     default:
       return state;
@@ -103,10 +107,7 @@ const AuthContextProvider = ({ children }) => {
       const res = await axios.post(`${API}/accounts/refresh/`, {
         refresh: tokens.refresh,
       });
-      localStorage.setItem(
-        "tokens",
-        JSON.stringify({ access: res.data.access, refresh: tokens.refresh })
-      );
+      localStorage.setItem("tokens", JSON.stringify(res.data));
       const email = localStorage.getItem("email");
       setCurrentUser(email);
     } catch (error) {
@@ -118,12 +119,26 @@ const AuthContextProvider = ({ children }) => {
   }
 
   async function checkuserid() {
+    console.log(125678903);
+    try {
+      const res = await axios(`${API}/accounts/`);
+      res.data.forEach((user) => {
+        if (user.email === currentUser) {
+          setUserID(user.id);
+          userFavorites(user.id);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function getUser() {
     try {
       const res = await axios(`${API}/accounts/`);
       res.data.map((user) => {
         if (user.email === currentUser) {
-          setUserID(user.id);
-          userFavorites(user.id);
+          dispatch({ type: "GET_USER", payload: user });
+          console.log(state.users);
         }
       });
     } catch (error) {
@@ -140,9 +155,22 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  firebase.initializeApp({
+    apiKey: "AIzaSyCiidF07xZKf4NqjhrXf8ZRKvG3kxslPHs",
+    authDomain: "chat-online-5705a.firebaseapp.com",
+    projectId: "chat-online-5705a",
+    storageBucket: "chat-online-5705a.appspot.com",
+    messagingSenderId: "324868954488",
+    appId: "1:324868954488:web:0dd4f25ce650f977fd908d",
+  });
+
+  const firestore = firebase.firestore();
+
   const values = {
+    getUser,
     checkuserid,
     userId,
+    users: state.users,
     favorites: state.favorites,
     userFavorites,
     ressetPassConfirm,
@@ -154,6 +182,8 @@ const AuthContextProvider = ({ children }) => {
     checkAuth,
     loading,
     error,
+    firebase,
+    firestore,
   };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };

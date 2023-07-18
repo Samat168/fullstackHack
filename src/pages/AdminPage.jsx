@@ -35,7 +35,7 @@ const AdminPage = () => {
         margin: "auto",
         height: "500px",
         width: "95%",
-        marginTop: "100px",
+        marginTop: "10%",
       }}
     >
       <div className="button_container">

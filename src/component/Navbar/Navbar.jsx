@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Logo from "../../assets/SellSwap-removebg-preview.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { Input } from "@mui/material";
@@ -32,8 +32,8 @@ const pages = [
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { currentUser, logout, checkAuth } = useAuth();
-
+  const { currentUser, logout, checkAuth, users, getUser } = useAuth();
+  const navigate = useNavigate();
   const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
   const [navbarHidden, setNavbarHidden] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -69,6 +69,9 @@ function Navbar() {
     }
   }, []);
 
+  useEffect(() => {
+    getUser();
+  }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -83,6 +86,19 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <AppBar
@@ -97,7 +113,11 @@ function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img
-            style={{ width: "200px", height: "80px", margin: "5px 0" }}
+            style={{
+              width: windowWidth < 400 ? "126px" : "200px",
+              height: "80px",
+              margin: "5px 0",
+            }}
             src={Logo}
             alt=""
           />
@@ -201,10 +221,20 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             {currentUser ? (
-              <div>
-                <p>{currentUser}</p>
-                <FavoriteBorderIcon className="navbar_icons" />
-                <ShoppingCartIcon className="navbar_icons" />
+              <div style={{ display: "flex" }}>
+                <Avatar
+                  onClick={() => navigate("/profile")}
+                  sx={{ cursor: "pointer" }}
+                  src={users.avatar}
+                />
+                <FavoriteBorderIcon
+                  sx={{ marginTop: "10px" }}
+                  className="navbar_icons"
+                />
+                <ShoppingCartIcon
+                  sx={{ marginTop: "10px" }}
+                  className="navbar_icons"
+                />
               </div>
             ) : (
               <Box>

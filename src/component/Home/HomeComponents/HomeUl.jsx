@@ -1,13 +1,30 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const HomeUl = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className="home_ul_main">
       <ul
         style={{
           display: "flex",
           justifyContent: "space-between",
+
           marginTop: "100px",
+          flexWrap: "wrap",
         }}
       >
         <li className="home_ul_li">
@@ -16,7 +33,7 @@ const HomeUl = () => {
             alt=""
           />
           <div className="home_li_div">
-            <h4>Доставка и оплата</h4>
+            <h4 style={{ fontWeight: "500" }}>Доставка и оплата</h4>
             <p>
               Оплата наличными курьеру или
               <br />
@@ -30,7 +47,7 @@ const HomeUl = () => {
             alt=""
           />
           <div className="home_li_div">
-            <h4>Условия возврата</h4>
+            <h4 style={{ fontWeight: "500" }}>Условия возврата</h4>
             <p>
               Быстрый возврат, если товар
               <br />
@@ -44,7 +61,7 @@ const HomeUl = () => {
             alt=""
           />
           <div className="home_li_div">
-            <h4>Гарантийное обслуживание</h4>
+            <h4 style={{ fontWeight: "500" }}>Гарантийное обслуживание</h4>
             <p>
               Оплата наличными курьеру или
               <br />

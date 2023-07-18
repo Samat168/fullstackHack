@@ -1,11 +1,19 @@
-import React from 'react'
-import Favorites from '../component/favorites/Favorites'
+import React, { useEffect } from "react";
+import Favorites from "../component/favorites/Favorites";
+import { useAuth } from "../context/AuthContextProvider";
 
 const FavoritesPage = () => {
-  return (
-    <div><Favorites/>
-    </div>
-  )
-}
+  const { favorites, userFavorites, userId, checkuserid, users } = useAuth();
 
-export default FavoritesPage
+  useEffect(() => {
+    checkuserid();
+  }, []);
+
+  return (
+    <div>
+      <Favorites />
+    </div>
+  );
+};
+
+export default FavoritesPage;
