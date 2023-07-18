@@ -4,11 +4,14 @@ import {
   Button,
   Container,
   Grid,
+  IconButton,
+  InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../../../context/AuthContextProvider";
+import { AccountCircle, Send } from "@mui/icons-material";
 const Chat = () => {
   const { currentUser, firestore, firebase, checkuserid, users } = useAuth();
   const [value, setValue] = useState("");
@@ -42,7 +45,7 @@ const Chat = () => {
             height: "423px",
             border: "1px solid gray",
             overflowY: "auto",
-            borderRadius: "14%",
+            borderRadius: "6%",
           }}
         >
           {messages.map((message) => (
@@ -53,7 +56,7 @@ const Chat = () => {
                 border:
                   currentUser === message?.uid
                     ? "2px solid green"
-                    : "2px dashed red",
+                    : "2px solid red",
                 marginLeft: currentUser === message?.uid ? "auto" : "10px",
                 width: "fit-content",
                 padding: 5,
@@ -71,19 +74,22 @@ const Chat = () => {
           container
           direction={"column"}
           alignItems={"flex-end"}
-          style={{ width: "80%" }}
+          style={{ width: "36%", marginLeft: "20px" }}
         >
           <TextField
             fullWidth
             rowsMax={2}
-            variant={"outlined"}
+            variant="outlined"
             value={value}
             onChange={(e) => setValue(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <IconButton onClick={sendMessage}>
+                  <Send />
+                </IconButton>
+              ),
+            }}
           />
-
-          <Button onClick={sendMessage} variant={"outlined"}>
-            Отправить
-          </Button>
         </Grid>
       </Grid>
     </Container>
