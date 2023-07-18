@@ -12,10 +12,7 @@ const Favorites = () => {
   const { togglefav } = useProduct();
   const navigate = useNavigate();
 
-  checkuserid();
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   console.log(users);
 
@@ -30,7 +27,7 @@ const Favorites = () => {
       }}
       className=""
     >
-      <Avatar src={users.avatar}/>
+      <Avatar src={users.avatar} />
       {favorites.map((item) => (
         <div
           style={{ width: "20%", marginRight: "10%" }}
