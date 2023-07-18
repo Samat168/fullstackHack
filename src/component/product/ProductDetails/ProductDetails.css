@@ -1,6 +1,7 @@
 .container_details {
-  width: 65%;
+  width: 80%;
   margin-left: 9%;
+  margin-top: 10%;
 }
 
 .details_info {
@@ -36,8 +37,8 @@
   width: 100%;
 }
 .preview_left {
-  width: 74%;
-  margin-left: 12%;
+  width: 60%;
+  margin-left: 19%;
   height: 600px;
 }
 
@@ -240,4 +241,10 @@
   .remove-to-cart {
     font-size: 10px;
   }
+}
+
+.review_name {
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 4px;
 }

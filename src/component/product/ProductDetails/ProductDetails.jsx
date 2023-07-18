@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import moment from "moment/moment";
 import { useAuth } from "../../../context/AuthContextProvider";
 import { useProduct } from "../../../context/ProductContextProvider";
-import { Button, Rating } from "@mui/material";
+import { Box, Button, LinearProgress, Rating, Typography } from "@mui/material";
 import { useCart } from "../../../context/CartContextProvider";
 import "./ProductDetails.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 const ProductDetails = () => {
   const {
     oneProduct,
@@ -22,7 +24,9 @@ const ProductDetails = () => {
   const { addProductToCart } = useCart();
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
-  const [commentToEdit, setCommentToEdit] = useState(null);
+  const [ratingAvg, setRatingAvg] = useState(
+    oneProduct?.rating.rating__avg || 0
+  );
   const { id } = useParams();
   useEffect(() => {
     getOneProduct(id);
@@ -51,19 +55,17 @@ const ProductDetails = () => {
   const handleRatingChange = (event, value) => {
     setRating(value);
   };
+  const navigate = useNavigate();
+  const stars = oneProduct?.stars;
 
-  // const handleChange = (e) => {
-  //   setCommentToEdit({ ...commentToEdit, text: e.target.value });
-  // };
-
-  // const handleSave = () => {
-  //   const editedReview = {
-  //     text: commentToEdit.text,
-  //     product: commentToEdit.product,
-  //   };
-  //   saveEditedReview(editedReview, commentToEdit.id);
-  //   setCommentToEdit(null);
-  // };
+  const totalStars1 = stars?.["1"] || 0;
+  const totalStars2 = stars?.["2"] || 0;
+  const totalStars3 = stars?.["3"] || 0;
+  const totalStars4 = stars?.["4"] || 0;
+  const totalStars5 = stars?.["5"] || 0;
+  useEffect(() => {
+    setRatingAvg(oneProduct?.rating.rating__avg || 0);
+  }, [oneProduct?.rating.rating__avg]);
 
   return (
     // <div style={{ margin: "auto" }}>
@@ -202,40 +204,163 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div style={{ margin: "auto", width: "50%", marginTop: "30px" }}>
-        {review.some((item) => item.user === currentUser) ? (
-          <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
-        ) : (
-          <form onSubmit={handleAddReview} action="">
-            <label style={{ backgroundColor: "white" }}>
-              Rating:
-              <Rating
-                name="rating"
-                value={rating}
-                onChange={handleRatingChange}
-                precision={1}
-                required
-              />
-            </label>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="w-75"
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
-            <button>add REVIEWS</button>
-          </form>
-        )}
+      <h2
+        style={{
+          marginTop: "100px",
+          fontWeight: "500",
+          letterSpacing: "5px",
+          fontSize: "30px",
+          textAlign: "center",
+        }}
+      >
+        Рекомендуемые товары
+      </h2>
+      <Swiper
+        slidesPerView={4}
+        spaceBetween={20}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Navigation]}
+        className="mySwiper"
+      >
+        <Box sx={{ padding: "0 15px" }}>
+          {oneProduct?.recommended_products.map((item) => (
+            <SwiperSlide
+              key={item.id}
+              className="product_slider_item"
+              style={{ width: "399px", marginLeft: "23px" }}
+            >
+              <Box sx={{ width: "66%", height: "300px", overflow: "hidden" }}>
+                <img
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    marginTop: "10px",
+                  }}
+                  src={`http://34.134.83.129${item.preview}`}
+                  alt=""
+                />
+              </Box>
 
-        <div>
+              <Box sx={{ height: "100px" }}>
+                <h4 style={{ textAlign: "start", margin: "5px" }}>
+                  {item.title}
+                </h4>
+                <Rating
+                  name="rating"
+                  value={item.rating}
+                  precision={item.rating}
+                  required
+                />
+              </Box>
+            </SwiperSlide>
+          ))}
+        </Box>
+      </Swiper>
+      <div style={{ marginLeft: "16%", width: "80%", marginTop: "30px" }}>
+        <div style={{ display: "flex", width: "70%" }}>
+          <div style={{ marginTop: "10%", marginRight: "5%", width: "14%" }}>
+            <h3 style={{ fontSize: "25px" }}>
+              {oneProduct?.rating.rating__avg
+                ? oneProduct.rating.rating__avg.toFixed(2)
+                : 0}
+            </h3>
+            <Rating
+              name="rating"
+              value={ratingAvg ? ratingAvg : 0}
+              precision={0.5}
+              required
+              sx={{ marginRight: "5%" }}
+            />
+          </div>
+
+          <div>
+            <h2 className="review_name">ОТЗЫВЫ ({review.length})</h2>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <LinearProgress
+                sx={{ height: "10px" }}
+                variant="determinate"
+                value={totalStars1}
+                max={30}
+                aria-valuemax={30}
+              />
+              <span>1</span>
+              <LinearProgress
+                sx={{ height: "10px" }}
+                variant="determinate"
+                value={totalStars2}
+                max={30}
+                aria-valuemax={30}
+              />
+              <span>2</span>
+              <LinearProgress
+                sx={{ height: "10px" }}
+                variant="determinate"
+                value={totalStars3}
+                max={30}
+                aria-valuemax={30}
+              />
+              <span>3</span>
+              <LinearProgress
+                sx={{ height: "10px" }}
+                variant="determinate"
+                value={totalStars4}
+                aria-valuemax={30}
+              />
+              <span>4</span>
+              <LinearProgress
+                sx={{ height: "10px" }}
+                variant="determinate"
+                value={totalStars5}
+                max={30}
+                aria-valuemax={30}
+              />
+              <span>5</span>
+            </div>
+          </div>
+          <div style={{ marginLeft: "14%" }}>
+            {review.some((item) => item.user === currentUser) ? (
+              <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
+            ) : (
+              <form
+                onSubmit={handleAddReview}
+                action=""
+                style={{ display: "flex", flexDirection: "column" }}
+              >
+                <label style={{ backgroundColor: "white" }}>
+                  <Rating
+                    name="rating"
+                    value={rating}
+                    onChange={handleRatingChange}
+                    precision={1}
+                    required
+                  />
+                </label>
+                <textarea
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  style={{ height: "100px" }}
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                ></textarea>
+                <button>Добавить отзыв</button>
+              </form>
+            )}
+          </div>
+        </div>
+        <div
+          style={{ display: "flex", justifyContent: "flex-end", width: "53%" }}
+        >
           {review?.map((item) => (
             <div key={item.id}>
               <h5 style={{ color: "black" }}>{item.user}</h5>
               <label style={{ backgroundColor: "white" }}>
-                Rating:
                 <Rating
                   name="rating"
                   value={item.rating}
