@@ -173,7 +173,7 @@ const ProductList = () => {
               </Card>
             ))}
         </Box>
-        {/* <Chat /> */}
+
         <Box
           className="BoxList"
           sx={{
@@ -216,7 +216,11 @@ const ProductList = () => {
           page={currentPage}
           onChange={handleChange}
         />
+        <Typography sx={{ width: "59%", textAlign: "center" }}>
+          Чат коммьюнити
+        </Typography>
       </Grid>
+      <Chat />
     </div>
   );
 };

@@ -10,13 +10,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 import { async } from "q";
 import { Api, Try } from "@mui/icons-material";
-
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
 
 const INIT_STATE = {
   favorites: [],
-  users:[]
+  users: [],
 };
 
 const reducer = (state = INIT_STATE, action) => {
@@ -156,6 +157,17 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  firebase.initializeApp({
+    apiKey: "AIzaSyCiidF07xZKf4NqjhrXf8ZRKvG3kxslPHs",
+    authDomain: "chat-online-5705a.firebaseapp.com",
+    projectId: "chat-online-5705a",
+    storageBucket: "chat-online-5705a.appspot.com",
+    messagingSenderId: "324868954488",
+    appId: "1:324868954488:web:0dd4f25ce650f977fd908d",
+  });
+
+  const firestore = firebase.firestore();
+
   const values = {
     getUser,
     checkuserid,
@@ -172,6 +184,8 @@ const AuthContextProvider = ({ children }) => {
     checkAuth,
     loading,
     error,
+    firebase,
+    firestore,
   };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
