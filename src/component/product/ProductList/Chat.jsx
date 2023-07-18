@@ -80,7 +80,7 @@ const Chat = () => {
           <TextField
             fullWidth
             rowsmax={2}
-            variant={"outlined"}
+            variant="outlined"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             InputProps={{
