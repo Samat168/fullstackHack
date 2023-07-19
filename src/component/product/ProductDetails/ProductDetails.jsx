@@ -225,8 +225,8 @@ const ProductDetails = () => {
         </Box>
       </Swiper>
       <div style={{ width: "100%", marginTop: "30px" }}>
-        <div style={{ display: "flex", width: "70%", marginLeft: "244px" }}>
-          <div style={{ marginTop: "10%", marginRight: "5%", width: "16%" }}>
+        <div className="review-start">
+          <div className="raiting-result">
             <h3 style={{ fontSize: "25px" }}>
               {oneProduct?.rating.rating__avg
                 ? oneProduct.rating.rating__avg.toFixed(2)
@@ -241,7 +241,7 @@ const ProductDetails = () => {
             />
           </div>
 
-          <div>
+          <div className="review-progress">
             <h2 className="review_name">ОТЗЫВЫ ({review.length})</h2>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <LinearProgress
@@ -305,7 +305,7 @@ const ProductDetails = () => {
                   style={{
                     backgroundColor: "white",
                     width: "56%",
-                    marginLeft: "91px",
+                    marginLeft: "15px",
                   }}
                 >
                   Рейтинг
@@ -343,7 +343,7 @@ const ProductDetails = () => {
         </div>
         <div style={{ width: "53%", marginLeft: "16%" }}>
           {review?.map((item) => (
-            <div key={item.id} style={{ marginTop: "20px" }}>
+            <div key={item.id} style={{ marginBottom: "20px" }}>
               <h5 style={{ color: "black" }}>{item.user}</h5>
               <label style={{ backgroundColor: "white" }}>
                 <Rating

@@ -61,6 +61,13 @@ const Profile = () => {
           >
             Изменить Фото
           </Button>
+          <Button
+            variant="outlined"
+            sx={{ marginLeft: "50px", marginTop: "20px" }}
+            onClick={logout}
+          >
+            Выйти
+          </Button>
         </div>
         <div style={{ width: "40%", marginTop: "25px" }} className="right">
           <div
