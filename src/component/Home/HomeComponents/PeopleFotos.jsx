@@ -13,6 +13,7 @@ const PeopleFotos = () => {
       "https://www.frisbuy.ru/sld01/post-media/3542/271075424.jpeg"
     );
   };
+
   return (
     <div style={{ width: "90%", margin: "auto" }} onMouseOut={returnPhoto}>
       <h2
