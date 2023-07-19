@@ -10,9 +10,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 import { async } from "q";
 import { Api, Try } from "@mui/icons-material";
-import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import firebase from "firebase/compat/app";
 import { getTokens } from "../helpers/functions";
+import jwtDecode from "jwt-decode";
+// import jwt from 'jsonwebtoken';
 export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
 
@@ -39,6 +41,7 @@ const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [userId, setUserID] = useState(0);
+  const [errorResset,setErrorResset] = useState(false)
   const { uid } = useParams();
 
   const navigate = useNavigate();
@@ -58,14 +61,29 @@ const AuthContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const res = await axios.post(`${API}/accounts/login/`, formData);
+      console.log(res.data.access)
       localStorage.setItem("tokens", JSON.stringify(res.data));
       localStorage.setItem("email", email);
       setCurrentUser(email);
+      decodeToken(res.data.access)
       navigate("/");
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
+    }
+  }
+
+  const decodeToken = (token) => {
+    try {
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken.user_id); 
+      setUserID(decodedToken.user_id);
+      // userFavorites(decodedToken.user_id);
+      return decodedToken;
+    } catch (error) {
+      console.error('Ошибка расшифровки токена:', error);
+      return null;
     }
   }
 
@@ -85,6 +103,7 @@ const AuthContextProvider = ({ children }) => {
       await axios.post(`${API}/accounts/password_reset/confirm/`, formData);
     } catch (error) {
       console.log(error);
+      setErrorResset(true)
     } finally {
       setLoading(false);
     }
@@ -117,20 +136,7 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
-  async function checkuserid() {
-    console.log(125678903);
-    try {
-      const res = await axios(`${API}/accounts/`);
-      res.data.forEach((user) => {
-        if (user.email === currentUser) {
-          setUserID(user.id);
-          userFavorites(user.id);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
   async function getUser() {
     try {
       const res = await axios(`${API}/accounts/`);
@@ -145,9 +151,9 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
-  async function userFavorites(id) {
+  async function userFavorites() {
     try {
-      const res = await axios(`${API}/accounts/${id}/favorites/`);
+      const res = await axios(`${API}/accounts/${userId}/favorites/`);
       dispatch({ type: "GET_USER_FAVORITES", payload: res.data });
     } catch (error) {
       console.log(error);
@@ -155,14 +161,14 @@ const AuthContextProvider = ({ children }) => {
   }
 
   async function changeUser(id, formData) {
-    // setLoading(true);
+  
     try {
       await axios.patch(`${API}/accounts/${id}/`, formData, getTokens());
       getUser();
     } catch (error) {
       console.log(error);
     } finally {
-      // setLoading(false);
+     
     }
   }
 
@@ -180,7 +186,7 @@ const AuthContextProvider = ({ children }) => {
   const values = {
     changeUser,
     getUser,
-    checkuserid,
+  
     userId,
     users: state.users,
     favorites: state.favorites,
@@ -196,6 +202,7 @@ const AuthContextProvider = ({ children }) => {
     error,
     firebase,
     firestore,
+    errorResset,
   };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };

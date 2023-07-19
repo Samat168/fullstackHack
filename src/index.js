@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./context/AuthContextProvider";
 import ProductContextProvider from "./context/ProductContextProvider";
 import CartContexProvider from "./context/CartContextProvider";
+// import './polyfills';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -16,6 +17,7 @@ root.render(
         <ProductContextProvider>
           <CartContexProvider>
             <App />
+            
           </CartContexProvider>
         </ProductContextProvider>
     

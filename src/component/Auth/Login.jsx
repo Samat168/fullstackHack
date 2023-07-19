@@ -9,16 +9,21 @@ import {
   Input,
   TextField,
   Typography,
+ 
 } from "@mui/material";
+
 import { useAuth } from "../../context/AuthContextProvider";
 import { useNavigate } from "react-router";
 import { hover } from "@testing-library/user-event/dist/hover";
+
+
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { handleLogin, loading,checkuserid } = useAuth();
+  const { handleLogin, loading, } = useAuth();
   const navigate = useNavigate()
   function handleSave() {
     if (!email.trim() || !password.trim()) {
@@ -32,11 +37,11 @@ const Login = () => {
     formData.append("password", password);
 
     handleLogin(formData, email);
-    checkuserid()
+
   }
 
   return (
-  <div style={{width: '100%' ,height: '700px',paddingTop:'140px', background: `url(${back})`}}>
+  <div style={{width: '100%' ,height: '700px',paddingTop:'140px', background: `url(${back})`, }}>
 <div
       style={{
         display: "flex",

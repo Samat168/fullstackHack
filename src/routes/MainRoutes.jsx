@@ -13,7 +13,6 @@ import FormforPayPage from "../pages/FormforPayPage";
 import PasswordResetPage from "../pages/PasswordResetPage";
 import PassRessetConfirmPage from "../pages/PassRessetConfirmPage";
 import RegisterSuccessPage from "../pages/RegisterSuccessPage";
-import FavoritesPage from "../pages/FavoritesPage";
 import ProfilePage from "../pages/ProfilePage";
 
 const MainRoutes = () => {
@@ -85,12 +84,7 @@ const MainRoutes = () => {
       element: <RegisterSuccessPage />,
       id: 14,
     },
-    {
-      link: "/favorites",
-
-      element: <FavoritesPage />,
-      id: 15,
-    },
+   
     {
       link: "/profile",
 
