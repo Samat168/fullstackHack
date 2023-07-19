@@ -66,7 +66,7 @@ export default function Cart() {
                 {row.product?.category}
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
-                {row.product?.price} $
+                {row.product?.price} rub
               </TableCell>
               {/* <TableCell align="right">
                 <input
@@ -83,30 +83,26 @@ export default function Cart() {
                 {row.subPrice}
               </TableCell>
               <TableCell align="right">
-                <button
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(62, 103, 150, 0.919) 11.38%, rgba(58, 120, 177, 0.8) 25.23%, rgb(15, 33, 110) 100%)",
+                <Button
+                  variant="outlined"
+                  sx={{
                     color: "white",
-                    border: "none",
+
                     borderRadius: "10%",
                     padding: "5px",
+                    border: "1px solid white",
                   }}
                   onClick={() => deleteCartProduct(row.product.id)}
-                  // sx={{
-                  //   background:
-                  //     "linear-gradient(90deg, rgba(62, 103, 150, 0.919) 11.38%, rgba(58, 120, 177, 0.8) 25.23%, rgb(15, 33, 110) 100%)",
-                  // }}
                 >
                   Удалить
-                </button>
+                </Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Link to={"/formforpay"}>
-        <Button>BUY NOW FOR {cart?.totalPrice} $</Button>
+        <Button>BUY NOW FOR {cart?.totalPrice} rub</Button>
       </Link>
     </TableContainer>
   );

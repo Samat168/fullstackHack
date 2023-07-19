@@ -4,10 +4,11 @@ import { Avatar, Button, IconButton, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Favorite } from "@mui/icons-material";
 import { useProduct } from "../../context/ProductContextProvider";
+import { useId } from "react";
 
 const Profile = () => {
   const [avatar, setAvatar] = useState(null);
-  
+  const [changeAvatar, setChangeAvatar] = useState(false);
   const {
     currentUser,
     logout,
@@ -17,25 +18,28 @@ const Profile = () => {
     userFavorites,
     favorites,
     changeUser,
+    decodeToken,
+    userId,
   } = useAuth();
 
   const navigate = useNavigate();
   useEffect(() => {
     getUser();
-    userFavorites()
-    
+    decodeToken();
   }, []);
 
- 
+  useEffect(() => {
+    userFavorites();
+  }, [userId]);
 
   console.log(users);
 
-  const handleSave = () => {
-    const changeProduct = new FormData();
-    changeProduct.append("avatar", avatar);
+  // const handleSave = () => {
+  //   const changeProduct = new FormData();
+  //   changeProduct.append("avatar", avatar);
 
-    changeUser(users.id, changeProduct);
-  };
+  //   changeUser(users.id, changeProduct);
+  // };
 
   return (
     <div style={{ marginTop: "150px" }}>
@@ -49,26 +53,32 @@ const Profile = () => {
         }}
         className=""
       >
-        <div style={{ width: "40%" }} className="left">
+        <div
+          style={{ width: "40%", display: "flex", flexDirection: "column" }}
+          className="left"
+        >
           <Avatar sx={{ width: "250px", height: "250px" }} src={users.avatar} />
+          {/* {changeAvatar ? (
+            <div>
           <TextField
+          sx={{width: '300px',display: 'block'}}
             onChange={(e) => setAvatar(e.target.files[0])}
             type="file"
-          />
+            />
+            <Button onClick={handleSave}>поменять</Button>
+            <Button onClick={() => setChangeAvatar(false)}>Принять</Button>
+            </div>
+          
+          
+          ) : (null)}
+          
           <Button
             variant="outlined"
-            sx={{ marginLeft: "50px", marginTop: "20px" }}
-            onClick={handleSave}
+            sx={{ marginLeft: "30px", marginTop: "20px",width:'170px' }}
+            onClick={() => setChangeAvatar(true)}
           >
             Изменить Фото
-          </Button>
-          <Button
-            variant="outlined"
-            sx={{ marginLeft: "50px", marginTop: "20px" }}
-            onClick={logout}
-          >
-            Выйти
-          </Button>
+          </Button> */}
         </div>
         <div style={{ width: "40%", marginTop: "25px" }} className="right">
           <div
