@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContextProvider";
 
 const HomePage = () => {
   const { getPromo, getCategories, getProducts } = useProduct();
-  const { checkuserid, userFavorites, getUser} = useAuth();
+  const { getUser} = useAuth();
 
   useEffect(() => {
     getCategories();

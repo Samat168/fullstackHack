@@ -29,6 +29,8 @@ const pages = [
   { name: "Admin", link: "/admin", id: 3 },
 ];
 
+const settings = ["Profile", "Account", "Dashboard"];
+
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -221,35 +223,10 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             {currentUser ? (
-              <div style={{ display: "flex" }}>
-                <Avatar
-                  onClick={() => navigate("/profile")}
-                  sx={{ cursor: "pointer" }}
-                  src={users.avatar}
-                />
-                <FavoriteBorderIcon
-                  sx={{ marginTop: "10px" }}
-                  className="navbar_icons"
-                />
-                <ShoppingCartIcon
-                  sx={{ marginTop: "10px" }}
-                  className="navbar_icons"
-                />
-              </div>
-            ) : (
-              <Box>
-                <Link to="/login">
-                  <Button sx={{ color: "#ebedff" }}>Sign in</Button>
-                </Link>
-                <Link to="/register">
-                  <Button sx={{ color: "#ebedff" }}>Sign up</Button>
-                </Link>
-              </Box>
-            )}
-            {/*  
-            <Tooltip title="Open settings"> 
+              <div style={{display: 'flex'}}>
+                <Tooltip title="Open settings"> 
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> 
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> 
+                <Avatar alt="Remy Sharp" src={users.avatar} /> 
               </IconButton> 
             </Tooltip> 
             <Menu 
@@ -268,12 +245,38 @@ function Navbar() {
               open={Boolean(anchorElUser)} 
               onClose={handleCloseUserMenu} 
             > 
-                {settings.map((setting) => ( 
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}> 
-                    <Typography textAlign="center">{setting}</Typography> 
+                
+                  <MenuItem  onClick={handleCloseUserMenu}> 
+                    <Link to={'profile'}> <Typography  textAlign="center">Profile</Typography> </Link>
+                   
                   </MenuItem> 
-                ))} 
-            </Menu> */}
+
+                
+                {users &&  (
+              <MenuItem
+                onClick={() => {
+                  handleCloseUserMenu();
+                  logout();
+                }}
+              >
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+            )}
+            </Menu>
+                <ShoppingCartIcon onClick = {() => navigate('/cart')} sx={{marginTop: '10px'}}  className="navbar_icons" />
+              </div>
+            ) : (
+              <Box>
+                <Link to="/login">
+                  <Button sx={{ color: "#ebedff" }}>Sign in</Button>
+                </Link>
+                <Link to="/register">
+                  <Button sx={{ color: "#ebedff" }}>Sign up</Button>
+                </Link>
+              </Box>
+            )}
+             
+          
           </Box>
         </Toolbar>
       </Container>
