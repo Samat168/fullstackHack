@@ -34,8 +34,8 @@ const settings = ["Profile", "Account", "Dashboard"];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { currentUser, logout, checkAuth, users ,getUser} = useAuth();
-  const navigate = useNavigate()
+  const { currentUser, logout, checkAuth, users, getUser } = useAuth();
+  const navigate = useNavigate();
   const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
   const [navbarHidden, setNavbarHidden] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -70,10 +70,10 @@ function Navbar() {
       checkAuth();
     }
   }, []);
-  
+
   useEffect(() => {
-    getUser()
-  },[])
+    getUser();
+  }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -88,6 +88,19 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <AppBar
@@ -102,7 +115,11 @@ function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img
-            style={{ width: "200px", height: "80px", margin: "5px 0" }}
+            style={{
+              width: windowWidth < 400 ? "126px" : "200px",
+              height: "80px",
+              margin: "5px 0",
+            }}
             src={Logo}
             alt=""
           />
