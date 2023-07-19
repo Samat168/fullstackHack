@@ -32,19 +32,19 @@ const FormforPay = () => {
   const navigate = useNavigate();
   const {  cart,getCart, handleSubmit } = useCart();
 console.log(cart.products.map((product) => console.log(product)));
-  const handleSave = () => {
+  // const handleSave = () => {
     
     
-    const order = {
-      products :[{
-        product : cart.products.map((product) => product.id && product.title)
-      }],
-      address: city,
-      number : phone,
+  //   const order = {
+  //     products :[{
+  //       product : cart.products.map((product) => product.id && product.title)
+  //     }],
+  //     address: city,
+  //     number : phone,
       
-    };
-    handleSubmit(order);
-  };
+  //   };
+  //   handleSubmit(order);
+  // };
 
   const cartCleaner = () => {
     if (
@@ -66,10 +66,10 @@ console.log(cart.products.map((product) => console.log(product)));
      
       return;
     }
-    handleSave()
-    // localStorage.removeItem("cart");
-    // getCart();
-    // navigate('/')
+  
+    localStorage.removeItem("cart");
+    getCart();
+    navigate('/')
   };
  
 
@@ -77,7 +77,7 @@ console.log(cart.products.map((product) => console.log(product)));
   
   return (
     <div className="block">
-      <h2 style={{ color: "white", marginBottom: "20px" }}> Способ Оплаты </h2>
+      <h2 style={{ color: "black", marginBottom: "20px" }}> Способ Оплаты </h2>
       <Box sx={{ Width: "30%" }}>
         <FormControl
           sx={{ backgroundColor: "white", borderRadius: "10px", width: "250px" }}
@@ -109,7 +109,7 @@ console.log(cart.products.map((product) => console.log(product)));
         }}
       >
         <Box>
-          <h4 style={{ color: "white" }}>Номер карты</h4>
+          <h4 style={{ color: "black" }}>Номер карты</h4>
           <FormControl
             sx={{
               backgroundColor: "white",
@@ -117,6 +117,7 @@ console.log(cart.products.map((product) => console.log(product)));
               marginTop: "3%",
               width: "250px",
               border: "none",
+              border: '1px solid black'
             }}
           >
             <Input
@@ -128,6 +129,7 @@ console.log(cart.products.map((product) => console.log(product)));
                 height: "50px",
                 padding: "10px",
                 borderBottom: "none",
+                border: '0.5px solid grey'
               }}
               onChange={(event) => setNumCard(event.target.value)}
 
@@ -135,7 +137,7 @@ console.log(cart.products.map((product) => console.log(product)));
           </FormControl>
         </Box>
         <Box sx={{ marginLeft: "5%" }}>
-          <h4 style={{ color: "white", marginBottom: "3%" }}>
+          <h4 style={{ color: "black", marginBottom: "3%" }}>
             Срок действия карты
           </h4>
           <FormControl
@@ -197,16 +199,16 @@ console.log(cart.products.map((product) => console.log(product)));
           </FormControl>
         </Box>
           <Box  sx={{marginLeft: '20px'}}>
-            <h3 style={{color: 'white'}}>Зашитный код CVV</h3>
+            <h3 style={{color: 'black' , }}>Зашитный код CVV</h3>
             <FormControl
             sx={{
               backgroundColor: "white",
               borderRadius: "10px",
               marginTop: "3%",
               width: "50px",
-              border: "none",
+              border: '1px solid grey',
               marginLeft: '10px'
-             
+              
             }}
           >
             <Input
@@ -226,7 +228,7 @@ console.log(cart.products.map((product) => console.log(product)));
       </Box>
       <Box sx={{display: 'flex' , width: '100%' , alignItems:'center', flexWrap: 'wrap'}} className = 'salam'>
             <Box sx={{width: '50%'}}>
-            <h2 style={{color: 'white', marginTop: '50px'}}> Информация о счете</h2>
+            <h2 style={{color: 'black', marginTop: '50px'}}> Информация о счете</h2>
               <div style={{display:'flex',marginTop: '20px',width:'310px',marginBottom: "3%"}} className="inp_name">
               <Input
               placeholder="Имя"
@@ -237,7 +239,8 @@ console.log(cart.products.map((product) => console.log(product)));
                 height: "45px",
                 borderBottom: "none",
                 paddingLeft: '15px',
-                width: '155px'
+                width: '155px',
+                border: '0.5px solid grey'
               }}
               onChange={(event) => setName(event.target.value)}
 
@@ -252,7 +255,8 @@ console.log(cart.products.map((product) => console.log(product)));
                 borderBottom: "none",
                 paddingLeft: '15px',
                 marginLeft: '15px',
-                width: '155px'
+                width: '155px',
+                border: '0.5px solid grey'
 
               }}
               onChange={(event) => setFullName(event.target.value)}
@@ -270,7 +274,8 @@ console.log(cart.products.map((product) => console.log(product)));
                 paddingLeft: '15px',
                 width:'310px',
                 marginBottom: "3%",
-                marginTop: '2%'
+                marginTop: '2%',
+                border: '0.5px solid grey',
               }}
               onChange={(event) => setEmail(event.target.value)}
 
@@ -289,6 +294,7 @@ console.log(cart.products.map((product) => console.log(product)));
                 marginBottom: "3%",
                 display: 'block',
                 paddingTop: '7px',
+                border: '0.5px solid grey',
               
               }}
               onChange={(event) => setCountry(event.target.value)}
@@ -311,6 +317,7 @@ console.log(cart.products.map((product) => console.log(product)));
                 marginTop: '90px',
                 paddingTop: '7px',
                 display:'block',
+                border: '0.5px solid grey'
                 
               }}
               onChange={(event) => setCity(event.target.value)}
@@ -330,6 +337,7 @@ console.log(cart.products.map((product) => console.log(product)));
                 marginTop: '2%',
                 display:'block',
                 paddingTop: '7px',
+                border: '0.5px solid grey'
               }}
               onChange={(event) => setIndex(event.target.value)}
 
@@ -348,6 +356,7 @@ console.log(cart.products.map((product) => console.log(product)));
                 marginTop: '2%',
                 display:'block',
                 paddingTop: '7px',
+                border: '0.5px solid grey'
               
               }}
               onChange={(event) => setPhone(event.target.value)}

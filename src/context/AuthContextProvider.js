@@ -79,7 +79,7 @@ const AuthContextProvider = ({ children }) => {
       const decodedToken = jwtDecode(token);
       console.log(decodedToken.user_id); 
       setUserID(decodedToken.user_id);
-      // userFavorites(decodedToken.user_id);
+      userFavorites(decodedToken.user_id);
       return decodedToken;
     } catch (error) {
       console.error('Ошибка расшифровки токена:', error);
@@ -151,9 +151,9 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
-  async function userFavorites() {
+  async function userFavorites(id) {
     try {
-      const res = await axios(`${API}/accounts/${userId}/favorites/`);
+      const res = await axios(`${API}/accounts/${id}/favorites/`);
       dispatch({ type: "GET_USER_FAVORITES", payload: res.data });
     } catch (error) {
       console.log(error);
@@ -186,7 +186,7 @@ const AuthContextProvider = ({ children }) => {
   const values = {
     changeUser,
     getUser,
-  
+    decodeToken,
     userId,
     users: state.users,
     favorites: state.favorites,
