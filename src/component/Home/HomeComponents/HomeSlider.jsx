@@ -45,7 +45,14 @@ export default function HomeSlider() {
                 >
                   {item.text}
                 </h2>
-                <button className="home_slider_button">Перейти</button>
+                <button className="home_slider_button">
+                  <a
+                    href="https://t.me/sell_haka_bot"
+                    style={{ color: "#fff" }}
+                  >
+                    Перейти
+                  </a>
+                </button>
               </div>
             </div>
           </SwiperSlide>
@@ -73,7 +80,11 @@ export default function HomeSlider() {
               >
                 Здесь могла бы быть ваша реклама
               </h2>
-              <button className="home_slider_button">Заказать рекламу</button>
+              <button className="home_slider_button">
+                <a href="https://t.me/sell_haka_bot" style={{ color: "#fff" }}>
+                  Заказать рекламу
+                </a>
+              </button>
             </div>
           </div>
         </SwiperSlide>
