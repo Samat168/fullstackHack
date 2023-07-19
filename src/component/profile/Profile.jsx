@@ -8,7 +8,7 @@ import { useId } from "react";
 
 const Profile = () => {
   const [avatar, setAvatar] = useState(null);
-  const [changeAvatar, setChangeAvatar] = useState(false)
+  const [changeAvatar, setChangeAvatar] = useState(false);
   const {
     currentUser,
     logout,
@@ -25,13 +25,12 @@ const Profile = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getUser();
-    decodeToken()
+    decodeToken();
   }, []);
 
   useEffect(() => {
-    userFavorites()
-  },[userId])
- 
+    userFavorites();
+  }, [userId]);
 
   console.log(users);
 
@@ -54,8 +53,10 @@ const Profile = () => {
         }}
         className=""
       >
-        <div style={{ width: "40%", display:"flex", flexDirection: 'column',
-       }} className="left">
+        <div
+          style={{ width: "40%", display: "flex", flexDirection: "column" }}
+          className="left"
+        >
           <Avatar sx={{ width: "250px", height: "250px" }} src={users.avatar} />
           {/* {changeAvatar ? (
             <div>

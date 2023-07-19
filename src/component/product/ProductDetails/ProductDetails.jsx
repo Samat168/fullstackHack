@@ -9,6 +9,7 @@ import "./ProductDetails.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import moment from "moment/moment";
 const ProductDetails = () => {
   const {
     oneProduct,
@@ -69,12 +70,15 @@ const ProductDetails = () => {
     setRatingAvg(oneProduct?.rating.rating__avg || 0);
   }, [oneProduct?.rating.rating__avg]);
 
-  const [photoForMain, setFotoForMain] = useState(oneProduct?.preview);
-  const changePhoto = (img) => {
-    setFotoForMain(img);
+  const [forPic, setForPic] = useState(false);
+  const [mainPic, setMainPic] = useState();
+  const changePic = (pic) => {
+    setMainPic(pic);
+    setForPic(true);
   };
-  const returnPhoto = () => {
-    setFotoForMain(oneProduct?.preview);
+
+  const returnPic = () => {
+    setForPic(false);
   };
 
   return (
@@ -88,8 +92,8 @@ const ProductDetails = () => {
                 className="img_product"
                 src={item.image}
                 alt=""
-                onMouseOver={(e) => changePhoto(e.target.src)}
-                onMouseOut={returnPhoto}
+                onMouseOver={(e) => changePic(e.target.src)}
+                onMouseOut={() => returnPic()}
               />
             ))}
           </div>
@@ -97,8 +101,7 @@ const ProductDetails = () => {
             <img
               alt=""
               className="preview_left"
-              onMouseOut={returnPhoto}
-              src={photoForMain}
+              src={forPic ? mainPic : oneProduct?.preview}
             />
           </div>
 
@@ -135,12 +138,30 @@ const ProductDetails = () => {
                 />{" "}
                 {oneProduct?.likes_count}
               </p>
+              <h4 style={{ fontSize: "20px", textAlign: "center" }}>
+                Описание
+              </h4>
+              <p
+                style={{
+                  fontSize: "14px",
+                  textAlign: "center",
+                  marginTop: "20px",
+                }}
+              >
+                {oneProduct?.description}
+              </p>
 
               <Button
-                sx={{ color: "blue", marginTop: "50px" }}
+                sx={{
+                  backgroundColor: "blue",
+                  color: "white",
+                  marginTop: "70px",
+                  border: "1px solid",
+                  width: "100%",
+                }}
                 onClick={() => addProductToCart(oneProduct)}
               >
-                Добавить в коризину
+                В корзину
               </Button>
             </div>
           </div>
@@ -173,6 +194,7 @@ const ProductDetails = () => {
               key={item.id}
               className="product_slider_item"
               style={{ width: "399px", marginLeft: "23px" }}
+              onClick={() => navigate(`/details/${item.id}`)}
             >
               <Box sx={{ width: "66%", height: "300px", overflow: "hidden" }}>
                 <img
@@ -203,9 +225,9 @@ const ProductDetails = () => {
           ))}
         </Box>
       </Swiper>
-      <div style={{ marginLeft: "16%", width: "80%", marginTop: "30px" }}>
-        <div style={{ display: "flex", width: "70%" }}>
-          <div style={{ marginTop: "10%", marginRight: "5%", width: "14%" }}>
+      <div style={{ width: "100%", marginTop: "30px" }}>
+        <div className="review-start">
+          <div className="raiting-result">
             <h3 style={{ fontSize: "25px" }}>
               {oneProduct?.rating.rating__avg
                 ? oneProduct.rating.rating__avg.toFixed(2)
@@ -220,7 +242,7 @@ const ProductDetails = () => {
             />
           </div>
 
-          <div>
+          <div className="review-progress">
             <h2 className="review_name">ОТЗЫВЫ ({review.length})</h2>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <LinearProgress
@@ -268,12 +290,12 @@ const ProductDetails = () => {
             style={{
               marginLeft: "14%",
               width: "39%",
-              border: "1px solid",
-              borderRadius: "36px",
             }}
           >
             {review.some((item) => item.user === currentUser) ? (
-              <h3 style={{ color: "black" }}>Вы уже оставили отзыв</h3>
+              <h3 style={{ color: "black", marginTop: "50px" }}>
+                Вы уже оставили отзыв
+              </h3>
             ) : (
               <form
                 onSubmit={handleAddReview}
@@ -283,10 +305,11 @@ const ProductDetails = () => {
                 <label
                   style={{
                     backgroundColor: "white",
-                    width: "31%",
-                    marginLeft: "91px",
+                    width: "56%",
+                    marginLeft: "15px",
                   }}
                 >
+                  Рейтинг
                   <Rating
                     name="rating"
                     value={rating}
@@ -298,20 +321,30 @@ const ProductDetails = () => {
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  style={{ height: "100px" }}
+                  style={{ height: "153px" }}
                   name=""
                   id=""
                   cols="30"
                   rows="10"
                 ></textarea>
-                <button>Добавить отзыв</button>
+                <button
+                  style={{
+                    marginTop: "20px",
+                    height: "49px",
+                    color: "white",
+                    backgroundColor: "blue",
+                    fontSize: "17px",
+                  }}
+                >
+                  Добавить отзыв
+                </button>
               </form>
             )}
           </div>
         </div>
-        <div style={{ width: "53%", marginLeft: "45%" }}>
+        <div style={{ width: "53%", marginLeft: "16%" }}>
           {review?.map((item) => (
-            <div key={item.id} style={{ marginTop: "20px" }}>
+            <div key={item.id} style={{ marginBottom: "20px" }}>
               <h5 style={{ color: "black" }}>{item.user}</h5>
               <label style={{ backgroundColor: "white" }}>
                 <Rating
@@ -319,9 +352,21 @@ const ProductDetails = () => {
                   value={item.rating}
                   precision={item.rating}
                   required
+                  sx={{ marginTop: "10px" }}
                 />
               </label>
-              <p style={{ color: "black" }}>{item.text}</p>
+              <div style={{ display: "flex" }}>
+                <p style={{ color: "black", marginTop: "7px" }}>{item.text}</p>
+                <span
+                  style={{
+                    fontSize: "10px",
+                    color: "lightgrey",
+                    marginLeft: "20px",
+                  }}
+                >
+                  {moment(item.created_at).format("DD/MM/YYYY HH:mm:ss")}
+                </span>
+              </div>
             </div>
           ))}
         </div>

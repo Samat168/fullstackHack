@@ -22,11 +22,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ADMIN } from "../../helpers/consts";
 
 const pages = [
   { name: "Главная", link: "/", id: 1 },
   { name: "Продукты", link: "/products", id: 2 },
-  { name: "Admin", link: "/admin", id: 3 },
+  // { name: "Admin", link: "/admin", id: 3 },
 ];
 
 const settings = ["Profile", "Account", "Dashboard"];
@@ -160,6 +161,13 @@ function Navbar() {
                   </MenuItem>
                 </Link>
               ))}
+              {currentUser === ADMIN ? (
+                <Link to="/admin">
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">ADMIN</Typography>
+                  </MenuItem>
+                </Link>
+              ) : null}
             </Menu>
           </Box>
 
@@ -186,6 +194,23 @@ function Navbar() {
                 </Button>
               </Link>
             ))}
+            {currentUser === ADMIN ? (
+              <Link to="/admin">
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      margin: "0 20px",
+                    }}
+                  >
+                    ADMIN
+                  </Typography>
+                </MenuItem>
+              </Link>
+            ) : null}
             <div
               className="search_container"
               style={{
@@ -223,47 +248,51 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             {currentUser ? (
-              <div style={{display: 'flex'}}>
-                <Tooltip title="Open settings"> 
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> 
-                <Avatar alt="Remy Sharp" src={users.avatar} /> 
-              </IconButton> 
-            </Tooltip> 
-            <Menu 
-              sx={{ mt: "45px" }} 
-              id="menu-appbar" 
-              anchorEl={anchorElUser} 
-              anchorOrigin={{ 
-                vertical: "top", 
-                horizontal: "right", 
-              }} 
-              keepMounted 
-              transformOrigin={{ 
-                vertical: "top", 
-                horizontal: "right", 
-              }} 
-              open={Boolean(anchorElUser)} 
-              onClose={handleCloseUserMenu} 
-            > 
-                
-                  <MenuItem  onClick={handleCloseUserMenu}> 
-                    <Link to={'profile'}> <Typography  textAlign="center">Profile</Typography> </Link>
-                   
-                  </MenuItem> 
+              <div style={{ display: "flex" }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src={users.avatar} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Link to={"profile"}>
+                      {" "}
+                      <Typography textAlign="center">Profile</Typography>{" "}
+                    </Link>
+                  </MenuItem>
 
-                
-                {users &&  (
-              <MenuItem
-                onClick={() => {
-                  handleCloseUserMenu();
-                  logout();
-                }}
-              >
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
-            )}
-            </Menu>
-                <ShoppingCartIcon onClick = {() => navigate('/cart')} sx={{marginTop: '10px'}}  className="navbar_icons" />
+                  {users && (
+                    <MenuItem
+                      onClick={() => {
+                        handleCloseUserMenu();
+                        logout();
+                      }}
+                    >
+                      <Typography textAlign="center">Logout</Typography>
+                    </MenuItem>
+                  )}
+                </Menu>
+                <ShoppingCartIcon
+                  onClick={() => navigate("/cart")}
+                  sx={{ marginTop: "10px" }}
+                  className="navbar_icons"
+                />
               </div>
             ) : (
               <Box>
@@ -275,8 +304,6 @@ function Navbar() {
                 </Link>
               </Box>
             )}
-             
-          
           </Box>
         </Toolbar>
       </Container>

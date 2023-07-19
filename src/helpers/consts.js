@@ -7,3 +7,4 @@ export const ACTIONS = {
   GET_PRODUCT_DETAILS: "GET_PRODUCT_DETAILS",
 };
 
+export const ADMIN = "admin@admin.com";

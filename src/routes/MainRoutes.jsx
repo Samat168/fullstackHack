@@ -84,7 +84,7 @@ const MainRoutes = () => {
       element: <RegisterSuccessPage />,
       id: 14,
     },
-   
+
     {
       link: "/profile",
 
@@ -92,6 +92,7 @@ const MainRoutes = () => {
       id: 16,
     },
   ];
+
   return (
     <Routes>
       {PUBLIC_ROUTES.map((item) => (

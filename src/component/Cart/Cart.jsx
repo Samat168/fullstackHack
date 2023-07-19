@@ -53,20 +53,20 @@ export default function Cart() {
         <TableBody>
           {cart?.products.map((row) => (
             <TableRow
-              key={row.product.id}
+              key={row.product?.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <img width={80} src={row.product.images[0].image} alt="" />
+                <img width={80} src={row.product?.preview} alt="" />
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
-                {row.product.title}
+                {row.product?.title}
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
-                {row.product.category}
+                {row.product?.category}
               </TableCell>
               <TableCell sx={{ color: "white" }} align="right">
-                {row.product.price} rub
+                {row.product?.price} rub
               </TableCell>
               {/* <TableCell align="right">
                 <input
@@ -86,15 +86,13 @@ export default function Cart() {
                 <Button
                   variant="outlined"
                   sx={{
-                    
                     color: "white",
-                    
+
                     borderRadius: "10%",
                     padding: "5px",
-                    border: '1px solid white'
+                    border: "1px solid white",
                   }}
                   onClick={() => deleteCartProduct(row.product.id)}
-              
                 >
                   Удалить
                 </Button>

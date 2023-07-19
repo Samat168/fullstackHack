@@ -66,8 +66,15 @@ const EditProduct = () => {
   };
 
   return (
-    <div style={{ margin: "auto" }}>
-      <h2>CREATE PRODUCT</h2>
+    <div
+      style={{
+        marginTop: "10%",
+        width: "50%",
+        marginLeft: "25%",
+        marginBottom: "20px",
+      }}
+    >
+      <h2 style={{ textAlign: "center" }}>EDIT PRODUCT</h2>
       <TextField
         onChange={(e) => setTitle(e.target.value)}
         placeholder="title"
@@ -87,7 +94,7 @@ const EditProduct = () => {
         value={price}
       />
 
-      <FormControl>
+      <FormControl style={{ width: "30%" }}>
         <InputLabel id="demo-simple-select-label">Категории</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -104,14 +111,21 @@ const EditProduct = () => {
         </Select>
       </FormControl>
       <p>
-        Preview BEFORE : {oneProduct ? oneProduct.preview : "preview is empty"}
+        Preview BEFORE :{" "}
+        {oneProduct ? (
+          <img style={{ width: "100px" }} src={oneProduct.preview} alt="" />
+        ) : (
+          "preview is empty"
+        )}
       </p>
       <TextField onChange={(e) => setPreview(e.target.files[0])} type="file" />
 
       <p>
         IMAGE BEFORE :{" "}
         {oneProduct
-          ? oneProduct.images.map((item) => `${item.image}`)
+          ? oneProduct.images.map((item) => (
+              <img style={{ width: "100px" }} src={item.image} alt="" />
+            ))
           : "image is empty"}
       </p>
       <input
@@ -121,7 +135,7 @@ const EditProduct = () => {
         style={{ padding: "16.5px 14px", border: "1px solid" }}
       />
 
-      <Button onClick={handleSave}>Create Product</Button>
+      <Button onClick={handleSave}>Сохранить</Button>
     </div>
   );
 };
