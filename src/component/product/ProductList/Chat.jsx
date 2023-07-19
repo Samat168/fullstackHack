@@ -35,6 +35,7 @@ const Chat = () => {
 
   return (
     <div>
+      <p style={{ textAlign: "center" }}>Чат коммьюнити</p>
       <Grid
         container
         justify={"center"}
@@ -88,6 +89,7 @@ const Chat = () => {
             width: "59%",
             marginLeft: "20px",
             marginTop: "20px",
+            marginBottom: "20px",
 
             "@media (max-width: 950px)": {
               width: "62%",

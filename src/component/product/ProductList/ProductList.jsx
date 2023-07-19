@@ -272,9 +272,6 @@ const ProductList = () => {
             page={currentPage}
             onChange={handleChange}
           />
-          <Typography sx={{ width: "59%", textAlign: "center" }}>
-            Чат коммьюнити
-          </Typography>
         </Grid>
       </div>
       <Chat />

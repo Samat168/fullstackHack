@@ -194,6 +194,7 @@ const ProductDetails = () => {
               key={item.id}
               className="product_slider_item"
               style={{ width: "399px", marginLeft: "23px" }}
+              onClick={() => navigate(`/details/${item.id}`)}
             >
               <Box sx={{ width: "66%", height: "300px", overflow: "hidden" }}>
                 <img
