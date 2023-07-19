@@ -34,7 +34,7 @@ const Chat = () => {
   }
 
   return (
-    <Container>
+    <div>
       <Grid
         container
         justify={"center"}
@@ -42,16 +42,22 @@ const Chat = () => {
       >
         <div
           style={{
-            width: "36%",
+            width: "73%",
             height: "423px",
             border: "1px solid gray",
             overflowY: "auto",
-            borderRadius: "6%",
+            borderRadius: "2%",
+            "@media (maxWidth: 1100px)": {
+              width: "43%",
+            },
+            "@media (maxWidth: 950px)": {
+              width: "65%",
+            },
           }}
         >
           {messages.map((message, index) => (
             <div
-              key={index} // Используйте индекс в качестве ключа
+              key={index}
               style={{
                 margin: 10,
                 border:
@@ -61,6 +67,9 @@ const Chat = () => {
                 marginLeft: currentUser === message?.uid ? "auto" : "10px",
                 width: "fit-content",
                 padding: 5,
+                "@media (max-width: 1100px)": {
+                  width: "43%",
+                },
               }}
             >
               <Grid container>
@@ -75,7 +84,15 @@ const Chat = () => {
           container
           direction={"column"}
           alignItems={"flex-end"}
-          style={{ width: "36%", marginLeft: "20px" }}
+          style={{
+            width: "59%",
+            marginLeft: "20px",
+            marginTop: "20px",
+
+            "@media (max-width: 950px)": {
+              width: "62%",
+            },
+          }}
         >
           <TextField
             fullWidth
@@ -93,7 +110,7 @@ const Chat = () => {
           />
         </Grid>
       </Grid>
-    </Container>
+    </div>
   );
 };
 

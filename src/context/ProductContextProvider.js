@@ -57,7 +57,6 @@ const ProductContextProvider = ({ children }) => {
         `${API}/products/${window.location.search}`,
         getTokens()
       );
-      console.log(res);
 
       dispatch({ type: "GET_PRODUCTS", payload: res.data });
     } catch (error) {
@@ -71,7 +70,6 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios(`${API}/categories/`);
       dispatch({ type: "GET_CATEGORIES", payload: res.data });
-      console.log(res);
     } catch (error) {
       console.log(error);
     }

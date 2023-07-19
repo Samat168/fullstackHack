@@ -66,7 +66,7 @@ const EditProduct = () => {
   };
 
   return (
-    <div style={{ margin: "auto" }}>
+    <div style={{ marginTop: "10%" }}>
       <h2>CREATE PRODUCT</h2>
       <TextField
         onChange={(e) => setTitle(e.target.value)}

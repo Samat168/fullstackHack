@@ -22,7 +22,7 @@ const ProductCard = ({ item }) => {
           onClick={() => navigate(`/details/${item.id}`)}
         />
         <div className="product_card_bottom">
-          <IconButton onClick={() => togglefav(item.id)} sx={{ color: "grey" }}>
+          <IconButton onClick={() => togglefav(item.id)}>
             <Favorite />
           </IconButton>
           <p style={{ color: "#000" }}>{item.title}</p>
