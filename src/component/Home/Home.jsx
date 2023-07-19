@@ -7,6 +7,7 @@ import { useProduct } from "../../context/ProductContextProvider";
 import { useState } from "react";
 import { useEffect } from "react";
 import HomeCategory from "./HomeComponents/HomeCategory";
+import TelegramButton from "./HomeComponents/TelegramButton";
 
 const Home = () => {
   const { categories } = useProduct();
@@ -50,6 +51,7 @@ const Home = () => {
   return (
     <div className="home_main_div">
       <HomeSlider />
+      <TelegramButton />
       <ProductSlider cat={odejda} slidesPerView={slidesPerView} />
       <HomeCategory />
       <ProductSlider cat={obuv} slidesPerView={slidesPerView} />

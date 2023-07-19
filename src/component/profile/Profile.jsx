@@ -7,13 +7,14 @@ import { useProduct } from "../../context/ProductContextProvider";
 
 const Profile = () => {
   const [avatar, setAvatar] = useState(null);
+  
   const {
     currentUser,
     logout,
     checkAuth,
     users,
     getUser,
-    checkuserid,
+    userFavorites,
     favorites,
     changeUser,
   } = useAuth();
@@ -21,11 +22,11 @@ const Profile = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getUser();
+    userFavorites()
+    
   }, []);
 
-  useEffect(() => {
-    checkuserid();
-  }, [users]);
+ 
 
   console.log(users);
 

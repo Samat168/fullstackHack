@@ -175,8 +175,7 @@ const Register = () => {
             width: "110px",
             margin: "auto",
             marginTop: "10px",
-            color:'white'
-            ,
+            color:'white' ,
             border: "1px solid white"
           }}
         >
