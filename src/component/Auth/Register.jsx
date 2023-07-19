@@ -37,7 +37,7 @@ const Register = () => {
     }
 
     const formData = new FormData();
-    // formData.append("avatar", avatar);
+    formData.append("avatar", avatar);
     formData.append("email", email);
     formData.append("first_name", name);
     formData.append("last_name", lastName);
@@ -148,7 +148,7 @@ const Register = () => {
           marginBottom: "10px",
         }}
       />
-      {/* <TextField
+      <TextField
         type="file"
         onChange={(e) => setAvatar(e.target.files[0])}
         placeholder="avatar"
@@ -161,7 +161,7 @@ const Register = () => {
           marginInline: "auto",
           marginBottom: "10px",
         }}
-      /> */}
+      />
       {loading ? (
         <Box sx={{ display: "flex", marginInline: "auto" }}>
           <CircularProgress />
@@ -179,7 +179,7 @@ const Register = () => {
             border: "1px solid white"
           }}
         >
-          REGISTER
+          <a style={{color: 'white'}} href="https://mail.google.com/" >REGISTER</a>
         </Button>
       )}
     </Box>
