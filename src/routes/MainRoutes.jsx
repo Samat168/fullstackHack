@@ -16,6 +16,7 @@ import RegisterSuccessPage from "../pages/RegisterSuccessPage";
 import ProfilePage from "../pages/ProfilePage";
 
 const MainRoutes = () => {
+  
   const PUBLIC_ROUTES = [
     {
       link: "/",

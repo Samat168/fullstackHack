@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import Logo from "../../assets/SellSwap-removebg-preview.png";
+import Logo from "../../assets/png-transparent-gym-logo-thumbnail.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { Input } from "@mui/material";
 import { Opacity, Search } from "@mui/icons-material";
@@ -26,7 +26,7 @@ import { ADMIN } from "../../helpers/consts";
 
 const pages = [
   { name: "Главная", link: "/", id: 1 },
-  { name: "Продукты", link: "/products", id: 2 },
+  { name: "Купить абонемент", link: "/products", id: 2 },
   // { name: "Admin", link: "/admin", id: 3 },
 ];
 
@@ -117,7 +117,7 @@ function Navbar() {
         <Toolbar disableGutters>
           <img
             style={{
-              width: windowWidth < 400 ? "126px" : "200px",
+              width: "100x",
               height: "80px",
               margin: "5px 0",
             }}

@@ -30,8 +30,8 @@ const HomeCategory = () => {
       >
         <div
           style={{
-            backgroundImage:
-              "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item1.webp)",
+            // backgroundImage:
+            //   "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item1.webp)",
             backgroundSize: "cover",
             width: windowWidth < 1000 ? "100%" : "49%",
             maxWidth: "100%",
@@ -55,8 +55,8 @@ const HomeCategory = () => {
 
         <div
           style={{
-            backgroundImage:
-              "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item2.webp)",
+            // backgroundImage:
+            //   "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item2.webp)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -85,8 +85,8 @@ const HomeCategory = () => {
         </div>
         <div
           style={{
-            backgroundImage:
-              "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item3.webp)",
+            // backgroundImage:
+            //   "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item3.webp)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -126,8 +126,8 @@ const HomeCategory = () => {
       >
         <div
           style={{
-            backgroundImage:
-              "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item4.webp)",
+            // backgroundImage:
+            //   "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item4.webp)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -156,8 +156,8 @@ const HomeCategory = () => {
         </div>
         <div
           style={{
-            backgroundImage:
-              "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item5.webp)",
+            // backgroundImage:
+            //   "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item5.webp)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -186,8 +186,8 @@ const HomeCategory = () => {
         </div>
         <div
           style={{
-            backgroundImage:
-              "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item6.webp)",
+            // backgroundImage:
+            //   "url(https://cdn.sportmaster.ru/upload/content/cmsgate/ru_sm/smprod/dip_content/2023/sm30/week28/14_07/slot1-item6.webp)",
             backgroundSize: "cover",
             width: windowWidth < 1000 ? "100%" : "49.5%",
             maxWidth: "100%",

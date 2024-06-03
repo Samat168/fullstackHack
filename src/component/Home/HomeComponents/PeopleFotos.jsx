@@ -3,14 +3,14 @@ import { useState } from "react";
 
 const PeopleFotos = () => {
   const [photoForMain, setFotoForMain] = useState(
-    "https://www.frisbuy.ru/sld01/post-media/3542/271075424.jpeg"
+    "https://diesel.elcat.kg/uploads/monthly_11_2021/post-69829-0-81010900-1637051632.jpg"
   );
   const changePhoto = (img) => {
     setFotoForMain(img);
   };
   const returnPhoto = () => {
     setFotoForMain(
-      "https://www.frisbuy.ru/sld01/post-media/3542/271075424.jpeg"
+      "https://diesel.elcat.kg/uploads/monthly_11_2021/post-69829-0-81010900-1637051632.jpg"
     );
   };
 
@@ -24,10 +24,10 @@ const PeopleFotos = () => {
           fontWeight: "500",
         }}
       >
-        СМОТРИ БОЛЬШЕ С ЭТИМ ТОВАРОМ
+        Присоединяйся к спорту
       </h2>
       <h5 style={{ fontSize: "20px", fontWeight: "500", marginBottom: "20px" }}>
-        Делись своими образами в соцсетях, отмечай SellSwap – и твой образ
+        Делись своими образами в соцсетях, отмечай спортзал Felix – и твой образ
         появится на сайте
       </h5>
       <div className="photos">
@@ -39,14 +39,14 @@ const PeopleFotos = () => {
             <li className="photos_right_li">
               <img
                 onMouseOver={(e) => changePhoto(e.target.src)}
-                src="https://www.frisbuy.ru/sld01/post-media/2505/271120824.jpeg"
+                src="https://with-sport.com/images/articles/190/first-time-gym.jpg"
                 alt=""
               />
             </li>
             <li className="photos_right_li">
               <img
                 onMouseOver={(e) => changePhoto(e.target.src)}
-                src="https://www.frisbuy.ru/sld01/post-media/5487/271120894.jpeg"
+                src="https://prestij.kg/gym2/images/gallery/2.jpg"
                 alt=""
               />
             </li>

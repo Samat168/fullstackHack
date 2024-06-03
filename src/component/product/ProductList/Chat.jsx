@@ -32,6 +32,9 @@ const Chat = () => {
   if (!messages) {
     return <div>Loading...</div>;
   }
+  const handleEdit = (id) => {
+    navigate(`/edit/${id}`);
+  };
 
   return (
     <div>
